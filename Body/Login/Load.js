@@ -2,7 +2,6 @@ import { hideHeader, hideLeftSidebar, loadTemplate, replaceBody } from "/Actions
 
 export async function loadLoginBody() {
     let page = await loadTemplate('/Body/Login/Login.html');
-    //page.querySelector('.landscape-image').src = '/images/sample.jpg';
 
     let formContainer = page.querySelector('#form-container');
     await loadLoginForm(formContainer);
