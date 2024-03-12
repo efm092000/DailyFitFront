@@ -7,7 +7,6 @@
 </head>
 <body>
     <header id="Header"> </header>
-    <hr class="Line" id="Horizontal_Line">
     <main class="Information">
         <div class="HomepageButtons">
             <div id="RoutinesButtonContainer">
@@ -18,20 +17,21 @@
             </div>
         </div>
         <hr class="Line" id="Vertical_Line">
-        <iframe>body</iframe>
+        <div id="Page"></div>
     </main>
-    <div id="Page"></div>
     <footer id="Footer"></footer>
 </body>
 
 <script type="module">
-    //import {loadBody} from './Body/Load.js';
+    //import {loadRoutineBody} from './Body/Routine/Load.js';
     import {loadHeader} from './Header/Load.js';
     import {loadFooter} from './Footer/load.js';
+    import{loadRoutines} from "./Actions";
 
     document.addEventListener('DOMContentLoaded', async function(){
         loadHeader();
-        //loadBody();
+        loadRoutines();
+        //loadRoutineBody();
         loadFooter();
     });
 </script>
