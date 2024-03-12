@@ -1,3 +1,7 @@
+#Footer {
+    z-index: 99;
+}
+
 #footer-container::before {
     content: '';
     width: 100%;
