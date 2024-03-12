@@ -5,13 +5,16 @@
     <title>Header</title>
     <link rel="stylesheet" href="/DailyFitFront/Header/Style_Header.css">
 </head>
-<body id="Header_Elements">
-    <img src="/DailyFitFront/Header/Logo.png" id="logo">
-    <div class="Search-container">
-        <form action="/search" method="GET">
-            <input id="Search"type="text" placeholder="Search routine..."  onkeydown="if (event.keyCode == 13) this.form.submit()">
-        </form>
+<div id="Container_Header">
+    <div id="Header_Elements">
+        <img src="/DailyFitFront/Images/Logo.png" id="logo">
+        <div class="Search-container">
+            <form action="/search" method="GET">
+                <input id="Search"type="text" placeholder="Search routine..."  onkeydown="if (event.keyCode == 13) this.form.submit()">
+            </form>
+        </div>
+        <img id="Icon" title="icon" src="/DailyFitFront/Images/Icon.png">
     </div>
-    <img id="Icon" title="icon" src="/DailyFitFront/Header/Icon.png">
-</body>
+    <hr class="Line" id="Horizontal_Line">
+</div>
 </html>

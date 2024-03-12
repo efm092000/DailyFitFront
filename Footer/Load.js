@@ -1,11 +1,11 @@
-//import { loadTemplate } from "../loadingFunctions.js";
+
 import {loadTemplate} from "../Actions.js";
 
 export async function loadFooter(){
-    let footer = await loadTemplate('DailyFitFront/Footer/Footer.html');
+    let footer = await loadTemplate('/DailyFitFront/Footer/Footer.html');
     loadSocialMediaIcons(footer);
     loadContactInfo(footer);
-    document.getElementById('footer').appendChild(footer);
+    document.getElementById('Footer').appendChild(footer);
 }
 
 function loadSocialMediaIcons(footer) {
@@ -17,21 +17,21 @@ function loadSocialMediaIcons(footer) {
 
 function loadFacebookIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/images/facebook.png';
+    icon.src = '/DailyFitFront/Images/facebook.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadInstagramIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/images/instagram.png';
+    icon.src = '/DailyFitFront/Images/instagram.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadTwitterIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/images/twitter.png';
+    icon.src = '/DailyFitFront/Images/twitter.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
@@ -48,7 +48,7 @@ function loadPhone(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/images/phone.png';
+    icon.src = '/DailyFitFront/Images/phone.png';
 
     let text = document.createElement('p');
     text.textContent = '123456789';
@@ -65,7 +65,7 @@ function loadEmail(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/images/mail.png';
+    icon.src = '/DailyFitFront/Images/mail.png';
 
     let text = document.createElement('p');
     text.textContent = 'mail@example.com';

@@ -1,5 +1,5 @@
 body{
-    background-image: url("Background.jpeg");
+    background-image: url("/Images/Background.jpeg");
     background-repeat: no-repeat;
     background-size: 1550px;
 }
@@ -29,7 +29,7 @@ body{
 }
 #Vertical_Line{
     border-left: 2px;
-    height:630px;
+    height:611px;
     width:2px;
     margin-left:0%;
     margin-right:3%;

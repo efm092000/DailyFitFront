@@ -16,3 +16,10 @@ export function replaceBody(body) {
     document.querySelector('#app').innerHTML = '';
     document.querySelector('#app').appendChild(body);
 }
+
+export async function loadRoutines(){
+    let RoutineButton = opinion.querySelector('#ButtonRoutines');
+    RoutineButton.addEventListener('click', function(){
+        loadRoutineBody()
+    })
+}
