@@ -17,7 +17,6 @@
 
 #footer-information-container{
     display: flex;
-    color:#07396B;
     font-size:80%;
     justify-content: center;
     gap: 4em;
@@ -41,6 +40,7 @@
     max-width: 15em;
     font-size : 1.5em;
     margin: 0;
+    font-size: 80%;
 }
 
 #footer-copyright-container{
