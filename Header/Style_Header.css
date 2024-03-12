@@ -1,0 +1,35 @@
+#Header_Elements{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+
+}
+#Logo{
+    height:3%;
+    width:8%;
+    margin-left: 5%;
+}
+.Search-container{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+#Search{
+    align-self: center;
+    outline:none;
+    border: transparent;
+    border-radius: 11px;
+    height: 20px;
+    width: 222%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#Icon{
+    height:5%;
+    width:5%;
+    margin-right:5%;
+    color: #406E9B;
+    margin-left: 25%;
+
+}

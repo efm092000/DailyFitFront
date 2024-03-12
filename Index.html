@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DailyFit</title>
+    <link rel="stylesheet" href="Style.css" type="text/css"/>
+</head>
+<body>
+    <header id="Header"> </header>
+    <hr class="Line" id="Horizontal_Line">
+    <main class="Information">
+        <div class="HomepageButtons">
+            <div id="RoutinesButtonContainer">
+                <button id="ButtonRoutines"> Routine</button>
+            </div>
+            <div id="WeeklyButtonContainer">
+                <button id="ButtonWeekly"> Weekly</button>
+            </div>
+        </div>
+        <hr class="Line" id="Vertical_Line">
+        <iframe>body</iframe>
+    </main>
+    <div id="Page"></div>
+    <footer id="Footer"></footer>
+</body>
+
+<script type="module">
+    //import {loadBody} from './Body/Load.js';
+    import {loadHeader} from './Header/Load.js';
+    import {loadFooter} from './Footer/load.js';
+
+    document.addEventListener('DOMContentLoaded', async function(){
+        loadHeader();
+        //loadBody();
+        loadFooter();
+    });
+</script>
+</html>
