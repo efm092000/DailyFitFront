@@ -1,0 +1,27 @@
+.SidebarItems {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 2em;
+}
+
+.SidebarIcons {
+    height: 3em;
+    width: 3em;
+}
+
+#Left_Sidebar{
+    p {
+        font-size: 2em;
+    }
+
+    display: flex;
+    flex-direction: column;
+    border-right: 4px solid #195DA2;
+    height: 100vh;
+
+    padding-top: 3em;
+    padding-left: 5em;
+    padding-right: 5em;
+    width: max-content;
+}
