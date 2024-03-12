@@ -1,0 +1,45 @@
+#login-page {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.form-title {
+    font-size: 4em;
+    color: #422F6B;
+    margin: 0;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 1em;
+}
+
+.question-text {
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.question-text:hover {
+    text-decoration: underline;
+}
+
+.form-button {
+    background-color: #422F6B;
+    color: white;
+    padding: 0.6em 1em;
+    cursor: pointer;
+}

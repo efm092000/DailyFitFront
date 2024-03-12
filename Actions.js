@@ -13,8 +13,16 @@ export async function fetchJson(url) {
 }
 
 export function replaceBody(body) {
-    document.querySelector('#app').innerHTML = '';
-    document.querySelector('#app').appendChild(body);
+    document.querySelector('.Information').innerHTML = '';
+    document.querySelector('.Information').appendChild(body);
+}
+
+export function hideHeader() {
+    document.querySelector('#Header').style.display = 'none';
+}
+
+export function hideLeftSidebar() {
+    document.querySelector('#Left_Sidebar').style.display = 'none';
 }
 
 export async function loadRoutines(){

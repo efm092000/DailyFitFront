@@ -7,18 +7,11 @@
 </head>
 <body>
     <header id="Header"> </header>
-    <main class="Information">
-        <div class="HomepageButtons">
-            <div id="RoutinesButtonContainer">
-                <button id="ButtonRoutines"> Routine</button>
-            </div>
-            <div id="WeeklyButtonContainer">
-                <button id="ButtonWeekly"> Weekly</button>
-            </div>
-        </div>
-        <hr class="Line" id="Vertical_Line">
-        <div id="Page"></div>
-    </main>
+    <div id="app">
+        <aside id="Left_Sidebar"> </aside>
+        <main class="Information"></main>
+        <aside id="Right_Sidebar"> </aside>
+    </div>
     <footer id="Footer"></footer>
 </body>
 
@@ -26,12 +19,16 @@
     //import {loadRoutineBody} from './Body/Routine/Load.js';
     import {loadHeader} from './Header/Load.js';
     import {loadFooter} from './Footer/load.js';
-    import{loadRoutines} from "./Actions";
+    // import{loadRoutines} from "./Actions.js";
+    import { loadLoginBody } from "./Body/Login/Load.js";
+    import { loadHomePage } from "./Body/HomePage/Load.js";
 
     document.addEventListener('DOMContentLoaded', async function(){
         loadHeader();
-        loadRoutines();
-        //loadRoutineBody();
+        await loadHomePage();
+        // await loadLoginBody();
+        // loadRoutines();
+        // loadRoutineBody();
         loadFooter();
     });
 </script>
