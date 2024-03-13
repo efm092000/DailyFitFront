@@ -2,12 +2,12 @@
     display: flex;
     align-items: center;
     width: max-content;
-    gap: 2em;
+    gap: 1em;
 }
 
 .SidebarIcons {
-    height: 3em;
-    width: 3em;
+    height: 2em;
+    width: 2em;
 }
 
 #Left_Sidebar{
@@ -19,9 +19,9 @@
     flex-direction: column;
     border-right: 4px solid #195DA2;
 
-    padding-top: 3em;
-    padding-left: 5em;
-    padding-right: 5em;
+    padding-top: 4em;
+    padding-left: 2em;
+    padding-right: 2em;
     width: max-content;
 
     height: 100%;

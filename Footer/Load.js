@@ -5,7 +5,9 @@ export async function loadFooter(){
     let footer = await loadTemplate('/DailyFitFront/Footer/Footer.html');
     loadSocialMediaIcons(footer);
     loadContactInfo(footer);
+    document.getElementById('Footer').innerHTML = '';
     document.getElementById('Footer').appendChild(footer);
+    document.getElementById('Footer').style.display = '';
 }
 
 function loadSocialMediaIcons(footer) {

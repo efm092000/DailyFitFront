@@ -1,104 +1,122 @@
 import { hideHeader, hideLeftSidebar, loadTemplate, replaceBody } from "/Actions.js";
+import { loadHomePage } from "../HomePage/Load.js";
+import { User } from "../../utils/user.js";
+import { loadHeader } from "../../Header/Load.js";
+import { loadFooter } from "../../Footer/Load.js";
+import { loadLeftSidebar } from "../LeftSidebar/Load.js";
 
 export async function loadLoginBody() {
-    let page = await loadTemplate('/Body/Login/Login.html');
+	let page = await loadTemplate('/Body/Login/Login.html');
 
-    let formContainer = page.querySelector('#form-container');
-    await loadLoginForm(formContainer);
-    await loadRegisterForm(formContainer);
-    hideLeftSidebar();
-    hideHeader();
-    replaceBody(page);
+	let formContainer = page.querySelector('#form-container');
+	await loadLoginForm(formContainer);
+	await loadRegisterForm(formContainer);
+
+	hideLeftSidebar();
+	hideHeader();
+	replaceBody(page);
 }
 
 async function loadLoginForm(formContainer) {
-    let template = await loadTemplate('/body/login/form.html');
-    let form = template.querySelector('.form');
-    form.id = 'login-form';
+	let template = await loadTemplate('/body/login/form-login.html');
+	let form = template.querySelector('.form');
+	form.id = 'login-form';
 
-    loadTitle(form, 'Login');
-    await loadUsernameInput(form);
-    await loadPasswordInput(form, 'Password');
-    loadLoginQuestion(form, formContainer);
-    loadButton(form, 'Login');
-    formContainer.appendChild(form);
+	loadToggleLink(form, formContainer);
+	loadLoginButton(form);
+
+	formContainer.appendChild(form);
+}
+
+function loadLoginButton(form) {
+	form.querySelector('#button-login').addEventListener(
+		'click', function () {
+			submitLogin();
+		}
+	)
+}
+
+function submitLogin() {
+	let email = document.querySelector('#input-email-login').value;
+	let password = document.querySelector('#input-password-login').value;
+	let loginUrl = `http://localhost:8080/api/user/${email}`;
+	fetch(loginUrl).then(
+		response => response.json())
+	.then(
+		async user => {
+			if (user.password === password) login(user);
+			else {
+				alert('Incorrect password');
+			}
+		}
+	).catch(
+		error => alert('User not found')
+	)
+}
+
+function login(user) {
+	let loggedUser = new User(user.email, user.name);
+	loggedUser.login();
+	loadHeader(loggedUser);
+	loadLeftSidebar(loggedUser);
+	loadHomePage(loggedUser);
+	loadFooter();
 }
 
 async function loadRegisterForm(formContainer) {
-    let template = await loadTemplate('/body/login/form.html');
-    let form = template.querySelector('.form');
-    form.id = 'register-form';
-    form.style.display = 'none';
+	let template = await loadTemplate('/body/login/form-register.html');
+	let form = template.querySelector('.form');
+	form.id = 'register-form';
+	form.style.display = 'none';
 
-    loadTitle(form, 'Register');
-    await loadUsernameInput(form);
-    await loadPasswordInput(form, 'Password');
-    await loadPasswordInput(form, 'Confirm password');
-    loadRegisterQuestion(form, formContainer);
-    loadButton(form, 'Register');
+	loadToggleLink(form, formContainer);
+	loadRegisterButton(form);
 
-    formContainer.appendChild(form);
+	formContainer.appendChild(form);
 }
 
-function loadLoginQuestion(form, formContainer) {
-    let question = form.querySelector('.question-text');
-    question.textContent = 'Don\'t have an account?';
-    question.addEventListener('click', async function() {
-        toggleForm(formContainer);
-    });
+function submitSignUp() {
+	let email = document.querySelector('#input-email-sign-up').value;
+	let password = document.querySelector('#input-password-sign-up').value;
+	let name = document.querySelector('#input-name-sign-up').value;
+	let signUpUrl = `http://localhost:8080/api/user/${email}?name=${name}&password=${password}`;
+	fetch(signUpUrl, {
+		method: 'POST',
+	})
+	.then(response => response.json())
+	.then(
+		user => {
+			if (user.password === password) login(user);
+		})
+	.catch(
+		error => alert('User already exists')
+	)
 }
 
-function loadRegisterQuestion(form, formContainer) {
-    let question = form.querySelector('.question-text');
-    question.textContent = 'Already have an account?';
+function loadRegisterButton(form) {
+	form.querySelector('#button-sign-up').addEventListener(
+		'click', function () {
+			console.log('Register');
+			submitSignUp();
+		}
+	)
+}
 
-    question.addEventListener('click', async function() {
-        toggleForm(formContainer);
-    });
+function loadToggleLink(form, formContainer) {
+	let link = form.querySelector('.link');
+	link.addEventListener('click', async function () {
+		toggleForm(formContainer);
+	});
 }
 
 function toggleForm(formContainer) {
-    let login = formContainer.querySelector('#login-form');
-    let register = formContainer.querySelector('#register-form');
-    if (login.style.display === 'none') {
-        login.style.display = '';
-        register.style.display = 'none';
-    } else {
-        login.style.display = 'none';
-        register.style.display = '';
-    }
-}
-
-function loadTitle(loginForm, text) {
-    let title = loginForm.querySelector('.form-title');
-    title.textContent = text;
-}
-
-async function loadUsernameInput(loginForm) {
-    let input = await loadTemplate('/body/login/input/input.html');
-    input.querySelector('.text-field').placeholder = 'Username';
-    input.querySelector('.text-field-icon').src = '/images/username.png';
-    loginForm.querySelector('.input-container').appendChild(input);
-}
-
-async function loadPasswordInput(loginForm, text) {
-    let input = await loadTemplate('/body/login/input/input.html');
-    input.querySelector('.text-field').placeholder = text;
-    input.querySelector('.text-field').type = 'password';
-    input.querySelector('.text-field-icon').src = '/images/password.png';
-
-    let inputField = input.querySelector('.input');
-    let eyeImage = document.createElement('img');
-    eyeImage.src = '/images/eye.png';
-    eyeImage.id = 'eye-icon';
-    inputField.appendChild(eyeImage);
-
-    loginForm.querySelector('.input-container').appendChild(input);
-}
-
-function loadButton(loginForm, text) {
-    let button = document.createElement('button');
-    button.className = 'form-button';
-    button.textContent = text;
-    loginForm.querySelector('.button-container').appendChild(button);
+	let login = formContainer.querySelector('#login-form');
+	let register = formContainer.querySelector('#register-form');
+	if (login.style.display === 'none') {
+		login.style.display = '';
+		register.style.display = 'none';
+	} else {
+		login.style.display = 'none';
+		register.style.display = '';
+	}
 }
