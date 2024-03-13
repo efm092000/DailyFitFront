@@ -25,14 +25,17 @@
     // import{loadRoutines} from "./Actions.js";
     // import { loadLoginBody } from "./Body/Login/Load.js";
     import { loadHomePage } from "./Body/HomePage/Load.js";
+    import {loadLeftSidebar} from "./Body/LeftSidebar/Load.js";
 
     document.addEventListener('DOMContentLoaded', async function(){
         loadHeader();
+        loadLeftSidebar();
         await loadHomePage();
         // await loadLoginBody();
         // loadRoutines();
         // loadRoutineBody();
         loadFooter();
+
     });
 </script>
 </html>

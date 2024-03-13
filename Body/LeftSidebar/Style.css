@@ -30,3 +30,11 @@
     left: 0;
     position: fixed;
 }
+#routine-button:active {
+    transform: scale(0.9);
+}
+#routine-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
