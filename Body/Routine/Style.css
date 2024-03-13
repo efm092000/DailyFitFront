@@ -1,13 +1,13 @@
 .Header_row{
     background-color: #D9EAFA;
     font-weight: bold;
-
 }
+
 .table{
     font-family: Arial, serif;
     height: 190%;
     width: 50%;
-
+    /*border-color: #406E9B;*/
 }
 
 .Container{
