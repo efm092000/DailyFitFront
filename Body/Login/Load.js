@@ -1,4 +1,5 @@
 import { hideHeader, hideLeftSidebar, loadTemplate, replaceBody } from "/Actions.js";
+import { loadHomePage } from "../HomePage/Load.js";
 
 export async function loadLoginBody() {
     let page = await loadTemplate('/Body/Login/Login.html');
@@ -6,6 +7,7 @@ export async function loadLoginBody() {
     let formContainer = page.querySelector('#form-container');
     await loadLoginForm(formContainer);
     await loadRegisterForm(formContainer);
+
     hideLeftSidebar();
     hideHeader();
     replaceBody(page);
@@ -17,14 +19,35 @@ async function loadLoginForm(formContainer) {
     form.id = 'login-form';
 
     loadToggleLink(form, formContainer);
+    loadLoginButton(form);
+
     formContainer.appendChild(form);
 }
 
-function loadRegisterButton(form) {
-    form.querySelector('#button-sign-up').addEventListener(
-        'click', function() {
-            console.log('Register');
+function loadLoginButton(form) {
+    form.querySelector('#button-login').addEventListener(
+        'click', function () {
+            login();
         }
+    )
+}
+
+function login() {
+    let email = document.querySelector('#input-email-login').value;
+    let password = document.querySelector('#input-password-login').value;
+    fetch('http://localhost:8080/api/user/' + email).then(
+        response => response.json())
+        .then(
+            user => {
+                if (user.password === password) {
+                    loadHomePage();
+                    // TODO: load user data
+                } else {
+                    alert('Incorrect password');
+                }
+            }
+        ).catch(
+        error => alert('User not found')
     )
 }
 
@@ -40,9 +63,38 @@ async function loadRegisterForm(formContainer) {
     formContainer.appendChild(form);
 }
 
+function signUp() {
+    let email = document.querySelector('#input-email-sign-up').value;
+    let password = document.querySelector('#input-password-sign-up').value;
+    let name = document.querySelector('#input-name-sign-up').value;
+    fetch('http://localhost:8080/api/user/' + email + '?name=' + name + '&password=' + password, {
+        method: 'POST',
+    }).then(
+        response => response.json())
+        .then(
+            user => {
+                if (user.password === password) {
+                    loadHomePage();
+                    // TODO: load user data
+                }
+            }
+        ).catch(
+        error => alert('User already exists')
+    )
+}
+
+function loadRegisterButton(form) {
+    form.querySelector('#button-sign-up').addEventListener(
+        'click', function () {
+            console.log('Register');
+            signUp();
+        }
+    )
+}
+
 function loadToggleLink(form, formContainer) {
     let link = form.querySelector('.link');
-    link.addEventListener('click', async function() {
+    link.addEventListener('click', async function () {
         toggleForm(formContainer);
     });
 }
