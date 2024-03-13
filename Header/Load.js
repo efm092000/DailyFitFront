@@ -5,7 +5,9 @@ import {loadTemplate} from '../Actions.js';
 
 export async function loadHeader() {
     let Header = await loadTemplate('/DailyFitFront/Header/Header.html');
+    document.getElementById('Header').innerHTML = '';
     document.getElementById('Header').appendChild(Header);
+    document.getElementById('Header').style.display = '';
    // ButtonsActions();
 }
 /**
