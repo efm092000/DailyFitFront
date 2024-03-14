@@ -1,5 +1,5 @@
 
-import {loadTemplate} from "../Actions.js";
+import {loadTemplate} from "../actions.js";
 
 export async function loadFooter(){
     let footer = await loadTemplate('/DailyFitFront/Footer/Footer.html');
