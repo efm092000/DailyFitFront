@@ -1,7 +1,7 @@
-//import {loadTemplate} from './Body/UserPage/Load.js';
-//import {loadTemplate} from './Body/SearchPage/Load.js';
-//import {loadTemplate} from '../Body/HomePage/Load.js';
-import {loadTemplate} from '../Actions.js';
+//import {loadTemplate} from './Body/UserPage/load.js';
+//import {loadTemplate} from './Body/SearchPage/load.js';
+//import {loadTemplate} from '../Body/HomePage/load.js';
+import {loadTemplate} from '../actions.js';
 import {loadLoginBody} from "../Body/Login/Load.js";
 
 export async function loadHeader() {
