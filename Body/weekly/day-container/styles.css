@@ -1,0 +1,14 @@
+.day-title {
+    font-size: 2em;
+    text-transform: capitalize;
+}
+
+.day-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: #D9EAFA;
+    padding: 2em;
+    border-radius: 2em;
+    height: 50vh;
+}

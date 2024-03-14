@@ -2,7 +2,7 @@
 //import {loadTemplate} from './Body/SearchPage/load.js';
 //import {loadTemplate} from '../Body/HomePage/load.js';
 import {loadTemplate} from '../actions.js';
-import {loadLoginBody} from "../Body/Login/Load.js";
+import {loadLoginBody} from "../Body/Login/load.js";
 
 export async function loadHeader() {
     let Header = await loadTemplate('/DailyFitFront/Header/Header.html');
