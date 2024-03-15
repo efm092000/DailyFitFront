@@ -1,16 +1,31 @@
 import { loadTemplate, replaceBody } from "../../actions.js";
 import { loadRoutineBody } from "../Routine/Load.js";
+import { loadPopup } from "./add-routine/load.js";
 
 export async function loadWeekly(user) {
 	let weeklyPlanContainer = await loadTemplate('/Body/weekly/weekly.html');
 	replaceBody(weeklyPlanContainer);
-
 	weeklyPlanContainer = document.querySelector('.weekly-page');
-	await loadFirstWeeklyPlan(user, weeklyPlanContainer);
+
+	await loadPopup(weeklyPlanContainer, user);
+	loadAddRoutineButton(weeklyPlanContainer);
+	await loadWeeklyPlan(user, weeklyPlanContainer);
 	await loadDaysOfWeekTemplate(weeklyPlanContainer);
 }
 
-async function loadFirstWeeklyPlan(user, weeklyPlanContainer) {
+export function reloadContent(weeklyPlanContainer, wid) {
+	loadRoutines(weeklyPlanContainer, wid);
+}
+
+function loadAddRoutineButton(weeklyPlanContainer) {
+	let addRoutineButton = weeklyPlanContainer.querySelector('.weekly-add-routine-button');
+	addRoutineButton.addEventListener('click', async function () {
+		let popup = weeklyPlanContainer.querySelector('.popup-container');
+		popup.style.display = '';
+	});
+}
+
+async function loadWeeklyPlan(user, weeklyPlanContainer) {
 	let weeklyPlansJson = await fetch(`http://localhost:8080/api/user/${user.email}/weeklies`).then(response => response.json());
 	let weeklyPlansSelector = loadWeeklyPlanSelector(weeklyPlanContainer);
 	for (const weeklyPlan of weeklyPlansJson) {
@@ -76,11 +91,11 @@ function transformData(json) {
 	})
 }
 
-async function loadRoutine(scheduleContainer, rid, day) {
+async function loadRoutine(weeklyPlanContainer, rid, day) {
 	let name = await fetch(`http://localhost:8080/api/routine/${rid}`)
 		.then(response => response.json())
 		.then(json => json.name);
-	let dayContainer = scheduleContainer.querySelector(`#weekly-${day}`);
+	let dayContainer = weeklyPlanContainer.querySelector(`#weekly-${day}`);
 	let dayContentContainer = dayContainer.querySelector('.day-content');
 	dayContentContainer.appendChild(loadCard(rid, name));
 }
