@@ -1,56 +1,62 @@
 import { loadTemplate, replaceBody } from "../../actions.js";
-import { User } from "../../utils/user.js";
+import { loadRoutineBody } from "../Routine/Load.js";
 
-export async function loadWeekly() {
-	let weekly = await loadTemplate('/Body/weekly/weekly.html');
+export async function loadWeekly(wid) {
+	let scheduleContainer = await loadTemplate('/Body/weekly/weekly.html');
 
-	let user = new User('a', 'a');
-	loadDaysOfWeek(weekly, user);
-	replaceBody(weekly);
+	await loadDaysOfWeekTemplate(scheduleContainer);
+	await loadRoutines(scheduleContainer, wid);
+	replaceBody(scheduleContainer);
 }
 
-function loadDaysOfWeek(weekly, user) {
-	loadDayOfWeek(weekly, user, 'monday');
-	loadDayOfWeek(weekly, user, 'tuesday');
-	loadDayOfWeek(weekly, user, 'wednesday');
-	loadDayOfWeek(weekly, user, 'thursday');
-	loadDayOfWeek(weekly, user, 'friday');
-	loadDayOfWeek(weekly, user, 'saturday');
-	loadDayOfWeek(weekly, user, 'sunday');
+async function loadDaysOfWeekTemplate(weekly) {
+	let daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+	for (const day of daysOfWeek) {
+		let dayTemplate = await loadTemplate('/Body/weekly/day-container/day-container.html');
+		dayTemplate.querySelector('.day-title').innerText = day;
+		weekly.querySelector(`#weekly-${day}`).appendChild(dayTemplate);
+	}
 }
 
-async function loadDayOfWeek(weekly, user, dayOfWeek) {
-	let dayContainer = weekly.querySelector(`#weekly-${dayOfWeek}`);
-	let dayTemplate = await loadTemplate('/Body/weekly/day-container/day-container.html');
-	dayTemplate.querySelector('.day-title').innerText = dayOfWeek;
-
-	let dayContentContainer = dayTemplate.querySelector('.day-content');
-	dayContainer.appendChild(dayTemplate);
-
-	loadRoutines(dayContentContainer, user);
+async function loadRoutines(scheduleContainer, wid) {
+	let json = await fetch(`http://localhost:8080/api/weekly/${wid}/routines`)
+		.then(response => response.json());
+	transformData(json);
+	for (const routine of json) {
+		await loadRoutine(scheduleContainer, routine.rid, routine.day);
+	}
 }
 
-function loadRoutines(dayContentContainer, user) {
-	fetch(`http://localhost:8080/api/user/${user.email}/routines`)
+function transformData(json) {
+	const dayMap = {
+		1: 'monday',
+		2: 'tuesday',
+		3: 'wednesday',
+		4: 'thursday',
+		5: 'friday',
+		6: 'saturday',
+		7: 'sunday'
+	}
+	json.forEach(routine => {
+		routine.day = dayMap[routine.day];
+	})
+}
+
+async function loadRoutine(scheduleContainer, rid, day) {
+	let name = await fetch(`http://localhost:8080/api/routine/${rid}`)
 		.then(response => response.json())
-		.then(routines => {
-			routines.forEach(routine => {
-				addRoutineToDay(dayContentContainer, routine);
-			});
-		});
-
-/*
-	let exercises = user.getExercises();
-	let exerciseContainer = dayContainer.querySelector('.exercise-container');
-	exercises.forEach(exercise => {
-		let exerciseElement = createExerciseElement(exercise);
-		exerciseContainer.appendChild(exerciseElement);
-	});
-*/
+		.then(json => json.name);
+	let dayContainer = scheduleContainer.querySelector(`#weekly-${day}`);
+	let dayContentContainer = dayContainer.querySelector('.day-content');
+	dayContentContainer.appendChild(loadCard(rid, name));
 }
 
-function addRoutineToDay(dayContentContainer, routine) {
-	let routineElement = document.createElement('p');
-	routineElement.innerText = routine.name;
-	dayContentContainer.appendChild(routineElement);
+function loadCard(rid, name) {
+	let card = document.createElement('button');
+	card.innerText = name;
+	card.classList.add('btn-routine-card');
+	card.addEventListener('click', async function () {
+		await loadRoutineBody(rid);
+	});
+	return card;
 }
