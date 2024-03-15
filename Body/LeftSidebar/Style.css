@@ -45,3 +45,25 @@
 #routine-button img {
     margin-right: 10px;
 }
+
+#weekly-button:active {
+    transform: scale(0.9);
+}
+#weekly-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+
+}
+#weekly-button img {
+    margin-right: 10px;
+}
+
+#Left_Sidebar_Routine{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
