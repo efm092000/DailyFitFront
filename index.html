@@ -19,21 +19,23 @@
 </body>
 
 <script type="module">
-    //import {loadRoutineBody} from './Body/Routine/Load.js';
+    //import {loadRoutinesBody} from './Body/Routines/load.js';
     import {loadHeader} from './Header/Load.js';
     import {loadFooter} from './Footer/load.js';
     // import{loadRoutines} from "./Actions.js";
-    // import { loadLoginBody } from "./Body/Login/Load.js";
+    // import { loadLoginBody } from "./Body/Login/load.js";
     import { loadHomePage } from "./Body/HomePage/Load.js";
     import {loadLeftSidebar} from "./Body/LeftSidebar/Load.js";
+    import{User} from "./utils/user.js";
+    let guest = new User('','');
 
     document.addEventListener('DOMContentLoaded', async function(){
         loadHeader();
-        loadLeftSidebar();
+        loadLeftSidebar(guest);
         await loadHomePage();
         // await loadLoginBody();
         // loadRoutines();
-        // loadRoutineBody();
+        //await loadRoutinesBody();
         loadFooter();
 
     });

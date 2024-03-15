@@ -24,10 +24,3 @@ export function hideHeader() {
 export function hideLeftSidebar() {
     document.querySelector('#Left_Sidebar').style.display = 'none';
 }
-
-export async function loadRoutines(){
-    let RoutineButton = opinion.querySelector('#ButtonRoutines');
-    RoutineButton.addEventListener('click', function(){
-        loadRoutineBody()
-    })
-}

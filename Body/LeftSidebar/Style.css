@@ -30,10 +30,10 @@
     left: 0;
     position: fixed;
 }
-#routine-button:active {
+#routines-button:active {
     transform: scale(0.9);
 }
-#routine-button {
+#routines-button {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -42,7 +42,7 @@
     font-size: 2em;
 
 }
-#routine-button img {
+#routines-button img {
     margin-right: 10px;
 }
 
