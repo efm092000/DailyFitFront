@@ -1,12 +1,28 @@
 import { loadTemplate, replaceBody } from "../../actions.js";
 import { loadRoutineBody } from "../Routine/Load.js";
 
-export async function loadWeekly(wid) {
-	let scheduleContainer = await loadTemplate('/Body/weekly/weekly.html');
+export async function loadWeekly(user) {
+	let weeklyPlanContainer = await loadTemplate('/Body/weekly/weekly.html');
+	replaceBody(weeklyPlanContainer);
 
-	await loadDaysOfWeekTemplate(scheduleContainer);
-	await loadRoutines(scheduleContainer, wid);
-	replaceBody(scheduleContainer);
+	weeklyPlanContainer = document.querySelector('.weekly-page');
+	await loadFirstWeeklyPlan(user, weeklyPlanContainer);
+	await loadDaysOfWeekTemplate(weeklyPlanContainer);
+}
+
+async function loadFirstWeeklyPlan(user, weeklyPlanContainer) {
+	let weeklyPlansJson = await fetch(`http://localhost:8080/api/user/${user.email}/weeklies`).then(response => response.json());
+	let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
+	weeklyPlansSelector.addEventListener('change', function () {
+		loadRoutines(weeklyPlanContainer, this.value);
+	});
+	for (const weeklyPlan of weeklyPlansJson) {
+		let option = document.createElement('option');
+		option.label = weeklyPlan.name;
+		option.value = weeklyPlan.wid;
+		option.classList.add('option-weekly-plan');
+		weeklyPlansSelector.appendChild(option);
+	}
 }
 
 async function loadDaysOfWeekTemplate(weekly) {
@@ -18,13 +34,19 @@ async function loadDaysOfWeekTemplate(weekly) {
 	}
 }
 
-async function loadRoutines(scheduleContainer, wid) {
-	let json = await fetch(`http://localhost:8080/api/weekly/${wid}/routines`)
-		.then(response => response.json());
+async function loadRoutines(weeklyPlanContainer, wid) {
+	let json = await fetch(`http://localhost:8080/api/weekly/${wid}/routines`).then(response => response.json());
+	clearTable(weeklyPlanContainer);
 	transformData(json);
 	for (const routine of json) {
-		await loadRoutine(scheduleContainer, routine.rid, routine.day);
+		await loadRoutine(weeklyPlanContainer, routine.rid, routine.day);
 	}
+}
+
+function clearTable(weeklyPlanContainer) {
+	weeklyPlanContainer.querySelectorAll('.day-content').forEach(dayContent => {
+		dayContent.innerHTML = '';
+	});
 }
 
 function transformData(json) {
