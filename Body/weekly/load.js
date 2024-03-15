@@ -12,10 +12,7 @@ export async function loadWeekly(user) {
 
 async function loadFirstWeeklyPlan(user, weeklyPlanContainer) {
 	let weeklyPlansJson = await fetch(`http://localhost:8080/api/user/${user.email}/weeklies`).then(response => response.json());
-	let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
-	weeklyPlansSelector.addEventListener('change', function () {
-		loadRoutines(weeklyPlanContainer, this.value);
-	});
+	let weeklyPlansSelector = loadWeeklyPlanSelector(weeklyPlanContainer);
 	for (const weeklyPlan of weeklyPlansJson) {
 		let option = document.createElement('option');
 		option.label = weeklyPlan.name;
@@ -23,6 +20,21 @@ async function loadFirstWeeklyPlan(user, weeklyPlanContainer) {
 		option.classList.add('option-weekly-plan');
 		weeklyPlansSelector.appendChild(option);
 	}
+}
+
+function loadWeeklyPlanSelector(weeklyPlanContainer) {
+	let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
+
+	let defaultOption = document.createElement('option');
+	defaultOption.label = 'Select a weekly plan';
+	defaultOption.disabled = true;
+	defaultOption.selected = true;
+
+	weeklyPlansSelector.appendChild(defaultOption);
+	weeklyPlansSelector.addEventListener('change', function () {
+		loadRoutines(weeklyPlanContainer, this.value);
+	});
+	return weeklyPlansSelector;
 }
 
 async function loadDaysOfWeekTemplate(weekly) {

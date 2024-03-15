@@ -4,6 +4,7 @@
     align-items: center;
     width: 100%;
     padding: 5em;
+    gap: 1em;
 }
 
 #schedule {
@@ -13,6 +14,7 @@
     padding: 3em;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 2em;
+    border-color: #195DA2;
 }
 
 .weekly-day-of-week-container {
@@ -33,4 +35,15 @@
     border: none;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.weekly-plans-selector {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1em;
+    font-size: 2em;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 2em;
+    border-color: #195DA2;
 }
