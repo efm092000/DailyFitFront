@@ -1,4 +1,5 @@
-import {loadTemplate, replaceBody} from "../../Actions.js";
+import {loadTemplate, replaceBody} from "../../actions.js";
+import {loadLoginBody} from "../Login/load.js";
 
 export async function loadExerciseSearchPage() {
     let exerciseSearchPage = await loadTemplate('/Body/ExerciseSearch/ExerciseSearch.html');
@@ -54,6 +55,7 @@ async function viewSearch(data) {
             for (const e of entries) {
                 await createEntry(e);
             }
+            await viewDetails();
         } else {
             document.querySelector("#search-results").innerHTML = 'There are no entries';
         }
@@ -62,6 +64,7 @@ async function viewSearch(data) {
         document.querySelector("#search-results").innerHTML = 'Error';
     }
 }
+
 
 async function createEntry(e) {
     let entryHtml = await fetch('/Body/ExerciseSearch/ExerciseSearchResult.html');
