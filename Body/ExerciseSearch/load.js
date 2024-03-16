@@ -1,5 +1,5 @@
 import {loadTemplate, replaceBody} from "../../actions.js";
-import {loadLoginBody} from "../Login/load.js";
+import {loadExerciseDetailsPage} from "./load-exercise-details.js";
 
 export async function loadExerciseSearchPage() {
     let exerciseSearchPage = await loadTemplate('/Body/ExerciseSearch/ExerciseSearch.html');
@@ -52,16 +52,25 @@ async function viewSearch(data) {
     try {
         let entries = data;
         if (entries && entries.length > 0) {
+            document.querySelector("#search-results div").innerHTML = '';
             for (const e of entries) {
                 await createEntry(e);
             }
-            await viewDetails();
+            let items = document.querySelectorAll(".exercise-search-result")
+            items.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    // Tu función de manejo de eventos aquí
+                    loadExerciseDetailsPage(item.querySelector(".exercise-search-result-name").innerText);
+                });
+            });
         } else {
-            document.querySelector("#search-results").innerHTML = 'There are no entries';
+            document.querySelector("#search-results div").innerHTML = '';
+            document.querySelector("#search-results div").innerHTML = 'There are no entries';
         }
     } catch (error) {
         console.error('Error al obtener datos:', error);
-        document.querySelector("#search-results").innerHTML = 'Error';
+        document.querySelector("#search-results div").innerHTML = '';
+        document.querySelector("#search-results div").innerHTML = 'Error';
     }
 }
 
@@ -72,9 +81,5 @@ async function createEntry(e) {
     const newEntry = document.createRange().createContextualFragment(contentHTML);
     newEntry.querySelector('.exercise-search-result-name').innerHTML = e.name;
     newEntry.querySelector('.exercise-search-result-muscle').innerHTML = e.muscleGroup;
-
-    newEntry.addEventListener('click', async function () {
-        await loadExerciseSearchPage(e);
-    });
     document.querySelector("#search-results div").appendChild(newEntry);
 }

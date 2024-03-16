@@ -27,10 +27,12 @@
     width: 15em;
 }
 #search-results {
+    margin-top: 5em;
     display:block;
 }
 .exercise-search-result{
     background-color: #195DA2;
     color:white;
+    text-align: center;
     margin: 2em;
 }
