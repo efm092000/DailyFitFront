@@ -11,24 +11,24 @@
 
 <form id="exerciseForm" action="http://localhost:8080/api/exercise" method="GET">
 
-    <input type="text" id="search-name" name="name" placeholder="Search exercises" class="col-12">
+    <input type="text" id="search-name" name="name" placeholder="Search exercises">
 
 
     <select id="search-muscleGroup" name="muscleGroup">
-        <option selected>Muscle Group?</option>
+        <option selected value="">Muscle Group?</option>
         <option value="legs">Legs</option>
         <option value="arms">Arms</option>
         <option value="abs">Abs</option>
     </select>
 
     <select id="search-material" name = "material">
-        <option selected>Material needed?</option>
+        <option selected value ="">Material needed?</option>
         <option value="true">Material needed</option>
         <option value="false">Material not needed</option>
     </select>
 
     <select id="search-type" name="type">
-        <option selected>Type?</option>
+        <option selected value="">Type?</option>
         <option value="Push">Push</option>
         <option value="Pull">Pull</option>
         <option value="FR">Hypertrofy</option>
@@ -36,7 +36,7 @@
 
 
     <select id="search-difficulty" name="difficulty">
-        <option selected>Difficulty?</option>
+        <option selected value="">Difficulty?</option>
         <option value="1">Easy</option>
         <option value="2">Medium</option>
         <option value="3">Hard</option>

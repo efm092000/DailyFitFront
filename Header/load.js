@@ -3,6 +3,7 @@
 //import {loadTemplate} from '../Body/HomePage/load.js';
 import {loadTemplate} from '../actions.js';
 import {loadLoginBody} from "../Body/Login/load.js";
+import {loadExerciseSearchPage} from "../Body/ExerciseSearch/Load.js";
 
 export async function loadHeader() {
     let Header = await loadTemplate('/DailyFitFront/Header/Header.html');
@@ -26,5 +27,8 @@ function ButtonsActions(){
      */
     document.getElementById('profile-image-button').addEventListener('click', async function() {
         await loadLoginBody();
+    });
+    document.getElementById('Search').addEventListener('click', async function() {
+        await loadExerciseSearchPage();
     });
 }

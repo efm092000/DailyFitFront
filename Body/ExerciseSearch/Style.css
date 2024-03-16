@@ -1,4 +1,4 @@
-.search-page{
+#exerciseForm{
     display: flex;
     justify-content: end;
     width:100%;
@@ -12,12 +12,24 @@
 #search-name{
     height: 4em;
     width: 70%;
-    border: 1px solid #333; /* Define el borde con color oscuro */
-    border-radius: 5px; /* Ajusta el radio de las esquinas para que sea redondeado */
-    padding: 8px; /* Añade un espacio interno para el texto */
-    font-size: 16px; /* Ajusta el tamaño de la fuente */
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
 }
 #exerciseForm select {
     height: 4em;
     width: 15em;
+}
+#exerciseForm button {
+    background-color: #195DA2;
+    height: 3em;
+    width: 15em;
+}
+#search-results {
+    display:block;
+}
+.exercise-search-result{
+    background-color: #195DA2;
+    margin: 2em;
 }
