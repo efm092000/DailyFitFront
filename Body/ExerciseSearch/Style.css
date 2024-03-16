@@ -1,0 +1,23 @@
+.search-page{
+    display: flex;
+    justify-content: end;
+    width:100%;
+}
+
+#exerciseForm{
+    align-content: center;
+    width:100%;
+    display:flex;
+}
+#search-name{
+    height: 4em;
+    width: 70%;
+    border: 1px solid #333; /* Define el borde con color oscuro */
+    border-radius: 5px; /* Ajusta el radio de las esquinas para que sea redondeado */
+    padding: 8px; /* Añade un espacio interno para el texto */
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+}
+#exerciseForm select {
+    height: 4em;
+    width: 15em;
+}
