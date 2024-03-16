@@ -1,4 +1,5 @@
 import { loadTemplate, replaceBody} from "../../actions.js";
+import { loadRoutineBody } from "../Routine/Load.js";
 //import {loadCreateRoutine} from "../Routine/load.js"
 export async function loadRoutinesBody(user) {
     let routines = await loadTemplate('/Body/Routines/Routines.html');
@@ -6,13 +7,9 @@ export async function loadRoutinesBody(user) {
 
     let userRoutinesContainer = document.getElementById("routines-container");
     loadRoutines(userRoutinesContainer,user);
-    /*
     document.getElementById('create-routine-button').addEventListener('click', async function(){
-        await loadCreateRoutine(user);
+        await loadRoutineBody(user);
     })
-
-     */
-
 }
 
 function loadRoutines(userRoutinesContainer, user){
