@@ -42,7 +42,7 @@ export async function addRow()
             let table = document.getElementById("table");
             let tableRows = table.rows.length
             let newRow = table.insertRow(tableRows);
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 3; i++) {
                 let c = newRow.insertCell(i);
                 let cell = document.createElement("input");
                 cell.type = "text";
