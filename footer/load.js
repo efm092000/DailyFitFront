@@ -5,9 +5,9 @@ export async function loadFooter(){
     let footer = await loadTemplate('/DailyFitFront/Footer/Footer.html');
     loadSocialMediaIcons(footer);
     loadContactInfo(footer);
-    document.getElementById('Footer').innerHTML = '';
-    document.getElementById('Footer').appendChild(footer);
-    document.getElementById('Footer').style.display = '';
+    document.getElementById('footer').innerHTML = '';
+    document.getElementById('footer').appendChild(footer);
+    document.getElementById('footer').style.display = '';
 }
 
 function loadSocialMediaIcons(footer) {
@@ -19,21 +19,21 @@ function loadSocialMediaIcons(footer) {
 
 function loadFacebookIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/Images/facebook.png';
+    icon.src = '/DailyFitFront/images/facebook.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadInstagramIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/Images/instagram.png';
+    icon.src = '/DailyFitFront/images/instagram.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadTwitterIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/Images/twitter.png';
+    icon.src = '/DailyFitFront/images/twitter.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
@@ -50,7 +50,7 @@ function loadPhone(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/DailyFitFront/Images/phone.png';
+    icon.src = '/DailyFitFront/images/phone.png';
 
     let text = document.createElement('p');
     text.textContent = '123456789';
@@ -67,7 +67,7 @@ function loadEmail(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/DailyFitFront/Images/mail.png';
+    icon.src = '/DailyFitFront/images/mail.png';
 
     let text = document.createElement('p');
     text.textContent = 'mail@example.com';

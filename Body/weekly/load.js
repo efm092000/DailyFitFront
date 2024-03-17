@@ -1,5 +1,5 @@
 import { loadTemplate, replaceBody } from "../../actions.js";
-import { loadRoutineBody } from "../Routine/Load.js";
+import { loadRoutineBody } from "../routine/load.js";
 import { loadPopup } from "./add-routine/load.js";
 
 export async function loadWeekly(user) {

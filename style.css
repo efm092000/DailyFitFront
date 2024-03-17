@@ -6,7 +6,7 @@
     font-size: 15px;
 }
 
-.Line {
+.line {
     border: none;
     height: 2px;
     width: 90%;
@@ -25,7 +25,7 @@
     z-index: -1;
 }
 
-#BackgroundImage {
+#background-image {
     /*
     bottom: -1px;
     width: 100%;
@@ -47,7 +47,7 @@
 
 }
 
-.Information {
+.information {
     display: flex;
     flex-direction: row;
     margin-top: 0;

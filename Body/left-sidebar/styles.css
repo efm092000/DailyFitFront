@@ -1,16 +1,16 @@
-.SidebarItems {
+.sidebar-items {
     display: flex;
     align-items: center;
     width: max-content;
     gap: 1em;
 }
 
-.SidebarIcons {
+.sidebar-icons {
     height: 2em;
     width: 2em;
 }
 
-#Left_Sidebar{
+#left-sidebar {
     p {
         font-size: 2em;
     }
@@ -30,9 +30,11 @@
     left: 0;
     position: fixed;
 }
+
 #routines-button:active {
     transform: scale(0.9);
 }
+
 #routines-button {
     display: flex;
     align-items: center;
@@ -42,6 +44,7 @@
     font-size: 2em;
 
 }
+
 #routines-button img {
     margin-right: 10px;
 }
@@ -49,6 +52,7 @@
 #weekly-button:active {
     transform: scale(0.9);
 }
+
 #weekly-button {
     display: flex;
     align-items: center;
@@ -58,11 +62,12 @@
     font-size: 2em;
 
 }
+
 #weekly-button img {
     margin-right: 10px;
 }
 
-#Left_Sidebar_Routine{
+#left-sidebar-routine {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

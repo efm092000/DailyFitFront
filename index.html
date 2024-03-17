@@ -6,38 +6,32 @@
     <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
 <body>
-    <header id="Header"> </header>
-    <div id="app">
-        <aside id="Left_Sidebar"> </aside>
-        <main class="Information"></main>
-        <aside id="Right_Sidebar"> </aside>
-    </div>
-    <div id="Background">
-        <img id="BackgroundImage" src="/Images/Background.jpeg" alt="">
-    </div>
-    <footer id="Footer"></footer>
+<header id="header"></header>
+<div id="app">
+    <aside id="left-sidebar"></aside>
+    <main class="information"></main>
+    <aside id="right-sidebar"></aside>
+</div>
+<div id="Background">
+    <img id="background-image" src="/images/background.jpeg" alt="">
+</div>
+<footer id="footer"></footer>
 </body>
 
 <script type="module">
-    //import {loadRoutinesBody} from './Body/Routines/load.js';
-    import {loadHeader} from './Header/Load.js';
-    import {loadFooter} from './Footer/load.js';
-    // import{loadRoutines} from "./Actions.js";
-    // import { loadLoginBody } from "./Body/Login/load.js";
-    import { loadHomePage } from "./Body/HomePage/Load.js";
-    import {loadLeftSidebar} from "./Body/LeftSidebar/Load.js";
-    import{User} from "./utils/user.js";
-    let guest = new User('','');
+	import { loadHeader } from './header/Load.js';
+	import { loadFooter } from './footer/load.js';
+	import { loadHomePage } from "./Body/homepage/load.js";
+	import { loadLeftSidebar } from "./Body/left-sidebar/load.js";
+	import { User } from "./utils/user.js";
 
-    document.addEventListener('DOMContentLoaded', async function(){
-        loadHeader();
-        loadLeftSidebar(guest);
-        await loadHomePage();
-        // await loadLoginBody();
-        // loadRoutines();
-        //await loadRoutinesBody();
-        loadFooter();
+	let guest = new User('', '');
 
-    });
+	document.addEventListener('DOMContentLoaded', async function () {
+		await loadHeader();
+		await loadLeftSidebar(guest);
+		await loadHomePage();
+		await loadFooter();
+	});
 </script>
 </html>

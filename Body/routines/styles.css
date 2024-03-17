@@ -7,11 +7,13 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
 #routines-container.grid-container {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
 }
+
 #routines-container button {
     width: auto;
     margin: 10px;
@@ -25,8 +27,9 @@
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
+
 #create-routine-link {
     display: flex;
     flex-direction: column;
@@ -34,6 +37,7 @@
     margin-top: 250px;
     margin-left: 30px;
 }
+
 #create-routine-link button {
     padding: 15px 30px;
     border: none;
@@ -47,8 +51,9 @@
 }
 
 #create-routine-link button:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
+
 #routine-button:hover {
     background-color: #195DA2;
 }

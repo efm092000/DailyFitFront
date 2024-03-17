@@ -1,24 +1,25 @@
-.Header_row{
+.header-row {
     background-color: #D9EAFA;
     font-weight: bold;
 }
 
-.table{
+.table {
     font-family: Arial, serif;
     height: 190%;
     width: 50%;
     /*border-color: #406E9B;*/
 }
 
-.Container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#CreateRoutineButton{
+
+#CreateRoutineButton {
     border-radius: 11px;
-    border:none;
+    border: none;
     background-color: #406E9B;
     color: white;
     margin-top: 5%;

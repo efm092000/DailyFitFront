@@ -1,4 +1,4 @@
-#Footer {
+#footer {
     z-index: 99;
 }
 
@@ -6,15 +6,12 @@
     content: '';
     width: 100%;
     height: 1px;
-   /* background-color: #07396B;*/
 }
 
 #footer-container {
     display: flex;
     flex-direction: column;
     gap: 2em;
-    margin-top: 3em;
-    margin-bottom: 2em;
     background-color: #07396B;
     margin:0;
 }
@@ -42,9 +39,8 @@
 #about-us-text , .contact-info-text {
     color: white;
     max-width: 15em;
-    font-size : 1.5em;
     margin: 0;
-    font-size: 80%;
+    font-size: 1em;
 }
 
 #footer-copyright-container{

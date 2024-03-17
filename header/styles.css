@@ -1,9 +1,10 @@
-#Header {
+#header {
     top: 0;
     position: sticky;
     z-index: 99;
     background: white;
 }
+
 #profile-image-button {
     background-color: transparent;
     border: none;
@@ -14,51 +15,53 @@
     transform: scale(0.9);
 }
 
-#Header_Elements{
+#header-elements {
 
-    display:flex;
+    display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
 
 }
 
-.header-logo img{
+.header-logo img {
 
     max-width: 100px;
     height: auto;
     margin-left: 50px;
 }
 
-.Search-container{
+.search-container {
 
     position: relative;
 }
-#Search{
 
+#search {
     width: 500px;
     padding: 10px;
     border: none;
     border-radius: 20px;
     font-size: 16px;
     outline: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: #195DA2;
 }
-#Search::placeholder{
+
+#search::placeholder {
     color: #195DA2;
     padding-left: 10px;
 }
 
-#Icon{
+#icon {
 
     max-width: 50px;
     height: auto;
     margin-right: 20px;
 
 }
-.Line{
+
+.line {
 
     margin-left: 50px;
     width: calc(100% - 50px);
@@ -67,6 +70,6 @@
 
 }
 
-#Container_Header{
+#container-header {
     position: relative;
 }

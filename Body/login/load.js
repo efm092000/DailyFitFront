@@ -1,12 +1,12 @@
 import { hideHeader, hideLeftSidebar, loadTemplate, replaceBody } from "/Actions.js";
-import { loadHomePage } from "../HomePage/Load.js";
+import { loadHomePage } from "../homepage/load.js";
 import { User } from "../../utils/user.js";
-import { loadHeader } from "../../Header/Load.js";
-import { loadFooter } from "../../Footer/Load.js";
-import { loadLeftSidebar } from "../LeftSidebar/Load.js";
+import { loadHeader } from "../../header/load.js";
+import { loadFooter } from "../../footer/load.js";
+import { loadLeftSidebar } from "../left-sidebar/load.js";
 
 export async function loadLoginBody() {
-	let page = await loadTemplate('/Body/Login/Login.html');
+	let page = await loadTemplate('/Body/login/login.html');
 
 	let formContainer = page.querySelector('#form-container');
 	await loadLoginForm(formContainer);

@@ -1,12 +1,12 @@
 import { loadTemplate } from "../../actions.js";
-import {loadRoutinesBody} from "../Routines/load.js";
+import {loadRoutinesBody} from "../routines/load.js";
 import { loadWeekly } from "../weekly/load.js";
 
 export async function loadLeftSidebar(user) {
 
-    let leftSidebarContent = await loadTemplate('Body/LeftSidebar/LeftSidebar.html');
-    document.querySelector('#Left_Sidebar').innerHTML='';
-    document.querySelector('#Left_Sidebar').appendChild(leftSidebarContent);
+    let leftSidebarContent = await loadTemplate('Body/left-sidebar/left-sidebar.html');
+    document.querySelector('#left-sidebar').innerHTML='';
+    document.querySelector('#left-sidebar').appendChild(leftSidebarContent);
     ButtonsActions(user);
 
 }
