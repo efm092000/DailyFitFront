@@ -7,8 +7,15 @@ export async function loadRoutinesBody(user) {
 
 	let userRoutinesContainer = document.getElementById("routines-container");
 	loadRoutines(userRoutinesContainer, user);
+	addCreateRoutineButton(user);
+}
+
+function addCreateRoutineButton(user) {
 	document.getElementById('create-routine-button').addEventListener('click', async function () {
-		await loadRoutineBody(user);
+		let rid = await fetch(`http://localhost:8080/api/routine/NewRoutine?email=${user.email}`, {
+			method: 'POST'
+		}).then(response => response.json()).then(routine => routine.rid);
+		await loadRoutineBody(rid);
 	})
 }
 
