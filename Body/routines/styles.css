@@ -54,6 +54,6 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-#routine-button:hover {
+.routine-button:hover {
     background-color: #195DA2;
 }

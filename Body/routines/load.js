@@ -25,11 +25,9 @@ function loadRoutines(userRoutinesContainer, user) {
 function addButtonToContainer(container, routine) {
 	let routineButton = document.createElement("button");
 	routineButton.textContent = routine.name;
-	routineButton.id = "routine-button";
-	/*
+	routineButton.className = "routine-button";
 	routineButton.addEventListener('click', function(){
-		window.location.href = 'Body/CreateRoutine/create-routine.html'
+		alert(routine.rid)
 	});
-	 */
 	container.appendChild(routineButton);
 }
