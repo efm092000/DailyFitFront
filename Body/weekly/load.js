@@ -11,6 +11,8 @@ export async function loadWeekly(user) {
 	loadAddRoutineButton(weeklyPlanContainer);
 	await loadWeeklyPlan(user, weeklyPlanContainer);
 	await loadDaysOfWeekTemplate(weeklyPlanContainer);
+
+	await loadWeeklyPlanSelectorAction(weeklyPlanContainer, user);
 	loadTitleAction(user, weeklyPlanContainer);
 }
 
@@ -49,7 +51,7 @@ async function loadWeeklyPlan(user, weeklyPlanContainer) {
 	}
 }
 
-function loadWeeklyPlanSelector(weeklyPlanContainer, user) {
+function loadWeeklyPlanSelector(weeklyPlanContainer) {
 	let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
 	weeklyPlansSelector.innerHTML = '';
 
@@ -58,12 +60,11 @@ function loadWeeklyPlanSelector(weeklyPlanContainer, user) {
 
 	let createOption = loadCreateOption();
 	weeklyPlansSelector.appendChild(createOption);
-
-	loadWeeklyPlanSelectorAction(weeklyPlanContainer, weeklyPlansSelector, user);
 	return weeklyPlansSelector;
 }
 
-async function loadWeeklyPlanSelectorAction(weeklyPlanContainer, weeklyPlansSelector, user) {
+async function loadWeeklyPlanSelectorAction(weeklyPlanContainer, user) {
+	let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
 	weeklyPlansSelector.addEventListener('change', async function () {
 		if (this.value === 'create') {
 			await createNewWeeklyPlan(weeklyPlanContainer, user);
