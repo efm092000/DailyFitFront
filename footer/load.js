@@ -2,7 +2,7 @@
 import {loadTemplate} from "../actions.js";
 
 export async function loadFooter(){
-    let footer = await loadTemplate('/DailyFitFront/Footer/Footer.html');
+    let footer = await loadTemplate('/footer/footer.html');
     loadSocialMediaIcons(footer);
     loadContactInfo(footer);
     document.getElementById('footer').innerHTML = '';
@@ -19,21 +19,21 @@ function loadSocialMediaIcons(footer) {
 
 function loadFacebookIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/images/facebook.png';
+    icon.src = '/images/facebook.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadInstagramIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/images/instagram.png';
+    icon.src = '/images/instagram.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
 
 function loadTwitterIcon(socialMediaIcons) {
     let icon = document.createElement('img');
-    icon.src = '/DailyFitFront/images/twitter.png';
+    icon.src = '/images/twitter.png';
     icon.className = 'social-media-icon';
     socialMediaIcons.appendChild(icon);
 }
@@ -50,7 +50,7 @@ function loadPhone(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/DailyFitFront/images/phone.png';
+    icon.src = '/images/phone.png';
 
     let text = document.createElement('p');
     text.textContent = '123456789';
@@ -67,7 +67,7 @@ function loadEmail(contactInfo) {
 
     let icon = document.createElement('img');
     icon.className = 'social-media-icon';
-    icon.src = '/DailyFitFront/images/mail.png';
+    icon.src = '/images/mail.png';
 
     let text = document.createElement('p');
     text.textContent = 'mail@example.com';
