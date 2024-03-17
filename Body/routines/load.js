@@ -11,7 +11,7 @@ export async function loadRoutinesBody(user) {
 }
 
 function addCreateRoutineButton(user) {
-	document.getElementById('create-routine-button').addEventListener('click', async function () {
+	document.getElementById('save-routine-button').addEventListener('click', async function () {
 		let rid = await fetch(`http://localhost:8080/api/routine/NewRoutine?email=${user.email}`, {
 			method: 'POST'
 		}).then(response => response.json()).then(routine => routine.rid);
@@ -34,7 +34,7 @@ function addButtonToContainer(container, routine) {
 	routineButton.textContent = routine.name;
 	routineButton.className = "routine-button";
 	routineButton.addEventListener('click', function(){
-		alert(routine.rid)
+		loadRoutineBody(routine.rid)
 	});
 	container.appendChild(routineButton);
 }

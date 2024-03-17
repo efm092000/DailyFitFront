@@ -1,74 +1,84 @@
 import {loadTemplate, replaceBody} from '../../Actions.js';
-import {Routine} from "../../utils/routine.js";
 
-export async function loadRoutineBody(rid, user) {
-	let routine = await loadTemplate('/Body/Routine/Routine.html');
-	replaceBody(routine);
-	loadExercises(10)
-	addExerciseButton();
-	createRoutineButton(user);
+export async function loadRoutineBody(rid) {
+    let routine = await loadTemplate('/Body/Routine/Routine.html');
+    replaceBody(routine);
+    loadRoutineName(rid);
+    loadExercises(rid);
+    addExerciseButton();
+    saveRoutineButton(rid);
+}
+
+async function loadRoutineName(rid) {
+    let getRoutineName = `http://localhost:8080/api/routine/${rid}`;
+    let name = await fetch(getRoutineName)
+        .then(response => response.json())
+        .then(routine => routine.name);
+
+    document.querySelector("#routine-name").value = name;
 }
 
 async function loadExercises(rid) {
-	let getExercisesURL = `http://localhost:8080/api/routine/${rid}/exercises`;
-	let json = await fetch(getExercisesURL)
-		.then(response => response.json());
+    let getExercisesURL = `http://localhost:8080/api/routine/${rid}/exercises`;
+    let json = await fetch(getExercisesURL)
+        .then(response => response.json());
 
-	for (const exercise of json) {
-		addRow(exercise.exercise, exercise.sets, exercise.reps);
-	}
+    for (const exercise of json) {
+        addRow(exercise.exercise, exercise.sets, exercise.reps);
+    }
 
 }
 
-function createRoutineButton(user) {
-	document.querySelector('#create-routine-button').addEventListener(
-		'click', function () {
-			createRoutine(user);
-		}
-	)
+function saveName(rid) {
+    let name = document.querySelector("#routine-name").value;
+    let updateNameURL = `http://localhost:8080/api/routine/${rid}?name=${name}`
+
+    fetch(updateNameURL, {
+        method: 'PUT',
+    });
 }
 
-export async function createRoutine(user) {
-	let name = document.querySelector('#routine-name').value;
-	let email = user.email;
-	let createRoutineURL = `http://localhost:8080/api/routine/${name}?email=${email}`;
-
-	fetch(createRoutineURL, {
-		method: 'POST',
-	}).then(
-		async routine => {
-			addRoutine(routine);
-		}
-	);
+function saveRoutineButton(rid) {
+    document.querySelector('#save-routine-button').addEventListener(
+        'click', function () {
+            saveRoutine(rid);
+            saveName(rid);
+            alert("Changes saved.");
+        }
+    )
 }
 
-function addRoutine(routine) {
-	let createdRoutine = new Routine(routine.name, routine.email);
-	// TODO: Update the routines list with the new routine.
-}
+export async function saveRoutine(rid) {
+    let nameArray = document.querySelectorAll('.exercise-field');
+    let setsArray = document.querySelectorAll('.sets-field');
+    let repsArray = document.querySelectorAll('.reps-field');
 
-function createCell(field, index, row) {
-	let c = row.insertCell(index);
-	let cell = document.createElement("input");
-	cell.type = "text";
-	cell.value = field;
-	c.appendChild(cell);
+    for (let i = 0; i < nameArray.length; i++) {
+        let name = nameArray[i].value;
+        let sets = setsArray[i].value;
+        let reps = repsArray[i].value;
+        let getExercisesURL = `http://localhost:8080/api/routine/${rid}/exercise?name=${name}&sets=${sets}&reps=${reps}`;
+
+        fetch(getExercisesURL, {
+            method: 'POST',
+        });
+    }
 }
 
 function addExerciseButton() {
-	document.querySelector("#add-exercise").addEventListener(
-		'click', function () {
-			addRow('', '', '');
-		}
-	);
+    document.querySelector("#add-exercise").addEventListener(
+        'click', function () {
+            addRow('', '', '');
+        }
+    );
 }
 
-export async function addRow(exercise, sets, reps) {
-	let table = document.getElementById("table");
-	let tableRows = table.rows.length
-	let newRow = table.insertRow(tableRows);
+async function addRow(exercise, sets, reps) {
+    let table = document.getElementById("table");
+    let row = await loadTemplate('/Body/routine/row.html');
 
-	createCell(exercise, 0, newRow);
-	createCell(sets, 1, newRow);
-	createCell(reps, 2, newRow);
+    row.querySelector('.exercise-field').value = exercise;
+    row.querySelector('.sets-field').value = sets;
+    row.querySelector('.reps-field').value = reps;
+    table.appendChild(row);
 }

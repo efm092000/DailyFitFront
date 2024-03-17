@@ -28,7 +28,7 @@ table, th, td {
     flex-direction: column;
 }
 
-#create-routine-button{
+#save-routine-button{
     border-radius: 11px;
     border:none;
     background-color: #406E9B;
