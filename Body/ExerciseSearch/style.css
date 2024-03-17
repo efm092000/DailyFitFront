@@ -1,16 +1,17 @@
 #exerciseForm{
-    display: flex;
-    justify-content: end;
+    text-align: center;
     width:100%;
+    margin: 1em auto;
+}
+.search-filters{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 1em;
 }
 
-#exerciseForm{
-    align-content: center;
-    width:100%;
-    display:flex;
-}
 #search-name{
-    height: 4em;
+    height: 3em;
     width: 70%;
     border: 1px solid #333;
     border-radius: 5px;
