@@ -1,11 +1,23 @@
-import { loadTemplate, replaceBody } from '../../Actions.js';
-import { Routine } from "../../utils/routine.js";
+import {loadTemplate, replaceBody} from '../../Actions.js';
+import {Routine} from "../../utils/routine.js";
 
-export async function loadRoutineBody(user) {
-	let routine = await loadTemplate('/Body/routine/routine.html');
+export async function loadRoutineBody(rid, user) {
+	let routine = await loadTemplate('/Body/Routine/Routine.html');
 	replaceBody(routine);
+	loadExercises(10)
+	addExerciseButton();
 	createRoutineButton(user);
-	await addRow();
+}
+
+async function loadExercises(rid) {
+	let getExercisesURL = `http://localhost:8080/api/routine/${rid}/exercises`;
+	let json = await fetch(getExercisesURL)
+		.then(response => response.json());
+
+	for (const exercise of json) {
+		addRow(exercise.exercise, exercise.sets, exercise.reps);
+	}
+
 }
 
 function createRoutineButton(user) {
@@ -35,18 +47,28 @@ function addRoutine(routine) {
 	// TODO: Update the routines list with the new routine.
 }
 
-export async function addRow() {
-	document.querySelector('#add-exercise').addEventListener(
+function createCell(field, index, row) {
+	let c = row.insertCell(index);
+	let cell = document.createElement("input");
+	cell.type = "text";
+	cell.value = field;
+	c.appendChild(cell);
+}
+
+function addExerciseButton() {
+	document.querySelector("#add-exercise").addEventListener(
 		'click', function () {
-			let table = document.getElementById("table");
-			let tableRows = table.rows.length
-			let newRow = table.insertRow(tableRows);
-			for (let i = 0; i < 4; i++) {
-				let c = newRow.insertCell(i);
-				let cell = document.createElement("input");
-				cell.type = "text";
-				c.appendChild(cell);
-			}
+			addRow('', '', '');
 		}
-	)
+	);
+}
+
+export async function addRow(exercise, sets, reps) {
+	let table = document.getElementById("table");
+	let tableRows = table.rows.length
+	let newRow = table.insertRow(tableRows);
+
+	createCell(exercise, 0, newRow);
+	createCell(sets, 1, newRow);
+	createCell(reps, 2, newRow);
 }

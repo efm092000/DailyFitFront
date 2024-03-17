@@ -1,28 +1,40 @@
-.header-row {
+.header-row{
     background-color: #D9EAFA;
     font-weight: bold;
+    text-align: center;
+    height: 70px;
 }
 
-.table {
+th, td {
+    padding: 15px;
+}
+
+table, th, td {
+    border: 2px solid #406E9B;
+    border-collapse: collapse;
+}
+
+#table{
     font-family: Arial, serif;
-    height: 190%;
     width: 50%;
-    /*border-color: #406E9B;*/
+    border-radius: 10px;
 }
 
-.container {
+.container{
     display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-#create-routine-button {
+#create-routine-button{
     border-radius: 11px;
-    border: none;
+    border:none;
     background-color: #406E9B;
     color: white;
     margin-top: 5%;
     height: 30px;
-    width: 20%;
+    width: fit-content;
+    padding: 0 10px;
 }
