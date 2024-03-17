@@ -15,7 +15,7 @@
     margin-right: 5%;
 }
 
-#Background {
+#background {
     background-color: #FFFFFF;
     position: sticky;
     height: 0;
@@ -26,14 +26,6 @@
 }
 
 #background-image {
-    /*
-    bottom: -1px;
-    width: 100%;
-    min-width: 140em;
-    z-index: -1;
-    position: absolute;
-
-     */
     position: fixed;
     top: 0;
     left: 0;
@@ -57,7 +49,7 @@
     margin-left: 15em;
 }
 
-#Vertical_Line {
+#vertical-line {
     border-left: 2px;
     height: 630px;
     width: 2px;
@@ -65,30 +57,30 @@
     margin-right: 3%;
 }
 
-.HomepageButtons {
+.homepage-buttons {
     width: 20%;
-    height: 15.78px;
+    height: 16px;
     /* text-decoration-color: #424242;*/
     font-family: Arial, serif;
 }
 
-#RoutinesButtonContainer {
+#routines-button-container {
     width: 100%;
     border: none;
 }
 
-#ButtonRoutines {
+#button-routines {
     width: 95%;
     border-radius: 300px;
     border: none;
     background: transparent;
 }
 
-#WeeklyButtonContainer {
+#weekly-button-container {
     width: 100%;
 }
 
-#ButtonWeekly {
+#button-weekly {
     border-radius: 300px;
     width: 95%;
     border: none;
