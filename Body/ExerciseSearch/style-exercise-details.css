@@ -1,7 +1,3 @@
- *{
-     background-color: #D9EAFA;
- }
-
  #text-area{
      align-content: center;
      margin-left: 5%;
@@ -17,6 +13,7 @@
      flex-direction: row;
      justify-content:space-between;
      align-items: center;
+     background: #D9EAFA;
  }
  .subheader{
      background: #406E9B ;
@@ -38,5 +35,8 @@
      text-align: center;
  }
  #exercise-name {
-     text-align: center;
+     align-content: center;
+     color:#000000;
+     font-size: 120%;
+
  }
