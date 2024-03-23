@@ -3,7 +3,7 @@ import { loadRoutineBody } from "../routine/load.js";
 import { loadPopup } from "./add-routine/load.js";
 
 export async function loadWeekly(user) {
-	let weeklyPlanContainer = await loadTemplate('/Body/weekly/weekly.html');
+	let weeklyPlanContainer = await loadTemplate('/body/weekly/weekly.html');
 	replaceBody(weeklyPlanContainer);
 	weeklyPlanContainer = document.querySelector('.weekly-page');
 
@@ -103,7 +103,7 @@ function loadCreateOption() {
 async function loadDaysOfWeekTemplate(weekly) {
 	let daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 	for (const day of daysOfWeek) {
-		let dayTemplate = await loadTemplate('/Body/weekly/day-container/day-container.html');
+		let dayTemplate = await loadTemplate('/body/weekly/day-container/day-container.html');
 		dayTemplate.querySelector('.day-title').innerText = day;
 		weekly.querySelector(`#weekly-${day}`).appendChild(dayTemplate);
 	}

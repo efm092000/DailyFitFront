@@ -4,7 +4,7 @@ import { loadWeekly } from "../weekly/load.js";
 
 export async function loadLeftSidebar(user) {
 
-    let leftSidebarContent = await loadTemplate('Body/left-sidebar/left-sidebar.html');
+    let leftSidebarContent = await loadTemplate('/body/left-sidebar/left-sidebar.html');
     document.querySelector('#left-sidebar').innerHTML='';
     document.querySelector('#left-sidebar').appendChild(leftSidebarContent);
     ButtonsActions(user);

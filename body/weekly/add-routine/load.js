@@ -3,7 +3,7 @@ import { reloadContent } from "../load.js";
 
 export async function loadPopup(weeklyPlanContainer, user) {
 	let popup = weeklyPlanContainer.querySelector('.popup-container');
-	let popupContent = await loadTemplate('/Body/weekly/add-routine/add-routine.html');
+	let popupContent = await loadTemplate('/body/weekly/add-routine/add-routine.html');
 	popup.innerHTML = '';
 	popup.appendChild(popupContent);
 	popup.style.display = 'none';

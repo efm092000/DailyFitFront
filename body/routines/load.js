@@ -2,7 +2,7 @@ import { loadTemplate, replaceBody } from "../../actions.js";
 import { loadRoutineBody } from "../routine/load.js";
 
 export async function loadRoutinesBody(user) {
-	let routines = await loadTemplate('/Body/routines/routines.html');
+	let routines = await loadTemplate('/body/routines/routines.html');
 	replaceBody(routines);
 
 	let userRoutinesContainer = document.getElementById("routines-container");

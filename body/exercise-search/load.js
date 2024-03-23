@@ -2,7 +2,7 @@ import {loadTemplate, replaceBody} from "../../actions.js";
 import {loadExerciseDetailsPage} from "./load-exercise-details.js";
 
 export async function loadExerciseSearchPage() {
-    let exerciseSearchPage = await loadTemplate('/Body/ExerciseSearch/ExerciseSearch.html');
+    let exerciseSearchPage = await loadTemplate('/body/exercise-search/exercise-search.html');
     replaceBody(exerciseSearchPage);
     await prepareForm();
 }
@@ -76,7 +76,7 @@ async function viewSearch(data) {
 
 
 async function createEntry(e) {
-    let entryHtml = await fetch('/Body/ExerciseSearch/ExerciseSearchResult.html');
+    let entryHtml = await fetch('/body/exercise-search/exercise-search-result.html');
     let contentHTML = await entryHtml.text();
     const newEntry = document.createRange().createContextualFragment(contentHTML);
     newEntry.querySelector('.exercise-search-result-name').innerHTML = e.name;

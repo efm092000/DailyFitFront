@@ -1,7 +1,7 @@
 import { loadTemplate } from '../actions.js';
-import { loadLoginBody } from "../Body/login/load.js";
-import { loadExerciseSearchPage } from "../Body/ExerciseSearch/load.js";
-import { loadHomePage } from "../Body/homepage/load.js";
+import { loadLoginBody } from "../body/login/load.js";
+import { loadExerciseSearchPage } from "../body/exercise-search/load.js";
+import { loadHomePage } from "../body/homepage/load.js";
 
 export async function loadHeader() {
 	let header = await loadTemplate('/header/header.html');
