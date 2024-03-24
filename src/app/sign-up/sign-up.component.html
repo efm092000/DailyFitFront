@@ -1,6 +1,7 @@
+<router-outlet></router-outlet>
 <div class="form container d-flex flex-column vh-100 justify-content-center align-items-center">
-    <p class="text text-primary text-center display-1">Login</p>
-    <form class="d-flex flex-column gap-2" [formGroup]="formLogin">
+    <p class="text text-primary text-center display-1">Sign Up</p>
+    <form class="d-flex flex-column gap-2" [formGroup]="formSignUp">
         <div class="input row row-cols-2 align-items-center justify-content-center">
             <div class="col-1 col-lg-1 align-items">
                 <i class="bi-envelope"></i>
@@ -20,9 +21,20 @@
                 <input class="form-control" formControlName="password" type="password" placeholder="Password">
             </div>
         </div>
-        <div class="row">
-            <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/sign-up">here</span></p>
+        <div class="input row row-cols-2 align-items-center justify-content-center">
+            <div class="col-1 col-lg-1">
+                <i class="bi-key"></i>
+            </div>
+            <div class="col col-lg-auto">
+                <input class="form-control" formControlName="confirmPassword" type="password" placeholder="Confirm password">
+                <div *ngIf="!passwordsMatch() && confirmPassword.dirty" class="text-danger">
+                    The passwords do not match
+                </div>
+            </div>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="formLogin.invalid" (click)="login()">Login</button>
+        <div class="row">
+            <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/login">here</span></p>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="formSignUp.invalid" (click)="signUp()">Sign Up</button>
     </form>
 </div>
