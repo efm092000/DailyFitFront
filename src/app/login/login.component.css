@@ -1,0 +1,15 @@
+.hover-effect {
+    color: #007bff; /* Change this to your preferred color */
+    font-weight: bold; /* Makes the text bold */
+}
+
+.hover-effect:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.row {
+    p {
+        margin: 0;
+    }
+}
