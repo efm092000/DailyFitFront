@@ -2,7 +2,7 @@
 <div class="form container d-flex flex-column vh-100 justify-content-center align-items-center">
     <p class="text text-primary text-center display-1">Sign Up</p>
     <form class="d-flex flex-column gap-2" [formGroup]="formSignUp">
-        <div class="input row row-cols-2 align-items-center justify-content-center">
+        <div class="row row-cols-2 align-items-center justify-content-center">
             <div class="col-1 col-lg-1 align-items">
                 <i class="bi-envelope"></i>
             </div>
@@ -13,7 +13,17 @@
                 <p>The email is not valid</p>
             </div>
         </div>
-        <div class="input row row-cols-2 align-items-center justify-content-center">
+
+        <div class="row row-cols-2 align-items-center justify-content-center">
+            <div class="col-1 col-lg-1">
+                <i class="bi-person"></i>
+            </div>
+            <div class="col col-lg-auto">
+                <input class="form-control" formControlName="username" type="text" placeholder="Enter username">
+            </div>
+        </div>
+
+        <div class="row row-cols-2 align-items-center justify-content-center">
             <div class="col-1 col-lg-1">
                 <i class="bi-key"></i>
             </div>
@@ -21,7 +31,7 @@
                 <input class="form-control" formControlName="password" type="password" placeholder="Password">
             </div>
         </div>
-        <div class="input row row-cols-2 align-items-center justify-content-center">
+        <div class="row row-cols-2 align-items-center justify-content-center">
             <div class="col-1 col-lg-1">
                 <i class="bi-key"></i>
             </div>
