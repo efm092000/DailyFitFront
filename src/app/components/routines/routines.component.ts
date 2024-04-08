@@ -17,7 +17,7 @@ import {Routine} from "../../interfaces/routine.interface";
   styleUrl: './routines.component.css'
 })
 export class RoutinesComponent implements OnInit{
-  userRoutines?: any[] = [];
+  userRoutines?: Routine[] = [];
   routine?: Routine;
 
   constructor(private serviceRoutines: RoutinesService) {}
@@ -25,7 +25,7 @@ export class RoutinesComponent implements OnInit{
   ngOnInit(): void {
     this.serviceRoutines.getUserRoutines().subscribe(
       {
-        next: (routines: any[] | undefined) => {
+        next: (routines: Routine[] | undefined) => {
           this.userRoutines = routines;
         },
         error: (err) => {
@@ -33,18 +33,7 @@ export class RoutinesComponent implements OnInit{
         }
       })
   }
-/*
-  loadDetails(): void {
-    this.serviceRoutines.getRoutine().subscribe(
-      {
-        next: (routine: Routine | undefined) => {
-          this.routine = routine;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-  }
- */
+
+
 }
 

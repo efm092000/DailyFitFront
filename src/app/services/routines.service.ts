@@ -21,8 +21,8 @@ export class RoutinesService {
     )
   }
 
-  getUserRoutines(): Observable<any[] | undefined>{
-    return this.http.get<any[]>(this.userRoutinesUrl).pipe(
+  getUserRoutines(): Observable<Routine[] | undefined>{
+    return this.http.get<Routine[]>(this.userRoutinesUrl).pipe(
       catchError((error) => {
         console.log(error)
         return of(undefined)
