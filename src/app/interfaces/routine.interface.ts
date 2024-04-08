@@ -1,5 +1,6 @@
 export interface Routine {
   rid: number;
-  name: string;
-  email: string;
+  exercise: string;
+  sets: number;
+  reps: number;
 }

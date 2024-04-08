@@ -1,7 +1,7 @@
 <div id="main-routine" class="d-flex flex-column align-items-center justify-content-between" style="margin-left: 20px; margin-right: 20px;">
   <div id="routines-container" class="grid-container row row-cols-3 g-3">
     <div *ngFor="let routine of userRoutines" class="routine col">
-      <button>{{ routine.name }}</button>
+      <button (click)="loadRoutine(routine.rid)">{{ routine.name }}</button>
     </div>
   </div>
 </div>

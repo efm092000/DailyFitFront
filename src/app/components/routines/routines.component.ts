@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink} from "@angular/router";
 import { JsonPipe, NgFor} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
+import {UserRoutines} from "../../interfaces/user-routines.interface";
 import {Routine} from "../../interfaces/routine.interface";
 
 
@@ -17,7 +18,7 @@ import {Routine} from "../../interfaces/routine.interface";
   styleUrl: './routines.component.css'
 })
 export class RoutinesComponent implements OnInit{
-  userRoutines?: Routine[] = [];
+  userRoutines?: UserRoutines[] = [];
   routine?: Routine;
 
   constructor(private serviceRoutines: RoutinesService) {}
@@ -25,7 +26,7 @@ export class RoutinesComponent implements OnInit{
   ngOnInit(): void {
     this.serviceRoutines.getUserRoutines().subscribe(
       {
-        next: (routines: Routine[] | undefined) => {
+        next: (routines: UserRoutines[] | undefined) => {
           this.userRoutines = routines;
         },
         error: (err) => {
@@ -34,6 +35,16 @@ export class RoutinesComponent implements OnInit{
       })
   }
 
-
+  loadRoutine(routineId: number): void {
+    this.serviceRoutines.getRoutine(routineId).subscribe(
+      {
+        next: (routine: Routine | undefined) => {
+          this.routine = routine;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
+  }
 }
 
