@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {RoutineService} from "../../services/routine.service";
 import {Routine} from "../../interfaces/routine.interface";
@@ -19,9 +19,9 @@ export class RoutineComponent implements OnInit{
   }
 
   exercises?: Routine[] = [];
-
+  @Input() rid!: number;
   ngOnInit(): void {
-    this.serviceRoutine.getRoutineExercises().subscribe(
+    this.serviceRoutine.getRoutineExercises(this.rid).subscribe(
       {
         next: (exercisesRoutine: Routine[] | undefined) => {
           this.exercises = exercisesRoutine;
@@ -50,10 +50,15 @@ export class RoutineComponent implements OnInit{
   }
 
   addExerciseAction() {
-    
+
   }
 
   deleteRoutineAction() {
-    
+
+  }
+
+  @Output() goBackEvent = new EventEmitter<boolean>();
+  goBackAction() {
+    this.goBackEvent.emit();
   }
 }

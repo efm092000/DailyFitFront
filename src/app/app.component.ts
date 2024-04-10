@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HomePageComponent } from './home-page/home-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import {RoutinesComponent} from "./components/routines/routines.component";
 import { LoginComponent } from "./components/login/login.component";
