@@ -7,9 +7,6 @@ thead{
 
 th, td {
   padding: 15px;
-}
-
-table, th, td {
   border: 2px solid #406E9B;
   border-collapse: collapse;
 }
@@ -18,10 +15,30 @@ td {
   text-align: center;
 }
 
+.delete-exercise-column {
+  border: 0 none transparent;
+  background-color: white;
+}
+
+.delete-exercise-button {
+  padding: 5px;
+}
+
+.delete-exercise-button:hover {
+  background-color: rgb(214, 214, 214);
+  border-radius: 30px;
+  cursor: pointer;
+}
+
 #table{
+  margin-top: 20px;
   font-family: Arial, serif;
-  width: 50%;
+  width: 100%;
   border-radius: 10px;
+}
+
+#routine-name {
+  margin-top: 10px;
 }
 
 .container{
@@ -29,16 +46,18 @@ td {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  width: 468px;
   flex-direction: column;
 }
 
 .button-container{
   flex-direction: row;
+  text-align: center;
 }
 
-#add-exercise {
-  padding: 0 !important;
-  margin: 0 !important;
+.add-exercise-button:hover {
+  background-color: rgb(214, 214, 214);
+  cursor: pointer;
 }
 
 button{
