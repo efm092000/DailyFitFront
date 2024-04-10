@@ -33,19 +33,9 @@ export class RoutineComponent implements OnInit{
     )
   }
 
-
   addExerciseButton: boolean = false;
   saveRoutineButton: boolean = false;
   editRoutineButton: boolean = true;
-  /*async loadExercises(): Promise<Exercise[]> {
-    const response = await fetch('http://localhost:8080/api/routine/30/exercises');
-    const data = await response.json();
-    return data.map((e: any) => ({
-      exercise: e.exercise,
-      sets: e.sets,
-      reps: e.reps
-    }));
-  }*/
 
   saveRoutineAction() {
     this.addExerciseButton = false;
@@ -57,5 +47,13 @@ export class RoutineComponent implements OnInit{
     this.addExerciseButton = true;
     this.saveRoutineButton = true;
     this.editRoutineButton = false;
+  }
+
+  addExerciseAction() {
+    
+  }
+
+  deleteRoutineAction() {
+    
   }
 }
