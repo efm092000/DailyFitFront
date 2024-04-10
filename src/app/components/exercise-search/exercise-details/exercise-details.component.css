@@ -1,0 +1,42 @@
+#text-area{
+  align-content: center;
+  margin-left: 5%;
+}
+
+#exercisegif{
+  width: 50%;
+  height:50%;
+}
+
+#element-container{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  background: #D9EAFA;
+}
+.subheader{
+  background: #406E9B ;
+  color: #FFFFFF;
+  border-radius: 11px;
+  width: 15%;
+  height: 16%;
+  text-align: center;
+  margin-top: 5%;
+
+}
+
+.info{
+  background: #7FA5CA ;
+  color: #FFFFFF;
+  border-radius: 11px;
+  width: 30%;
+  height: 50%;
+  text-align: center;
+}
+#exercise-name {
+  align-content: center;
+  color:#000000;
+  font-size: 120%;
+
+}
