@@ -10,9 +10,9 @@ export class RoutineService {
 
   constructor(private http: HttpClient) { }
 
-  url: string = 'http://localhost:8080/api/routine/30/exercises'
-  getRoutineExercises(): Observable<Routine[] |undefined> {
-    return this.http.get<Routine[]>(this.url).pipe(
+  url: string = 'http://localhost:8080/api/routine/'
+  getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
+    return this.http.get<Routine[]>(this.url+`${routineID}/exercises`).pipe(
       catchError( (err) => {
         console.log(err);
         return of(undefined);

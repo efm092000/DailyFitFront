@@ -1,53 +1,63 @@
-thead{
+thead {
   background-color: #D9EAFA;
-  font-weight: bold;
-  text-align: center;
-  height: 70px;
 }
 
-th, td {
-  padding: 15px;
-}
-
-table, th, td {
-  border: 2px solid #406E9B;
+table,
+th,
+td {
   border-collapse: collapse;
 }
 
+/* Adiciones */
+.container {
+  margin-top: 50px;
+}
+
+h2 {
+  color: #406E9B;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+table:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+th,
 td {
+  padding: 12px;
   text-align: center;
+  font-size: 16px;
+  border: 2px solid #406E9B;
 }
 
-#table{
-  font-family: Arial, serif;
-  width: 50%;
-  border-radius: 10px;
-}
-
-.container{
-  display: flex;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: column;
-}
-
-.button-container{
-  flex-direction: row;
-}
-
-#add-exercise {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-button{
-  border-radius: 11px;
-  border:none;
+th {
   background-color: #406E9B;
   color: white;
-  margin: 5% 0 0 7px;
-  height: 30px;
-  width: fit-content;
-  padding: 0 10px;
+  text-transform: uppercase;
 }
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Estilos de texto para celda específica (por ejemplo, columnas de nombre) */
+td:nth-child(1) {
+  font-weight: bold;
+}
+
+/* Estilos de texto para toda la tabla */
+table {
+  font-family: Arial, sans-serif;
+}
+

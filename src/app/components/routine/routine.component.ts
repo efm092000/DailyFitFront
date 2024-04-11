@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {RoutineService} from "../../services/routine.service";
+import {RoutinesService} from "../../services/routines.service";
 import {Routine} from "../../interfaces/routine.interface";
 
 @Component({
@@ -15,13 +15,17 @@ import {Routine} from "../../interfaces/routine.interface";
   styleUrl: './routine.component.css'
 })
 export class RoutineComponent implements OnInit{
-  constructor(private serviceRoutine: RoutineService) {
+  constructor(private serviceRoutine: RoutinesService) {
   }
 
   exercises?: Routine[] = [];
+  routineId?: number | undefined;
 
   ngOnInit(): void {
-    this.serviceRoutine.getRoutineExercises().subscribe(
+    this.serviceRoutine.routine$.subscribe(routine => {
+      this.routineId = routine;
+    });
+    this.serviceRoutine.getRoutineExercises(this.routineId).subscribe(
       {
         next: (exercisesRoutine: Routine[] | undefined) => {
           this.exercises = exercisesRoutine;
