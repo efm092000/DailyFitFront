@@ -20,4 +20,11 @@ export class RoutineService {
       })
     )
   }
+
+  deleteRoutine(rid: number): void {
+    this.url = `http://localhost:8080/api/routine/${rid}`;
+    this.http.delete(this.url).subscribe(() => {
+      alert("test");
+    });
+  }
 }

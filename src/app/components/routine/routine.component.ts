@@ -54,7 +54,9 @@ export class RoutineComponent implements OnInit{
   }
 
   deleteRoutineAction() {
-
+    this.serviceRoutine.deleteRoutine(this.rid);
+    location.reload();
+    this.goBackAction();
   }
 
   @Output() goBackEvent = new EventEmitter<boolean>();
