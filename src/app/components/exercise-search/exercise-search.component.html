@@ -1,0 +1,60 @@
+<div class="search-page">
+
+  <form id="exerciseForm" (submit)="onSubmit($event)">
+
+    <input type="text" [(ngModel)]="searchFilters.name" name="name" placeholder="Search exercises">
+
+    <div class="search-filters">
+      <select [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
+        <option selected value="">Muscle Group?</option>
+        <option value="Chest">Chest</option>
+        <option value="Upper Arms">Back</option>
+        <option value="Thigh">Thigh</option>
+        <option value="Calf">Calf</option>
+        <option value="Forearms">Forearms</option>
+        <option value="Shoulders">Shoulders</option>
+        <option value="Hips">Hips</option>
+      </select>
+
+      <select [(ngModel)]="searchFilters.material" name = "material">
+        <option selected value ="">Material needed?</option>
+        <option value="true">Material needed</option>
+        <option value="false">Material not needed</option>
+      </select>
+
+      <select [(ngModel)]="searchFilters.type" name="type">
+        <option selected value="">Type?</option>
+        <option value="Push">Push</option>
+        <option value="Pull">Pull</option>
+        <option value="Hypertrofy">Hypertrofy</option>
+      </select>
+
+
+      <select [(ngModel)]="searchFilters.difficulty" name="difficulty">
+        <option selected value="">Difficulty?</option>
+        <option value="1">Easy</option>
+        <option value="2">Medium</option>
+        <option value="3">Hard</option>
+        <option value="4">Super Hard</option>
+      </select>
+    </div>
+
+    <button type="submit">Search</button>
+
+  </form>
+
+
+
+  <section id="search-results" class="container-fluid">
+    <div class="row row-cols-4 justify-content-between">
+      <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises">
+        <p class="exercise-search-result-name">{{entry.name}}</p>
+        <p class="exercise-search-result-muscle">{{entry.muscleGroup}}</p>
+      </article>
+    </div>
+  </section>
+  <dialog id="{{entry.name.split(' ').join('_')}}" *ngFor="let entry of exercises">
+    <app-exercise-details [exercise]="entry"></app-exercise-details>
+    <button (click)="closeDialog(entry)">Close</button>
+  </dialog>
+</div>

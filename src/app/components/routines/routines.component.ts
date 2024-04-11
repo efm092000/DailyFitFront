@@ -39,19 +39,9 @@ export class RoutinesComponent implements OnInit{
         }
       })
   }
-
-  loadRoutine(routineId: number): void {
-    this.serviceRoutines.getRoutine(routineId).subscribe(
-      {
-        next: (routine: Routine | undefined) => {
-          this.routine = routine;
-          this.rid = routineId;
-          this.showChild = true;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
+  
+  onClick(routineId: number){
+    this.serviceRoutines.loadRoutine(routineId);
   }
 
   getRoutineId(): number {

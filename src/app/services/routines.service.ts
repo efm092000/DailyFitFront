@@ -1,6 +1,6 @@
 import { Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, of} from "rxjs";
+import {BehaviorSubject, catchError, Observable, of} from "rxjs";
 import { UserRoutines} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
 
@@ -10,6 +10,8 @@ import { Routine } from "../interfaces/routine.interface";
 
 export class RoutinesService {
   constructor(private http: HttpClient) { }
+  private routineSource = new BehaviorSubject<number | undefined>(undefined);
+  routine$ = this.routineSource.asObservable();
 
   routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/prueba@gmail.com/routines';
@@ -21,12 +23,24 @@ export class RoutinesService {
     })
     )
   }
-
   getUserRoutines(): Observable<UserRoutines[] | undefined>{
     return this.http.get<UserRoutines[]>(this.userRoutinesUrl).pipe(
       catchError((error) => {
         console.log(error)
         return of(undefined)
+      })
+    )
+  }
+
+  loadRoutine(routineId: number){
+    this.routineSource.next(routineId);
+  }
+
+  getRoutineExercises(routineID: number | undefined): Observable<Routine[] |undefined> {
+    return this.http.get<Routine[]>(this.routineUrl+`${routineID}/exercises`).pipe(
+      catchError( (err) => {
+        console.log(err);
+        return of(undefined);
       })
     )
   }

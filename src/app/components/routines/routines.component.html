@@ -2,7 +2,7 @@
      style="margin-left: 20px; margin-right: 20px;" *ngIf="!showChild">
   <div id="routines-container" class="grid-container row row-cols-3 g-3">
     <div *ngFor="let routine of userRoutines" class="routine col">
-      <a><button (click)="loadRoutine(routine.rid)">{{ routine.name }}</button></a>
+      <button (click)="onClick(routine.rid)" routerLink="/routine">{{ routine.name }}</button>
     </div>
   </div>
 </div>

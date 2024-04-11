@@ -1,8 +1,5 @@
-thead{
+thead {
   background-color: #D9EAFA;
-  font-weight: bold;
-  text-align: center;
-  height: 70px;
 }
 
 th, td {
@@ -11,8 +8,16 @@ th, td {
   border-collapse: collapse;
 }
 
+table:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+th,
 td {
+  padding: 12px;
   text-align: center;
+  font-size: 16px;
+  border: 2px solid #406E9B;
 }
 
 .delete-exercise-column {
@@ -60,13 +65,8 @@ td {
   cursor: pointer;
 }
 
-button{
-  border-radius: 11px;
-  border:none;
-  background-color: #406E9B;
-  color: white;
-  margin: 5% 0 0 7px;
-  height: 30px;
-  width: fit-content;
-  padding: 0 10px;
+/* Estilos de texto para toda la tabla */
+table {
+  font-family: Arial, sans-serif;
 }
+

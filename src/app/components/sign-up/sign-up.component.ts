@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { JsonPipe, NgIf } from "@angular/common";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { UserService } from "../../services/user.service";
 
 @Component({
 	selector: 'app-sign-up',
@@ -20,7 +20,7 @@ import { HttpClient } from "@angular/common/http";
 export class SignUpComponent {
 	question: string = 'Already have an account? Log in ';
 
-	constructor(private fb: FormBuilder, private http: HttpClient) { }
+	constructor(private fb: FormBuilder, private userService: UserService) { }
 
 	formSignUp: FormGroup = this.fb.group({
 		'email': ['', [Validators.required, Validators.email]],
@@ -30,12 +30,7 @@ export class SignUpComponent {
 	})
 
 	signUp(): void {
-		let signUpUrl = `http://localhost:8080/api/user/${this.email.value}?name=${this.username.value}&password=${this.password.value}`;
-		this.http.post(signUpUrl, {}, { responseType: 'text'})
-		.subscribe({
-			next: response => alert(response),
-			error: response => alert(response.error)
-		});
+    this.userService.createUser(this.email.value, this.username.value, this.password.value)
 	}
 
 	passwordsMatch(): boolean {
