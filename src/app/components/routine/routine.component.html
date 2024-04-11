@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/body/routine/styles.css">
+<div class="container">
+  <label for="routine-name"></label>
+  <input type="text" id="routine-name" name="routine-name"
+         placeholder="Routine Name">
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Exercises</th>
+        <th>Sets</th>
+        <th>Repetitions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exercise of exercises">
+        <td>{{exercise.exercise}}</td>
+        <td>{{exercise.sets}}</td>
+        <td>{{exercise.reps}}</td>
+      </tr>
+    <tr *ngIf="addExerciseButton">
+      <td colspan="3"><span>Add Exercise</span></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="button-container">
+    <button (click)="saveRoutineAction()" *ngIf="saveRoutineButton">Save Routine</button>
+    <button (click)="editRoutineAction()" *ngIf="editRoutineButton">Edit Routine</button>
+  </div>
+</div>

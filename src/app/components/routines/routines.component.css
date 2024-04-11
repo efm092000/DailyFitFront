@@ -1,0 +1,59 @@
+#main-routine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#routines-container.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#routines-container button {
+  width: auto;
+  margin: 10px;
+  padding: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #C1DBF6;
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#create-routine-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 250px;
+  margin-left: 30px;
+}
+
+#create-routine-link button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: #195DA2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#create-routine-link button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.routine-button:hover {
+  background-color: #195DA2;
+}
