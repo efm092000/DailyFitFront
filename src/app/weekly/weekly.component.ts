@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {WeeklyService} from "../service/weekly.service";
-
+import {Weekly} from "../interface/weekly";
 @Component({
   selector: 'app-weekly',
   standalone: true,
@@ -13,8 +13,8 @@ import {WeeklyService} from "../service/weekly.service";
   providers:[WeeklyService]
 })
 export class WeeklyComponent implements OnInit{
+  @Input() weekly: Weekly;
   editingMode: boolean = false;
-  weekly:any[]
   constructor(private weeklyService:WeeklyService){
     this.ngOnInit(){
       this.weekly =this.weeklyService.loadWeekly();

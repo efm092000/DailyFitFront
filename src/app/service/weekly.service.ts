@@ -4,8 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class WeeklyService {
+  private apiUrl ="http://localhost:8080/api/weekly/${wid}";
 
-  constructor() {
+  constructor(private HttpClient) {
+    let weekly ='?';
+    if (weekly.wid) {weekly = weekly + `wid=${weekly.wid}&`;}
+    if (weekly.name) {weekly = weekly + `wid=${weekly.name}&`;}
+    if (weekly.email) {weekly = weekly + `wid=${weekly.email}&`;}
 
   }
 
@@ -23,7 +28,7 @@ export class WeeklyService {
     loadTitleAction(user, weeklyPlanContainer);
   }
 
-  function loadTitleAction(user, weeklyPlanContainer) {
+  loadTitleAction(user, weeklyPlanContainer) {
     weeklyPlanContainer.querySelector('.weekly-title').addEventListener('change', async function () {
       let selector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
       let wid = selector.value;
@@ -34,11 +39,11 @@ export class WeeklyService {
     });
   }
 
-  export function reloadContent(weeklyPlanContainer, wid) {
+  reloadContent(weeklyPlanContainer, wid) {
     loadRoutines(weeklyPlanContainer, wid);
   }
 
-  function loadAddRoutineButton(weeklyPlanContainer) {
+  loadAddRoutineButton(weeklyPlanContainer) {
     let addRoutineButton = weeklyPlanContainer.querySelector('.weekly-add-routine-button');
     addRoutineButton.addEventListener('click', async function () {
       let popup = weeklyPlanContainer.querySelector('.popup-container');
@@ -46,7 +51,7 @@ export class WeeklyService {
     });
   }
 
-  async function loadWeeklyPlan(user, weeklyPlanContainer) {
+  async loadWeeklyPlan(user, weeklyPlanContainer) {
     let weeklyPlansJson = await fetch(`http://localhost:8080/api/user/${user.email}/weeklies`).then(response => response.json());
     let weeklyPlansSelector = loadWeeklyPlanSelector(weeklyPlanContainer, user);
     for (const weeklyPlan of weeklyPlansJson) {
@@ -58,7 +63,7 @@ export class WeeklyService {
     }
   }
 
-  function loadWeeklyPlanSelector(weeklyPlanContainer) {
+  loadWeeklyPlanSelector(weeklyPlanContainer) {
     let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
     weeklyPlansSelector.innerHTML = '';
 
@@ -70,7 +75,7 @@ export class WeeklyService {
     return weeklyPlansSelector;
   }
 
-  async function loadWeeklyPlanSelectorAction(weeklyPlanContainer, user) {
+  async loadWeeklyPlanSelectorAction(weeklyPlanContainer, user) {
     let weeklyPlansSelector = weeklyPlanContainer.querySelector('.weekly-plans-selector');
     weeklyPlansSelector.addEventListener('change', async function () {
       if (this.value === 'create') {
@@ -81,7 +86,7 @@ export class WeeklyService {
     });
   }
 
-  async function createNewWeeklyPlan(weeklyPlanContainer, user) {
+  async createNewWeeklyPlan(weeklyPlanContainer, user) {
     let wid = await fetch(`http://localhost:8080/api/weekly/${user.email}?name=New_Weekly_Plan`, {
       method: 'POST'
     })
@@ -92,7 +97,7 @@ export class WeeklyService {
     weeklyPlanContainer.querySelector('.weekly-plans-selector').value = wid;
   }
 
-  function loadDefaultOption() {
+  loadDefaultOption() {
     let defaultOption = document.createElement('option');
     defaultOption.label = 'Select a weekly plan';
     defaultOption.disabled = true;
@@ -100,14 +105,14 @@ export class WeeklyService {
     return defaultOption;
   }
 
-  function loadCreateOption() {
+   loadCreateOption() {
     let createWeeklyPlanOption = document.createElement('option');
     createWeeklyPlanOption.label = 'Create a new weekly plan';
     createWeeklyPlanOption.value = 'create';
     return createWeeklyPlanOption;
   }
 
-  async function loadRoutines(weeklyPlanContainer, wid) {
+  async loadRoutines(weeklyPlanContainer, wid) {
     let json = await fetch(`http://localhost:8080/api/weekly/${wid}/routines`).then(response => response.json());
     weeklyPlanContainer.querySelector('.weekly-title').value = await fetch(`http://localhost:8080/api/weekly/${wid}`).then(response => response.json()).then(json => json.name);
     clearTable(weeklyPlanContainer);
@@ -117,7 +122,7 @@ export class WeeklyService {
     }
   }
 
-  function clearTable(weeklyPlanContainer) {
+  clearTable(weeklyPlanContainer) {
     weeklyPlanContainer.querySelectorAll('.day-content').forEach(dayContent => {
       dayContent.innerHTML = '';
     });
@@ -138,7 +143,7 @@ export class WeeklyService {
     })
   }
 
-  async function loadRoutine(weeklyPlanContainer, rid, day) {
+  async loadRoutine(weeklyPlanContainer, rid, day) {
     let name = await fetch(`http://localhost:8080/api/routine/${rid}`)
       .then(response => response.json())
       .then(json => json.name);
@@ -147,7 +152,7 @@ export class WeeklyService {
     dayContentContainer.appendChild(loadCard(rid, name));
   }
 
-  function loadCard(rid, name) {
+  loadCard(rid, name) {
     let card = document.createElement('button');
     card.innerText = name;
     card.classList.add('btn-routine-card');
