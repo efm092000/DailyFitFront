@@ -27,7 +27,7 @@
   <div id="edit-button">
     <button (click)="saveRoutineAction()" *ngIf="saveRoutineButton">Save Routine</button>
     <button (click)="editRoutineAction()" *ngIf="editRoutineButton">Edit Routine</button>
-    <button (click)="deleteRoutineAction()">Delete Routine</button>
-    <button (click)="goBackAction()">Go Back</button>
+    <button (click)="deleteRoutineAction()" routerLink="/routines">Delete Routine</button>
+    <button routerLink="/routines">Go Back</button>
   </div>
 </div>

@@ -10,7 +10,7 @@ import { Routine } from "../interfaces/routine.interface";
 
 export class RoutinesService {
   constructor(private http: HttpClient) { }
-  private routineSource = new BehaviorSubject<number | undefined>(undefined);
+  private routineSource = new BehaviorSubject<number>(0);
   routine$ = this.routineSource.asObservable();
 
   routineUrl: string = 'http://localhost:8080/api/routine/';
@@ -36,12 +36,19 @@ export class RoutinesService {
     this.routineSource.next(routineId);
   }
 
-  getRoutineExercises(routineID: number | undefined): Observable<Routine[] |undefined> {
+  getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
     return this.http.get<Routine[]>(this.routineUrl+`${routineID}/exercises`).pipe(
       catchError( (err) => {
         console.log(err);
         return of(undefined);
       })
     )
+  }
+
+  deleteRoutine(rid: number | undefined): void {
+    this.routineUrl = `http://localhost:8080/api/routine/${rid}`;
+    this.http.delete(this.routineUrl).subscribe(() => {
+      alert("test");
+    });
   }
 }
