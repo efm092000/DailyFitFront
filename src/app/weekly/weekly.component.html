@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/body/weekly/styles.css">
+<div class="weekly-page">
+  <!
+  div class="popup-container"><!/div>
+  <div class="weekly-toolbar">
+    <select class="weekly-plans-selector"></select>
+    <button (click)="toggleEditMode()" class="weekly-add-routine-button"> {{ editingMode ? 'Save' : 'Edit' }}</button>
+    <div *ngIf="editingMode" >
+      <input type="text" class="weekly-title">
+      <div class="row row-cols-2 justify-content-center">
+        <button class ="weekly-add-routine-button"> Add Routine</button>
+        <button class ="weekly-add-routine-button"> Add New Weekly Plan</button>
+      </div>
+    </div>
+  </div>
+  <div id="schedule">
+    <div id="weekly-monday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-tuesday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-wednesday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-thursday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-friday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-saturday" class="weekly-day-of-week-container"></div>
+    <div id="weekly-sunday" class="weekly-day-of-week-container"></div>
+  </div>
+</div>
