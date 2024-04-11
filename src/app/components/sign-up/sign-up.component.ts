@@ -31,6 +31,10 @@ export class SignUpComponent {
 
 	signUp(): void {
     this.userService.createUser(this.email.value, this.username.value, this.password.value)
+    .subscribe({
+      next: response => alert(response),
+      error: response => alert(response.error)
+    });
 	}
 
 	passwordsMatch(): boolean {
