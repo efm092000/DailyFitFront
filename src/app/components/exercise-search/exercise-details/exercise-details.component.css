@@ -1,0 +1,23 @@
+#exercisegif{
+  width: 50%;
+  height:50%;
+}
+
+#element-container{
+  background: #D9EAFA;
+}
+.subheader{
+  background: #406E9B ;
+  color: #FFFFFF;
+  border-radius: 11px;
+}
+
+.info{
+  background: #7FA5CA ;
+  color: #FFFFFF;
+  border-radius: 11px;
+}
+#exercise-name {
+  color:#000000;
+  font-size: 120%;
+}
