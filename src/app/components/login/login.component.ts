@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { JsonPipe, NgIf } from "@angular/common";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FormControl } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { UserService } from "../../services/user.service";
 
 @Component({
 	selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent {
 	mode: string = 'login';
 	question: string = 'Don\'t have an account? Sign up ';
 
-	constructor(private fb: FormBuilder) {
+	constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
 	}
 	formLogin = this.fb.group({
 		'email': ['', [Validators.required, Validators.email]],
@@ -36,18 +37,20 @@ export class LoginComponent {
 	}
 
 	login() {
-		let loginUrl = `http://localhost:8080/api/user/${this.email}`;
-		fetch(loginUrl).then(
-			response => response.json())
-			.then(
-				async user => {
-					if (user.password === this.password) alert("good");
-					else {
-						alert('Incorrect password');
-					}
-				}
-			).catch(
-			error => alert('User not found')
-		)
-	}
+    this.userService.login(this.email.value, this.password.value)
+    .subscribe({
+        next: response => {
+          this.userService.saveUserToLocalStorage(response)
+          this.router.navigate(['/']);
+        },
+        error: response => {
+          if (response.status === 401) {
+            alert('Invalid credentials');
+          } else {
+            alert('An error occurred');
+          }
+        }
+      }
+    );
+  }
 }
