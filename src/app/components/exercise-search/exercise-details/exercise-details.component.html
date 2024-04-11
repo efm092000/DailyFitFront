@@ -12,12 +12,19 @@
       <div class="subheader">Description</div>
       </div>
       <div class="row text-center">
-        <div class="info">Crunches involve lying on your back, bending your knees, and lifting
-        your upper body off the ground by contracting your abdominal muscles. Exhale as you lift, squeeze
-        at the top, then lower back down with control</div>
+        <div class="info">{{exercise.description}}</div>
       </div>
     </div>
   </div>
+
+  <form>
+    <select name="routine">
+      <option selected value ="">Select a Routine</option>
+      <option value="routine1">Routine1</option>
+      <option value="routine2">Routine2</option>
+    </select>
+    <button type="submit">Add Exercise to Routine</button>
+  </form>
 </div>
 </body>
 

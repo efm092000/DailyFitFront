@@ -34,8 +34,11 @@
   background-color: #195DA2;
   color:white;
   text-align: center;
+  border-radius: 5%;
   margin: 2em;
 }
 dialog{
+  text-align: center;
   background: #D9EAFA;
 }
+

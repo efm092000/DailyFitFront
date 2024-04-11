@@ -52,11 +52,9 @@ export class ExerciseSearchComponent{
   }
 
   closeDialog(entry: Exercise) {
-    console.log("b");
     const dialogId = '#' + entry.name.split(' ').join('_');
     const dialogElement = document.querySelector(dialogId);
     if (dialogElement instanceof HTMLDialogElement) {
-      console.log("bbbb");
       dialogElement.close();
     }
   }

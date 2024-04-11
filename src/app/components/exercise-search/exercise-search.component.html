@@ -46,16 +46,15 @@
 
 
   <section id="search-results" class="container-fluid">
-    <div class="row row-cols-4">
+    <div class="row row-cols-4 justify-content-between">
       <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises">
         <p class="exercise-search-result-name">{{entry.name}}</p>
         <p class="exercise-search-result-muscle">{{entry.muscleGroup}}</p>
-
-        <dialog id="{{entry.name.split(' ').join('_')}}">
-          <app-exercise-details [exercise]="entry"></app-exercise-details>
-          <button (click)="closeDialog(entry)">Close</button>
-        </dialog>
       </article>
     </div>
   </section>
+  <dialog id="{{entry.name.split(' ').join('_')}}" *ngFor="let entry of exercises">
+    <app-exercise-details [exercise]="entry"></app-exercise-details>
+    <button (click)="closeDialog(entry)">Close</button>
+  </dialog>
 </div>
