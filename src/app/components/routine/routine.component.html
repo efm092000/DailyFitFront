@@ -1,26 +1,33 @@
-<div class="container text-center">
-  <h2>Nombre de la rutina</h2>
-  <table class="table">
+<div class="container">
+  <label for="routine-name"></label>
+  <input type="text" id="routine-name" name="routine-name"
+         placeholder="Routine Name">
+  <table id="table">
     <thead>
-    <tr>
-      <th>Exercise</th>
-      <th>Sets</th>
-      <th>Reps</th>
-    </tr>
+      <tr>
+        <th>Exercises</th>
+        <th>Sets</th>
+        <th>Repetitions</th>
+        <td class="delete-exercise-column" *ngIf="addExerciseButton"></td>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let exercise of exercises">
-      <td>{{exercise.exercise}}</td>
-      <td>{{exercise.sets}}</td>
-      <td>{{exercise.reps}}</td>
-    </tr>
-    <tr *ngIf="addExerciseButton">
-      <td colspan="3"><span>Add Exercise</span></td>
-    </tr>
+      <tr *ngFor="let exercise of exercises">
+        <td>{{exercise.exercise}}</td>
+        <td>{{exercise.sets}}</td>
+        <td>{{exercise.reps}}</td>
+        <td class="delete-exercise-column" *ngIf="addExerciseButton"><span class="delete-exercise-button">X</span></td>
+      </tr>
+      <tr class="add-exercise-button" *ngIf="addExerciseButton">
+        <td colspan="3"><span>Add Exercise</span></td>
+        <td class="delete-exercise-column" *ngIf="addExerciseButton" (click)="addExerciseAction()"></td>
+      </tr>
     </tbody>
   </table>
   <div id="edit-button">
     <button (click)="saveRoutineAction()" *ngIf="saveRoutineButton">Save Routine</button>
     <button (click)="editRoutineAction()" *ngIf="editRoutineButton">Edit Routine</button>
+    <button (click)="deleteRoutineAction()">Delete Routine</button>
+    <button (click)="goBackAction()">Go Back</button>
   </div>
 </div>

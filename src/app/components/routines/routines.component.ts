@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink} from "@angular/router";
-import { JsonPipe, NgFor} from "@angular/common";
+import {JsonPipe, NgFor, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {UserRoutines} from "../../interfaces/user-routines.interface";
 import {Routine} from "../../interfaces/routine.interface";
+import {RoutineComponent} from "../routine/routine.component";
 
 
 @Component({
@@ -13,6 +14,8 @@ import {Routine} from "../../interfaces/routine.interface";
     JsonPipe,
     NgFor,
     RouterLink,
+    RoutineComponent,
+    NgIf,
   ],
   templateUrl: './routines.component.html',
   styleUrl: './routines.component.css'
@@ -20,6 +23,8 @@ import {Routine} from "../../interfaces/routine.interface";
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutines[] = [];
   routine?: Routine;
+  rid?: number
+  showChild: boolean = false;
 
   constructor(private serviceRoutines: RoutinesService) {}
 
@@ -34,8 +39,17 @@ export class RoutinesComponent implements OnInit{
         }
       })
   }
+  
   onClick(routineId: number){
     this.serviceRoutines.loadRoutine(routineId);
+  }
+
+  getRoutineId(): number {
+    return <number>this.rid;
+  }
+
+  showParent($event: boolean) {
+    this.showChild = false;
   }
 }
 

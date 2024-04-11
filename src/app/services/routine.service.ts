@@ -10,13 +10,21 @@ export class RoutineService {
 
   constructor(private http: HttpClient) { }
 
-  url: string = 'http://localhost:8080/api/routine/'
-  getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
-    return this.http.get<Routine[]>(this.url+`${routineID}/exercises`).pipe(
+  url?: string;
+  getRoutineExercises(rid: number): Observable<Routine[] |undefined> {
+    this.url = `http://localhost:8080/api/routine/${rid}/exercises`
+    return this.http.get<Routine[]>(this.url).pipe(
       catchError( (err) => {
         console.log(err);
         return of(undefined);
       })
     )
+  }
+
+  deleteRoutine(rid: number): void {
+    this.url = `http://localhost:8080/api/routine/${rid}`;
+    this.http.delete(this.url).subscribe(() => {
+      alert("test");
+    });
   }
 }
