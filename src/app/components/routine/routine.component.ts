@@ -42,6 +42,7 @@ export class RoutineComponent implements OnInit{
   addExerciseButton: boolean = false;
   saveRoutineButton: boolean = false;
   editRoutineButton: boolean = true;
+  deleteRoutineButton: boolean = false;
 
   saveRoutineAction() {
     this.addExerciseButton = false;
@@ -59,7 +60,15 @@ export class RoutineComponent implements OnInit{
 
   }
 
+  showDeleteConfirmation() {
+    this.deleteRoutineButton = true;
+  }
+
   deleteRoutineAction() {
     this.serviceRoutine.deleteRoutine(this.routineId);
+  }
+
+  cancelDeleteRoutineAction() {
+    this.deleteRoutineButton = false;
   }
 }

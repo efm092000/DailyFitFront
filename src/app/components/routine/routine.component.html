@@ -27,7 +27,13 @@
   <div id="edit-button">
     <button (click)="saveRoutineAction()" *ngIf="saveRoutineButton">Save Routine</button>
     <button (click)="editRoutineAction()" *ngIf="editRoutineButton">Edit Routine</button>
-    <button (click)="deleteRoutineAction()" routerLink="/routines">Delete Routine</button>
+    <button (click)="showDeleteConfirmation()">Delete Routine</button>
     <button routerLink="/routines">Go Back</button>
   </div>
+</div>
+
+<div class="delete-confirmation" *ngIf="deleteRoutineButton">
+  <p>Are you sure you want to delete this routine?</p>
+  <button (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
+  <button (click)="cancelDeleteRoutineAction()">Cancel</button>
 </div>
