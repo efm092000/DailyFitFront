@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {Routine} from "../../interfaces/routine.interface";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-routine',
@@ -9,7 +10,8 @@ import {Routine} from "../../interfaces/routine.interface";
   imports: [
     NgForOf,
     AsyncPipe,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './routine.component.html',
   styleUrl: './routine.component.css'
@@ -19,7 +21,7 @@ export class RoutineComponent implements OnInit{
   }
 
   exercises?: Routine[] = [];
-  routineId?: number | undefined;
+  routineId: number = 0;
 
   ngOnInit(): void {
     this.serviceRoutine.routine$.subscribe(routine => {
@@ -40,6 +42,7 @@ export class RoutineComponent implements OnInit{
   addExerciseButton: boolean = false;
   saveRoutineButton: boolean = false;
   editRoutineButton: boolean = true;
+  deleteRoutineButton: boolean = false;
 
   saveRoutineAction() {
     this.addExerciseButton = false;
@@ -57,14 +60,15 @@ export class RoutineComponent implements OnInit{
 
   }
 
-  deleteRoutineAction() {
-    this.serviceRoutine.deleteRoutine(this.rid);
-    location.reload();
-    this.goBackAction();
+  showDeleteConfirmation() {
+    this.deleteRoutineButton = true;
   }
 
-  @Output() goBackEvent = new EventEmitter<boolean>();
-  goBackAction() {
-    this.goBackEvent.emit();
+  deleteRoutineAction() {
+    this.serviceRoutine.deleteRoutine(this.routineId);
+  }
+
+  cancelDeleteRoutineAction() {
+    this.deleteRoutineButton = false;
   }
 }

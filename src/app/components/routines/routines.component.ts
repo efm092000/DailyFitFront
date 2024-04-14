@@ -39,17 +39,10 @@ export class RoutinesComponent implements OnInit{
         }
       })
   }
-  
+
   onClick(routineId: number){
     this.serviceRoutines.loadRoutine(routineId);
   }
 
-  getRoutineId(): number {
-    return <number>this.rid;
-  }
-
-  showParent($event: boolean) {
-    this.showChild = false;
-  }
 }
 
