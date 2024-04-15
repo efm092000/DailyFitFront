@@ -16,15 +16,11 @@
       </div>
     </div>
   </div>
-
-  <form>
-    <select name="routine">
+   <select name="routine">
       <option selected value ="">Select a Routine</option>
-      <option value="routine1">Routine1</option>
-      <option value="routine2">Routine2</option>
+      <option value ="{{routine.rid}}}" *ngFor="let routine of routines">{{routine.name}}</option>
     </select>
-    <button type="submit">Add Exercise to Routine</button>
-  </form>
+    <button (click)="addExerciseToRoutine()">Add Exercise to Routine</button>
 </div>
 </body>
 

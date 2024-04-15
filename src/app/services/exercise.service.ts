@@ -6,7 +6,7 @@ import {Exercise} from "../interfaces/exercise";
 @Injectable({
   providedIn: 'root'
 })
-export class ExerciseSearchService {
+export class ExerciseService {
   private apiUrl = "http://localhost:8080/api/exercise";
 
   constructor(private http: HttpClient) {}
@@ -18,7 +18,6 @@ export class ExerciseSearchService {
     if (filters.type) {filter = filter + `type=${filters.type}&`;}
     if (filters.material) {filter = filter + `material=${filters.material}&`;}
     if (filters.muscleGroup) {filter = filter + `muscleGroup=${filters.muscleGroup}`;}
-    console.log(filter)
     return this.http.get<Exercise[]>(this.apiUrl + filter);
   }
 }
