@@ -13,10 +13,11 @@ export class RoutinesService {
   private routineSource = new BehaviorSubject<number>(0);
   routine$ = this.routineSource.asObservable();
 
+
   routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/prueba@gmail.com/routines';
-  getRoutine(routineId: number): Observable <Routine | undefined>{
-    return this.http.get<Routine>(this.routineUrl+`${routineId}/exercises`).pipe(
+  getRoutine(routineId: number): Observable <UserRoutines | undefined>{
+    return this.http.get<UserRoutines>(this.routineUrl+`${routineId}`).pipe(
       catchError ((error) => {
         console.log(error)
         return of(undefined)
@@ -35,7 +36,6 @@ export class RoutinesService {
   loadRoutine(routineId: number){
     this.routineSource.next(routineId);
   }
-
   getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
     return this.http.get<Routine[]>(this.routineUrl+`${routineID}/exercises`).pipe(
       catchError( (err) => {
@@ -51,4 +51,10 @@ export class RoutinesService {
       alert("test");
     });
   }
+/*
+  createRoutine(): UserRoutines {
+    this.http.post(this.routineUrl+'/NewRoutine', {},{responseType: "json"} );
+    return
+  }
+  */
 }

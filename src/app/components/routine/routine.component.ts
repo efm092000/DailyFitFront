@@ -3,6 +3,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {Routine} from "../../interfaces/routine.interface";
 import {RouterLink} from "@angular/router";
+import {UserRoutines} from "../../interfaces/user-routines.interface";
 
 @Component({
   selector: 'app-routine',
@@ -22,7 +23,9 @@ export class RoutineComponent implements OnInit{
 
   exercises?: Routine[] = [];
   routineId: number = 0;
-
+  routine?: UserRoutines;
+  isEditMode: boolean = false;
+  showDeleteConfirmation: boolean = false;
   ngOnInit(): void {
     this.serviceRoutine.routine$.subscribe(routine => {
       this.routineId = routine;
@@ -37,31 +40,39 @@ export class RoutineComponent implements OnInit{
         }
       }
     )
+    this.serviceRoutine.getRoutine(this.routineId).subscribe(
+      {
+        next: (routine: UserRoutines | undefined) => {
+          this.routine = routine;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      }
+    )
   }
 
   addExerciseButton: boolean = false;
-  saveRoutineButton: boolean = false;
-  editRoutineButton: boolean = true;
   deleteRoutineButton: boolean = false;
 
+  toggleMode(): void {
+    this.isEditMode = !this.isEditMode;
+  }
+
   saveRoutineAction() {
-    this.addExerciseButton = false;
-    this.saveRoutineButton = false;
-    this.editRoutineButton = true;
+    this.toggleMode();
   }
 
   editRoutineAction() {
-    this.addExerciseButton = true;
-    this.saveRoutineButton = true;
-    this.editRoutineButton = false;
+    this.toggleMode();
   }
 
   addExerciseAction() {
 
   }
 
-  showDeleteConfirmation() {
-    this.deleteRoutineButton = true;
+  toggleDeleteConfirmation(): void {
+    this.showDeleteConfirmation = !this.showDeleteConfirmation;
   }
 
   deleteRoutineAction() {

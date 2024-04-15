@@ -5,6 +5,7 @@ import {RoutinesService} from "../../services/routines.service";
 import {UserRoutines} from "../../interfaces/user-routines.interface";
 import {Routine} from "../../interfaces/routine.interface";
 import {RoutineComponent} from "../routine/routine.component";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 
 @Component({
@@ -16,6 +17,7 @@ import {RoutineComponent} from "../routine/routine.component";
     RouterLink,
     RoutineComponent,
     NgIf,
+    SidebarComponent,
   ],
   templateUrl: './routines.component.html',
   styleUrl: './routines.component.css'
@@ -24,7 +26,6 @@ export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutines[] = [];
   routine?: Routine;
   rid?: number
-  showChild: boolean = false;
 
   constructor(private serviceRoutines: RoutinesService) {}
 
@@ -43,6 +44,11 @@ export class RoutinesComponent implements OnInit{
   onClick(routineId: number){
     this.serviceRoutines.loadRoutine(routineId);
   }
+/*
+  createRoutine() {
 
+  }
+
+ */
 }
 

@@ -1,14 +1,15 @@
 <div class="container">
   <label for="routine-name"></label>
-  <input type="text" id="routine-name" name="routine-name"
-         placeholder="Routine Name">
+  <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
+         placeholder="Routine Name" value="{{routine?.name}}">
+  <p *ngIf="!isEditMode">{{routine?.name}}</p>
   <table id="table">
     <thead>
       <tr>
         <th>Exercises</th>
         <th>Sets</th>
         <th>Repetitions</th>
-        <td class="delete-exercise-column" *ngIf="addExerciseButton"></td>
+        <td class="delete-exercise-column" *ngIf="isEditMode"></td>
       </tr>
     </thead>
     <tbody>
@@ -16,24 +17,24 @@
         <td>{{exercise.exercise}}</td>
         <td>{{exercise.sets}}</td>
         <td>{{exercise.reps}}</td>
-        <td class="delete-exercise-column" *ngIf="addExerciseButton"><span class="delete-exercise-button">X</span></td>
+        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button">X</span></td>
       </tr>
-      <tr class="add-exercise-button" *ngIf="addExerciseButton">
+      <tr class="add-exercise-button" *ngIf="isEditMode">
         <td colspan="3"><span>Add Exercise</span></td>
-        <td class="delete-exercise-column" *ngIf="addExerciseButton" (click)="addExerciseAction()"></td>
+        <td class="delete-exercise-column" *ngIf="isEditMode" (click)="addExerciseAction()"></td>
       </tr>
     </tbody>
   </table>
   <div id="edit-button">
-    <button (click)="saveRoutineAction()" *ngIf="saveRoutineButton">Save Routine</button>
-    <button (click)="editRoutineAction()" *ngIf="editRoutineButton">Edit Routine</button>
-    <button (click)="showDeleteConfirmation()">Delete Routine</button>
+    <button (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
+    <button (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
+    <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
     <button routerLink="/routines">Go Back</button>
   </div>
 </div>
 
-<div class="delete-confirmation" *ngIf="deleteRoutineButton">
+<div class="delete-confirmation" *ngIf="showDeleteConfirmation">
   <p>Are you sure you want to delete this routine?</p>
   <button (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
-  <button (click)="cancelDeleteRoutineAction()">Cancel</button>
+  <button (click)="toggleDeleteConfirmation()">Cancel</button>
 </div>
