@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Exercise} from "../../interfaces/exercise";
-import {ExerciseSearchService} from "../../services/exercise-search.service";
+import {ExerciseService} from "../../services/exercise.service";
 import {FormsModule} from "@angular/forms";
 import {ExerciseDetailsComponent} from "./exercise-details/exercise-details.component";
 
@@ -26,7 +26,7 @@ export class ExerciseSearchComponent{
     type: "",
   };
 
-  constructor(private exerciseService: ExerciseSearchService) {}
+  constructor(private exerciseService: ExerciseService) {}
 
   onSubmit(event:Event){
     event.preventDefault();
