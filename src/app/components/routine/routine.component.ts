@@ -51,16 +51,19 @@ export class RoutineComponent implements OnInit{
       }
     )
   }
-
-  addExerciseButton: boolean = false;
-  deleteRoutineButton: boolean = false;
-
   toggleMode(): void {
     this.isEditMode = !this.isEditMode;
   }
 
   saveRoutineAction() {
     this.toggleMode();
+    const routineNameInput = document.getElementById("routine-name");
+    const newRoutine: UserRoutines = {
+      rid: this.routineId,
+      name: (routineNameInput as HTMLInputElement).value,
+      email: 'prueba@gmail'
+    }
+    this.serviceRoutine.editRoutine(newRoutine);
   }
 
   editRoutineAction() {
@@ -77,9 +80,5 @@ export class RoutineComponent implements OnInit{
 
   deleteRoutineAction() {
     this.serviceRoutine.deleteRoutine(this.routineId);
-  }
-
-  cancelDeleteRoutineAction() {
-    this.deleteRoutineButton = false;
   }
 }

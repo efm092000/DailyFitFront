@@ -51,6 +51,14 @@ export class RoutinesService {
       alert("test");
     });
   }
+
+  editRoutine(routine: UserRoutines): void {
+    this.routineUrl = `http://localhost:8080/api/routine/${routine.rid}?name=${routine.name}`;
+    this.http.put(this.routineUrl, {}).subscribe(
+        response => console.log(response),
+      );
+  }
+
 /*
   createRoutine(): UserRoutines {
     this.http.post(this.routineUrl+'/NewRoutine', {},{responseType: "json"} );

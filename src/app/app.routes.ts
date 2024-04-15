@@ -4,7 +4,7 @@ import {WeeklyComponent} from "./weekly/weekly.component";
 
 export const routes: Routes = [
   {path: 'prueba', component:PruebaComponent},
-  {path: 'weekly', component:WeeklyComponent}
+  {path: 'weekly', component:WeeklyComponent},
   { path: '', loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent)},
   { path: 'search', loadComponent: () => import('./components/exercise-search/exercise-search.component').then(m => m.ExerciseSearchComponent)},
   { path: 'details', loadComponent: () => import('./components/exercise-search/exercise-details/exercise-details.component').then(m => m.ExerciseDetailsComponent)},
