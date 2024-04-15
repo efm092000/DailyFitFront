@@ -1,0 +1,56 @@
+import { Component } from '@angular/core';
+import { JsonPipe, NgIf } from "@angular/common";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormControl } from '@angular/forms';
+import { Router, RouterLink } from "@angular/router";
+import { UserService } from "../../services/user.service";
+
+@Component({
+	selector: 'app-login',
+	standalone: true,
+	imports: [
+		NgIf,
+		ReactiveFormsModule,
+		JsonPipe,
+		RouterLink,
+	],
+	templateUrl: './login.component.html',
+	styleUrl: './login.component.css'
+})
+export class LoginComponent {
+	mode: string = 'login';
+	question: string = 'Don\'t have an account? Sign up ';
+
+	constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+	}
+	formLogin = this.fb.group({
+		'email': ['', [Validators.required, Validators.email]],
+		'password': ['', [Validators.required]]
+	})
+
+	get email() {
+		return this.formLogin.get('email') as FormControl;
+	}
+
+	get password() {
+		return this.formLogin.get('password') as FormControl;
+	}
+
+	login() {
+    this.userService.login(this.email.value, this.password.value)
+    .subscribe({
+        next: response => {
+          this.userService.saveUserToLocalStorage(response)
+          this.router.navigate(['/']);
+        },
+        error: response => {
+          if (response.status === 401) {
+            alert('Invalid credentials');
+          } else {
+            alert('An error occurred');
+          }
+        }
+      }
+    );
+  }
+}

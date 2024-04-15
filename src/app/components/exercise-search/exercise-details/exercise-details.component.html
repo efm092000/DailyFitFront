@@ -1,0 +1,27 @@
+<body>
+<div class="element-container container">
+  <div class = "row">
+    <div class="col-4 text-center">
+      <img id="exercisegif" src="../../../../favicon.ico" class="img-fluid" alt="Imagen">
+    </div>
+    <div class="col-8">
+      <div id="text-area" class="row text-center">
+      <h1 id="exercise-name">{{exercise.name}}</h1>
+      </div>
+      <div class="row text-center">
+      <div class="subheader">Description</div>
+      </div>
+      <div class="row text-center">
+        <div class="info">{{exercise.description}}</div>
+      </div>
+    </div>
+  </div>
+   <select name="routine">
+      <option selected value ="">Select a Routine</option>
+      <option value ="{{routine.rid}}}" *ngFor="let routine of routines">{{routine.name}}</option>
+    </select>
+    <button (click)="addExerciseToRoutine()">Add Exercise to Routine</button>
+</div>
+</body>
+
+
