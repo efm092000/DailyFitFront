@@ -1,26 +1,43 @@
-<div class="weekly-page d-flex flex-column  col-1 align-items-center">
+<div class="weekly-page d-flex flex-column col-1 align-items-center">
   <select class="weekly-plans-selector">
-   <option selected value="">Select a weekly plan </option>
+    <option *ngFor="let entry of weeklyPlans" [value]="entry">{{ entry.name }}</option>
   </select>
-  <div id="schedule">
-    <div id="weekly-{{day}}" class="weekly-day-of-week-container row-cols-7 justify-content-between container-fluid" *ngFor="let day of days">
-      <div class="day-title-container">
-        <h1 class="day-title"> {{ day }}</h1>
-      </div>
-      <div class="day-content">
-      </div>
+  <div id="schedule" class="justify-content-center">
+    <div id="weekly-{{day}}" class="weekly-day-of-week-container row-cols-7 justify-content-between container-fluid" *ngFor="let day of daysOfWeek">
+      <h1 class="day-title">{{ day }}</h1>
+      <div class="day-content" *ngFor="let entry of routines" >{{entry.rid}}</div>
     </div>
   </div>
 
-  <button (click)="toggleEditMode()" class="weekly-add-routine-button"> {{ editingMode ? 'Save' : 'Edit' }}</button>
-  <div *ngIf="editingMode" class="col align-items-center" >
-    <div class="input-container">
-      <input type="text" class="weekly-title">
-    </div>
-    <div class="row row-cols-2  align-items-center justify-content-between">
-      <button  (click)="addRoutine()" class ="weekly-add-routine-button"> Add Routine</button>
-      <button  (click)="addWeeklyPlan()" class ="weekly-add-routine-button"> Add New Weekly Plan</button>
+  <button (click)="toggleEditMode()" class="weekly-add-routine-button">{{ editingMode ? 'Save' : 'Edit' }}</button>
+
+
+  <div *ngIf="editingMode" class="col align-items-center">
+    <div class="row row-cols-2 align-items-center justify-content-between">
+      <button (click)="togglePopup()" class="weekly-add-routine-button col-1">Add Routine</button>
+      <button (click)="toggleInput()" class="weekly-add-routine-button col-2">Add New Weekly Plan</button>
     </div>
   </div>
 
+  <div *ngIf="showInput" class="add-weekly-name-input col-1 align-items-center justify-content-between">
+    <div class="d-flex col justify-content-between">
+      <div class="input-container">
+        <input type="text" class="weekly-title" [(ngModel)] = "newWeeklyName">
+      </div>
+      <button (click)="addWeeklyPlan()" id="weekly-input-btn-add">Add</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="showPopup" class="add-routine-popup">
+    <div class="selector-container">
+      <label for="day-selector">Day:</label>
+      <select id="day-selector"></select>
+    </div>
+    <div class="selector-container">
+      <label for="routine-selector">Routine:</label>
+      <select id="routine-selector"></select>
+    </div>
+    <button (click)="addRoutine()" id="weekly-popup-btn-add">Add</button>
+  </div>
 </div>
