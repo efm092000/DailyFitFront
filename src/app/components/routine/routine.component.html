@@ -1,8 +1,7 @@
 <div class="container">
-  <label for="routine-name"></label>
   <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
-         placeholder="Routine Name" value="{{routine?.name}}">
-  <p *ngIf="!isEditMode">{{routine?.name}}</p>
+         placeholder="Routine Name" [(ngModel)] = "routineName" value="{{routine?.name}}">
+  <p *ngIf="!isEditMode">{{routineName}}</p>
   <table id="table">
     <thead>
       <tr>
@@ -17,7 +16,7 @@
         <td>{{exercise.exercise}}</td>
         <td>{{exercise.sets}}</td>
         <td>{{exercise.reps}}</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button">X</span></td>
+        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button" (click)="deleteExerciseAction(exercise)">X</span></td>
       </tr>
       <tr class="add-exercise-button" *ngIf="isEditMode">
         <td colspan="3"><span>Add Exercise</span></td>

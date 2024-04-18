@@ -4,6 +4,7 @@ import {RoutinesService} from "../../services/routines.service";
 import {Routine} from "../../interfaces/routine.interface";
 import {RouterLink} from "@angular/router";
 import {UserRoutines} from "../../interfaces/user-routines.interface";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-routine',
@@ -12,7 +13,8 @@ import {UserRoutines} from "../../interfaces/user-routines.interface";
     NgForOf,
     AsyncPipe,
     NgIf,
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './routine.component.html',
   styleUrl: './routine.component.css'
@@ -26,6 +28,8 @@ export class RoutineComponent implements OnInit{
   routine?: UserRoutines;
   isEditMode: boolean = false;
   showDeleteConfirmation: boolean = false;
+  routineName: string = "";
+
   ngOnInit(): void {
     this.serviceRoutine.routine$.subscribe(routine => {
       this.routineId = routine;
@@ -44,6 +48,7 @@ export class RoutineComponent implements OnInit{
       {
         next: (routine: UserRoutines | undefined) => {
           this.routine = routine;
+          this.routineName = <string>routine?.name;
         },
         error: (err) => {
           console.log(err);
@@ -51,19 +56,16 @@ export class RoutineComponent implements OnInit{
       }
     )
   }
+
   toggleMode(): void {
     this.isEditMode = !this.isEditMode;
   }
 
   saveRoutineAction() {
-    this.toggleMode();
     const routineNameInput = document.getElementById("routine-name");
-    const newRoutine: UserRoutines = {
-      rid: this.routineId,
-      name: (routineNameInput as HTMLInputElement).value,
-      email: 'prueba@gmail'
-    }
-    this.serviceRoutine.editRoutine(newRoutine);
+    this.routineName = (routineNameInput as HTMLInputElement).value;
+    this.serviceRoutine.editRoutine(this.routineId, this.routineName);
+    this.toggleMode();
   }
 
   editRoutineAction() {
@@ -80,5 +82,15 @@ export class RoutineComponent implements OnInit{
 
   deleteRoutineAction() {
     this.serviceRoutine.deleteRoutine(this.routineId);
+  }
+
+  deleteExerciseAction(exercise: any) {
+    console.log("rid: ", this.routineId);
+    console.log("Exercise: ", exercise.exercise);
+    console.log("Sets: ", exercise.sets);
+    console.log("Reps: ", exercise.reps);
+    this.serviceRoutine.deleteExerciseFromRoutine(this.routineId, exercise.exercise, exercise.sets, exercise.reps);
+    const index = this.exercises?.indexOf(exercise);
+    this.exercises?.splice(<number>index, 1);
   }
 }

@@ -24,6 +24,7 @@ export class RoutinesService {
     })
     )
   }
+
   getUserRoutines(): Observable<UserRoutines[] | undefined>{
     return this.http.get<UserRoutines[]>(this.userRoutinesUrl).pipe(
       catchError((error) => {
@@ -36,6 +37,7 @@ export class RoutinesService {
   loadRoutine(routineId: number){
     this.routineSource.next(routineId);
   }
+
   getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
     return this.http.get<Routine[]>(this.routineUrl+`${routineID}/exercises`).pipe(
       catchError( (err) => {
@@ -47,16 +49,23 @@ export class RoutinesService {
 
   deleteRoutine(rid: number | undefined): void {
     this.routineUrl = `http://localhost:8080/api/routine/${rid}`;
-    this.http.delete(this.routineUrl).subscribe(() => {
-      alert("test");
-    });
+    this.http.delete(this.routineUrl).subscribe(
+      response => console.log(response),
+    );
   }
 
-  editRoutine(routine: UserRoutines): void {
-    this.routineUrl = `http://localhost:8080/api/routine/${routine.rid}?name=${routine.name}`;
+  editRoutine(rid: number, name: string): void {
+    this.routineUrl = `http://localhost:8080/api/routine/${rid}?name=${name}`;
     this.http.put(this.routineUrl, {}).subscribe(
         response => console.log(response),
       );
+  }
+
+  deleteExerciseFromRoutine(rid: number, name: string, sets: number, reps: number) {
+    this.routineUrl = `http://localhost:8080/api/routine/${rid}/exercises?name=${name}&sets=${sets}&reps=${reps}`;
+    this.http.delete(this.routineUrl).subscribe(
+      response => console.log(response),
+    );
   }
 
 /*

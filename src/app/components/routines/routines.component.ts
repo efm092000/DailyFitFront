@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink} from "@angular/router";
+import { RouterLink } from "@angular/router";
 import {JsonPipe, NgFor, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {UserRoutines} from "../../interfaces/user-routines.interface";
@@ -42,6 +42,7 @@ export class RoutinesComponent implements OnInit{
   }
 
   onClick(routineId: number){
+    console.log(routineId);
     this.serviceRoutines.loadRoutine(routineId);
   }
 /*
