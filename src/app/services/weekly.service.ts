@@ -18,7 +18,7 @@ export class WeeklyService {
     return this.http.get<Weekly[]>(`${(this.apiUser)}123@gmail.com/weeklies`);
   }
 
-  //Este método es raro, porque no tengo botón para update el nombre.
+  //pno tengo botón para update el nombre.
   updateWeeklyPlanName(wid: number, name: string): Observable<any>{
     return this.http.put(`${this.apiUrl}${wid}`, { name });
   }
