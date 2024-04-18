@@ -27,11 +27,7 @@ export class UserService {
 
   createUser(email: string, username: string, password: string) {
     let signUpUrl = `${this.userApiUrl}/${email}?name=${username}&password=${password}`;
-    this.http.post(signUpUrl, {}, {responseType: 'text'})
-    .subscribe({
-      next: response => alert(response),
-      error: response => alert(response.error)
-    });
+    return this.http.post(signUpUrl, {}, {responseType: 'text'})
   }
 
   login(email: string, password: string) {

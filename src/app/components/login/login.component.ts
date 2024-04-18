@@ -6,50 +6,44 @@ import { Router, RouterLink } from "@angular/router";
 import { UserService } from "../../services/user.service";
 
 @Component({
-	selector: 'app-login',
-	standalone: true,
-	imports: [
-		NgIf,
-		ReactiveFormsModule,
-		JsonPipe,
-		RouterLink,
-	],
-	templateUrl: './login.component.html',
-	styleUrl: './login.component.css'
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    JsonPipe,
+    RouterLink,
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
-	mode: string = 'login';
-	question: string = 'Don\'t have an account? Sign up ';
+  question: string = 'Don\'t have an account? Sign up ';
 
-	constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
-	}
-	formLogin = this.fb.group({
-		'email': ['', [Validators.required, Validators.email]],
-		'password': ['', [Validators.required]]
-	})
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  }
 
-	get email() {
-		return this.formLogin.get('email') as FormControl;
-	}
+  formLogin = this.fb.group({
+    'email': ['', [Validators.required, Validators.email]],
+    'password': ['', [Validators.required]]
+  })
 
-	get password() {
-		return this.formLogin.get('password') as FormControl;
-	}
+  get email() {
+    return this.formLogin.get('email') as FormControl;
+  }
 
-	login() {
+  get password() {
+    return this.formLogin.get('password') as FormControl;
+  }
+
+  login() {
     this.userService.login(this.email.value, this.password.value)
     .subscribe({
         next: response => {
-          this.userService.saveUserToLocalStorage(response)
+          this.userService.saveUserToLocalStorage(response);
           this.router.navigate(['/']);
         },
-        error: response => {
-          if (response.status === 401) {
-            alert('Invalid credentials');
-          } else {
-            alert('An error occurred');
-          }
-        }
+        error: response => alert(response.error)
       }
     );
   }
