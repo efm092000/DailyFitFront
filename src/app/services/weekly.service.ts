@@ -23,14 +23,12 @@ export class WeeklyService {
     return this.http.put(`${this.apiUrl}${wid}`, { name });
   }
 
-  //Se elige un nombre y se añade una weekly al user que está conectado.
-  createNewWeeklyPlan(email: string): Observable<number>{
-    return this.http.post<Weekly>(`${this.apiUrl}${email}?name=Prueba`, {}).pipe(
+  createNewWeeklyPlan(email: string, name: string){
+    return this.http.post<any>(`${this.apiUrl}${email}?name=${name}`, {}).pipe(
       map(response => response.wid)
     );
   }
 
-  //Cuando se ha seleccionado algo en el selector, se muestran las rutinas de esa weekly, se coge el wid asociado a ese nombre, se cogen las routines de eso y se muestran
   getRoutinesOfWeeklyPlan(wid: number): Observable<UserRoutines[]> {
     return this.http.get<UserRoutines[]>(`${this.apiUrl}${wid}/routines`);
   }
@@ -39,5 +37,4 @@ export class WeeklyService {
   addRoutineToWeeklyPlan(wid: number, rid: number, day: string): Observable<any> {
     return this.http.post(`${this.apiUrl}${wid}/routine`, { rid, day });
   }
-
 }

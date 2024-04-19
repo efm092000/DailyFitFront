@@ -1,6 +1,6 @@
 <div class="weekly-page d-flex flex-column col-1 align-items-center">
-  <select class="weekly-plans-selector">
-    <option *ngFor="let entry of weeklyPlans" [value]="entry">{{ entry.name }}</option>
+  <select class="weekly-plans-selector" [(ngModel)]="selectedWeeklyPlanIndex" (change) = "onWeeklyPlanChange()">
+    <option *ngFor="let entry of weeklyPlans, let i = index" [value]="i" >{{ entry.name }}</option>
   </select>
   <div id="schedule" class="justify-content-center">
     <div id="weekly-{{day}}" class="weekly-day-of-week-container row-cols-7 justify-content-between container-fluid" *ngFor="let day of daysOfWeek">
@@ -24,7 +24,7 @@
       <div class="input-container">
         <input type="text" class="weekly-title" [(ngModel)] = "newWeeklyName">
       </div>
-      <button (click)="addWeeklyPlan()" id="weekly-input-btn-add">Add</button>
+      <button (click)="addWeeklyPlan(newWeeklyName)" id="weekly-input-btn-add">Add</button>
     </div>
 
   </div>
@@ -36,7 +36,9 @@
     </div>
     <div class="selector-container">
       <label for="routine-selector">Routine:</label>
-      <select id="routine-selector"></select>
+      <select id="routine-selector">
+        <option *ngFor="let routine of routines" >{{ routine.name}}</option>
+      </select>
     </div>
     <button (click)="addRoutine()" id="weekly-popup-btn-add">Add</button>
   </div>
