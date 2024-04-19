@@ -1,7 +1,7 @@
 <div class="container">
   <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
-         placeholder="Routine Name" [(ngModel)] = "routineName" value="{{routine?.name}}">
-  <p *ngIf="!isEditMode">{{routineName}}</p>
+         placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
+  <p *ngIf="!isEditMode">{{userRoutine.name}}</p>
   <table id="table">
     <thead>
       <tr>

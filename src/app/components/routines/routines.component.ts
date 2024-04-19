@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import {JsonPipe, NgFor, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
-import {UserRoutines} from "../../interfaces/user-routines.interface";
-import {Routine} from "../../interfaces/routine.interface";
+import {UserRoutine} from "../../interfaces/user-routines.interface";
 import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 
@@ -23,16 +22,15 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
   styleUrl: './routines.component.css'
 })
 export class RoutinesComponent implements OnInit{
-  userRoutines?: UserRoutines[] = [];
-  routine?: Routine;
-  rid?: number
+  userRoutines?: UserRoutine[] = [];
+
 
   constructor(private serviceRoutines: RoutinesService) {}
 
   ngOnInit(): void {
-    this.serviceRoutines.getUserRoutines().subscribe(
+    this.serviceRoutines.getAllUserRoutines().subscribe(
       {
-        next: (routines: UserRoutines[] | undefined) => {
+        next: (routines: UserRoutine[] | undefined) => {
           this.userRoutines = routines;
         },
         error: (err) => {
@@ -41,9 +39,10 @@ export class RoutinesComponent implements OnInit{
       })
   }
 
-  onClick(routineId: number){
-    console.log(routineId);
-    this.serviceRoutines.loadRoutine(routineId);
+  routineAccess(rid: number, name: string, email: string){
+    console.log(rid);
+    this.serviceRoutines.setUserRoutine(rid,name,email);
+
   }
 /*
   createRoutine() {

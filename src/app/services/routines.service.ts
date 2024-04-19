@@ -1,7 +1,7 @@
 import { Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, Observable, of} from "rxjs";
-import { UserRoutines} from "../interfaces/user-routines.interface";
+import { catchError, Observable, of} from "rxjs";
+import { UserRoutine} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
 
 @Injectable({
@@ -10,14 +10,23 @@ import { Routine } from "../interfaces/routine.interface";
 
 export class RoutinesService {
   constructor(private http: HttpClient) { }
-  private routineSource = new BehaviorSubject<number>(0);
-  routine$ = this.routineSource.asObservable();
 
-
-  routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/prueba@gmail.com/routines';
-  getRoutine(routineId: number): Observable <UserRoutines | undefined>{
-    return this.http.get<UserRoutines>(this.routineUrl+`${routineId}`).pipe(
+  routineUrl: string = 'http://localhost:8080/api/routine/';
+  userRoutine: UserRoutine = {rid:0,name:"name",email:"email"};
+  rid?: number;
+  name?: string;
+  email?: string;
+  routine?: Routine;
+
+  setUserRoutine(rid: number, name: string, email: string){
+    this.userRoutine.rid = rid;
+    this.userRoutine.name = name;
+    this.userRoutine.email = email;
+  }
+  //rid, nombre y email:
+  getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine | undefined>{
+    return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`).pipe(
       catchError ((error) => {
         console.log(error)
         return of(undefined)
@@ -25,17 +34,17 @@ export class RoutinesService {
     )
   }
 
-  getUserRoutines(): Observable<UserRoutines[] | undefined>{
-    return this.http.get<UserRoutines[]>(this.userRoutinesUrl).pipe(
+  setRoutine(routine: Routine){
+    this.routine = routine;
+  }
+
+  getAllUserRoutines(): Observable<UserRoutine[] | undefined>{
+    return this.http.get<UserRoutine[]>(this.userRoutinesUrl).pipe(
       catchError((error) => {
         console.log(error)
         return of(undefined)
       })
     )
-  }
-
-  loadRoutine(routineId: number){
-    this.routineSource.next(routineId);
   }
 
   getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {

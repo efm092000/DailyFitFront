@@ -3,7 +3,7 @@ import {Exercise} from "../../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {RoutinesService} from "../../../services/routines.service";
-import {UserRoutines} from "../../../interfaces/user-routines.interface";
+import {UserRoutine} from "../../../interfaces/user-routines.interface";
 
 @Component({
   selector: 'app-exercise-details',
@@ -16,13 +16,13 @@ import {UserRoutines} from "../../../interfaces/user-routines.interface";
   styleUrl: './exercise-details.component.css'
 })
 export class ExerciseDetailsComponent implements OnInit{
-  routines: UserRoutines[] | undefined;
+  routines: UserRoutine[] | undefined;
   @Input() exercise!: Exercise;
   constructor(private routineService: RoutinesService) {
   }
   ngOnInit(): void {
-    this.routineService.getUserRoutines().subscribe(
-      (routines: UserRoutines[] | undefined) => {
+    this.routineService.getAllUserRoutines().subscribe(
+      (routines: UserRoutine[] | undefined) => {
         this.routines = routines;
       },
       (error) => {
