@@ -34,7 +34,7 @@ export class WeeklyService {
   }
 
   //Se añade una rutina al weekly plan seleccionado en el selector.
-  addRoutineToWeeklyPlan(wid: number, rid: number, day: string): Observable<any> {
+  addRoutineToWeeklyPlan(wid: number, rid: number, day: number): Observable<any> {
     return this.http.post(`${this.apiUrl}${wid}/routine`, { rid, day });
   }
 }

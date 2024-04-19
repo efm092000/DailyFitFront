@@ -32,12 +32,14 @@
   <div *ngIf="showPopup" class="add-routine-popup">
     <div class="selector-container">
       <label for="day-selector">Day:</label>
-      <select id="day-selector"></select>
+      <select id="day-selector" [(ngModel)]="numberOfDay">
+        <option *ngFor="let day of daysOfWeek; let i = index"> {{ day }}</option>
+      </select>
     </div>
     <div class="selector-container">
       <label for="routine-selector">Routine:</label>
-      <select id="routine-selector" [(ngModel)]="selectedWeeklyPlanIndex"  (change)="onWeeklyPlanChange()">
-        <option *ngFor="let routine of routines; let i = index" [value]="i" [selected]="i === 0">{{ routine.name}}</option>
+      <select id="routine-selector">
+        <option *ngFor="let routine of routines;" >{{ routine.name}}</option>
       </select>
     </div>
     <button (click)="addRoutine()" id="weekly-popup-btn-add">Add</button>

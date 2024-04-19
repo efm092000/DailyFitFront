@@ -27,8 +27,9 @@ export class WeeklyComponent implements OnInit {
   selectedWid: number = 0;
   showPopup: boolean = false;
   showInput: boolean = false;
-  daysOfWeek: string[] = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+  daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   newWeeklyName: string = 'New_Weekly_Plan';
+  numberOfDay: number = 0;
 
   constructor(private weeklyService: WeeklyService, private routinesService: RoutinesService) {
   }
@@ -93,7 +94,8 @@ export class WeeklyComponent implements OnInit {
   }
 
   async addRoutine(): Promise<void> {
-    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, 5, 'monday')
+    //this.numberOfDay = this.numberOfDay +1;
+    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, 5, 1)
     this.togglePopup()
   }
 
