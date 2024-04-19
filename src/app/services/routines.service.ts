@@ -25,13 +25,8 @@ export class RoutinesService {
     this.userRoutine.email = email;
   }
   //rid, nombre y email:
-  getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine | undefined>{
-    return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`).pipe(
-      catchError ((error) => {
-        console.log(error)
-        return of(undefined)
-    })
-    )
+  getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine>{
+    return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`);
   }
 
   setRoutine(routine: Routine){
@@ -66,6 +61,7 @@ export class RoutinesService {
 
   editRoutine(rid: number, name: string): void {
     this.routineUrl = `http://localhost:8080/api/routine/${rid}?name=${name}`;
+    console.log(rid);
     this.http.put(this.routineUrl, {}).subscribe(
         response => console.log(response),
       );

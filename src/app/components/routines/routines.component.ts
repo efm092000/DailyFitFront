@@ -50,11 +50,16 @@ export class RoutinesComponent implements OnInit{
     this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
       next: (response: UserRoutine) => {
         console.log('Rutina creada:', response);
+        this.serviceRoutines.userRoutine.rid = response.rid;
+        this.serviceRoutines.userRoutine.name = response.name;
+        this.serviceRoutines.userRoutine.email = response.email;
+
       },
       error: error => {
         console.error('Error al crear la rutina:', error);
       }
     });
+
   }
 }
 
