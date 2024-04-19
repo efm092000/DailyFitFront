@@ -7,6 +7,7 @@ import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 
 
+
 @Component({
   selector: 'app-routines',
   standalone: true,
@@ -44,11 +45,16 @@ export class RoutinesComponent implements OnInit{
     this.serviceRoutines.setUserRoutine(rid,name,email);
 
   }
-/*
-  createRoutine() {
 
+  routineGenerator(): void{
+    this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
+      next: (response: UserRoutine) => {
+        console.log('Rutina creada:', response);
+      },
+      error: error => {
+        console.error('Error al crear la rutina:', error);
+      }
+    });
   }
-
- */
 }
 
