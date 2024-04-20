@@ -49,13 +49,14 @@ export class RoutinesComponent implements OnInit{
 
   routineGenerator(): void{
     this.serviceRoutines.clearUserRoutine();
+    this.serviceRoutines.isEditMode = true;
     this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
       next: (response: UserRoutine) => {
         console.log('Rutina creada:', response);
         this.serviceRoutines.userRoutine.rid = response.rid;
         this.serviceRoutines.userRoutine.name = response.name;
         this.serviceRoutines.userRoutine.email = response.email;
-        this.serviceRoutines.isEditMode = true;
+
 
       },
       error: error => {

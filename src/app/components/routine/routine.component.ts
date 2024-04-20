@@ -25,10 +25,11 @@ export class RoutineComponent implements OnInit{
 
   exercises?: Routine[] = [];
   userRoutine: UserRoutine = this.serviceRoutine.userRoutine;
-  isEditMode: boolean = this.serviceRoutine.isEditMode;
+  isEditMode?: boolean;
   showDeleteConfirmation: boolean = false;
 
   ngOnInit(): void {
+    this.isEditMode = this.serviceRoutine.isEditMode;
     this.serviceRoutine.getRoutineExercises(this.userRoutine.rid).subscribe(
       (exercises) => {
         this.exercises = exercises;
@@ -69,5 +70,11 @@ export class RoutineComponent implements OnInit{
     this.serviceRoutine.deleteExerciseFromRoutine(this.userRoutine.rid, exercise.exercise, exercise.sets, exercise.reps);
     const index = this.exercises?.indexOf(exercise);
     this.exercises?.splice(<number>index, 1);
+  }
+
+  goBack(){
+    if(this.serviceRoutine.isEditMode){
+      this.toggleMode();
+    }
   }
 }

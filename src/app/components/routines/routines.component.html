@@ -5,6 +5,8 @@
       <button (click)="routineAccess(userRoutine.rid, userRoutine.name, userRoutine.email)" routerLink="/routine">{{ userRoutine.name }}</button>
     </div>
   </div>
-
-  <button (click)="routineGenerator()" routerLink="/routine">Create routine</button>
+  <div class="spacer"></div>
+  <div  class="create-routine-btn-container">
+    <button class="create-routine-btn" (click)="routineGenerator()" routerLink="/routine">Create routine</button>
+  </div>
 </div>
