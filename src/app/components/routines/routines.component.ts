@@ -48,6 +48,7 @@ export class RoutinesComponent implements OnInit{
   }
 
   routineGenerator(): void{
+    this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
       next: (response: UserRoutine) => {
         console.log('Rutina creada:', response);
