@@ -81,10 +81,9 @@ export class RoutinesService {
     );
   }
 
-/*
-  createRoutine(): UserRoutines {
-    this.http.post(this.routineUrl+'/NewRoutine', {},{responseType: "json"} );
-    return
+  createRoutine(name: string, email: string): Observable<UserRoutine> {
+    const url = `${this.routineUrl}${name}?email=${email}`;
+    return this.http.post<UserRoutine>(url, {});
   }
   */
 }
