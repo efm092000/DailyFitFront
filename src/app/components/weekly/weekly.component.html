@@ -3,9 +3,13 @@
     <option *ngFor="let entry of weeklyPlans, let i = index" [value]="i" >{{ entry.name }}</option>
   </select>
   <div id="schedule" class="justify-content-center">
-    <div id="weekly-{{day}}" class="weekly-day-of-week-container row-cols-7 justify-content-between container-fluid" *ngFor="let day of daysOfWeek">
+    <div id="weekly-{{day}}" class="weekly-day-of-week-container row-cols-7 justify-content-between container-fluid" *ngFor="let i = index, let day of daysOfWeek">
       <h1 class="day-title">{{ day }}</h1>
-      <div class="day-content" *ngFor="let entry of routines" >{{entry.rid}}</div>
+      <div class="day-content">
+        <div *ngFor=" let entry of filterRoutinesByDay(i+1)">
+          {{ entry.rid}}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -33,13 +37,13 @@
     <div class="selector-container">
       <label for="day-selector">Day:</label>
       <select id="day-selector" [(ngModel)]="numberOfDay">
-        <option *ngFor="let day of daysOfWeek; let i = index"> {{ day }}</option>
+        <option *ngFor="let day of daysOfWeek; let i = index"  [value]="i"> {{ day }}</option>
       </select>
     </div>
     <div class="selector-container">
       <label for="routine-selector">Routine:</label>
-      <select id="routine-selector">
-        <option *ngFor="let routine of routines;" >{{ routine.name}}</option>
+      <select id="routine-selector" [(ngModel)]="selectedRoutineIndex">
+        <option *ngFor="let i = index, let routine of routinesByUser;" [value]="i">{{ routine.name}}</option>
       </select>
     </div>
     <button (click)="addRoutine()" id="weekly-popup-btn-add">Add</button>

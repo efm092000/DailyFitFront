@@ -3,7 +3,6 @@ import { WeeklyService } from '../../services/weekly.service';
 import { Weekly } from '../../interfaces/weekly';
 import { UserRoutines} from '../../interfaces/user-routines.interface';
 import {NgForOf, NgIf} from "@angular/common";
-
 import {FormsModule} from "@angular/forms";
 import {RoutinesService} from "../../services/routines.service";
 
@@ -21,7 +20,8 @@ import {RoutinesService} from "../../services/routines.service";
 })
 export class WeeklyComponent implements OnInit {
   weeklyPlans: Weekly[] = [];
-  routines: UserRoutines[] | undefined = [];
+  routinesByUser: UserRoutines[] | undefined = [];
+  routinesByWeekly: UserRoutines [] = [];
   selectedWeeklyPlanIndex: number = 0;
   editingMode: boolean = false;
   selectedWid: number = 0;
@@ -30,7 +30,8 @@ export class WeeklyComponent implements OnInit {
   daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   newWeeklyName: string = 'New_Weekly_Plan';
   numberOfDay: number = 0;
-
+  selectedRoutineIndex : number =0;
+  private selectedRid: number = 0;
   constructor(private weeklyService: WeeklyService, private routinesService: RoutinesService) {
   }
 
@@ -51,7 +52,7 @@ export class WeeklyComponent implements OnInit {
     this.routinesService.getUserRoutines().subscribe(
       {
         next: (routines: UserRoutines[] | undefined) => {
-          this.routines = routines;
+          this.routinesByUser = routines;
         }, error: (error) => {
           console.log('Error al cargar las rutinas', error);
         }
@@ -60,7 +61,7 @@ export class WeeklyComponent implements OnInit {
 
   loadRoutinesOfWeekly() {
     this.weeklyService.getRoutinesOfWeeklyPlan(this.selectedWid).subscribe((routines: UserRoutines[]) => {
-      this.routines = routines;
+      this.routinesByWeekly = routines;
     }, (error) => {
       console.error('Error al obtener las rutinas:', error);
     });
@@ -94,22 +95,33 @@ export class WeeklyComponent implements OnInit {
   }
 
   async addRoutine(): Promise<void> {
-    //this.numberOfDay = this.numberOfDay +1;
-    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, 5, 1)
-    this.togglePopup()
+    if (this.routinesByUser) {
+      const selectedRoutine: UserRoutines = this.routinesByUser[this.selectedRoutineIndex];
+      if(selectedRoutine){
+        this.selectedRid = selectedRoutine.rid;
+      }
+    }
+    this.numberOfDay = parseInt(String(this.numberOfDay)) + 1;
+    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, this.selectedRid, this.numberOfDay);
+    this.loadRoutines();
+    this.loadRoutinesOfWeekly();
+    this.togglePopup();
   }
 
   onWeeklyPlanChange(): void {
     const selectedWeeklyPlan = this.weeklyPlans[this.selectedWeeklyPlanIndex];
     if (selectedWeeklyPlan) {
       this.selectedWid = selectedWeeklyPlan.wid;
-      console.log("Selected wid:", this.selectedWid);
       this.loadRoutinesOfWeekly();
     } else {
       console.error("No se ha seleccionado ningún plan semanal.");
     }
   }
-
-
+  filterRoutinesByDay(day:number){
+    if (this.routinesByWeekly == undefined){
+      return;
+    }
+    return this.routinesByWeekly.filter(entry => entry.day === day);
+  }
 }
 

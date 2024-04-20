@@ -18,7 +18,7 @@ export class WeeklyService {
     return this.http.get<Weekly[]>(`${(this.apiUser)}123@gmail.com/weeklies`);
   }
 
-  //pno tengo botón para update el nombre.
+  //For later upgrades
   updateWeeklyPlanName(wid: number, name: string): Observable<any>{
     return this.http.put(`${this.apiUrl}${wid}`, { name });
   }
@@ -33,8 +33,7 @@ export class WeeklyService {
     return this.http.get<UserRoutines[]>(`${this.apiUrl}${wid}/routines`);
   }
 
-  //Se añade una rutina al weekly plan seleccionado en el selector.
-  addRoutineToWeeklyPlan(wid: number, rid: number, day: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}${wid}/routine`, { rid, day });
+  addRoutineToWeeklyPlan(wid: number, rid: number, day: number) {
+    return this.http.post<any>(`${this.apiUrl}${wid}/routine?rid=${rid}&day=${day}`, {})
   }
 }
