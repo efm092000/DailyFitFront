@@ -18,6 +18,7 @@ export class RoutinesService {
   name?: string;
   email?: string;
   routine?: Routine;
+  isEditMode: boolean = false;
 
   setUserRoutine(rid: number, name: string, email: string){
     this.userRoutine.rid = rid;

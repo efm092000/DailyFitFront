@@ -55,6 +55,7 @@ export class RoutinesComponent implements OnInit{
         this.serviceRoutines.userRoutine.rid = response.rid;
         this.serviceRoutines.userRoutine.name = response.name;
         this.serviceRoutines.userRoutine.email = response.email;
+        this.serviceRoutines.isEditMode = true;
 
       },
       error: error => {

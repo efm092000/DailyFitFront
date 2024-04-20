@@ -25,7 +25,7 @@ export class RoutineComponent implements OnInit{
 
   exercises?: Routine[] = [];
   userRoutine: UserRoutine = this.serviceRoutine.userRoutine;
-  isEditMode: boolean = false;
+  isEditMode: boolean = this.serviceRoutine.isEditMode;
   showDeleteConfirmation: boolean = false;
 
   ngOnInit(): void {
@@ -38,7 +38,8 @@ export class RoutineComponent implements OnInit{
   }
 
   toggleMode(): void {
-    this.isEditMode = !this.isEditMode;
+    this.serviceRoutine.isEditMode = !this.serviceRoutine.isEditMode;
+    this.isEditMode = this.serviceRoutine.isEditMode;
   }
 
   saveRoutineAction() {
