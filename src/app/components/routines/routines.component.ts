@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterLink } from "@angular/router";
 import {JsonPipe, NgFor, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
@@ -25,7 +25,8 @@ export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
 
 
-  constructor(private serviceRoutines: RoutinesService) {}
+  constructor(private serviceRoutines: RoutinesService) {
+  }
 
   ngOnInit(): void {
     this.serviceRoutines.getAllUserRoutines().subscribe(
@@ -36,7 +37,7 @@ export class RoutinesComponent implements OnInit{
         error: (err) => {
           console.log(err);
         }
-      })
+      });
   }
 
   routineAccess(rid: number, name: string, email: string){

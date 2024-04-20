@@ -29,17 +29,9 @@ export class RoutineComponent implements OnInit{
   showDeleteConfirmation: boolean = false;
 
   ngOnInit(): void {
-    this.serviceRoutine.getUserRoutine(this.userRoutine);
-    console.log(this.userRoutine.rid);
     this.serviceRoutine.getRoutineExercises(this.userRoutine.rid).subscribe(
-      {
-        next: (exercisesRoutine: Routine[] | undefined) => {
-          console.log(exercisesRoutine);
-          this.exercises = exercisesRoutine;
-        },
-        error: (err) => {
-          console.log(err);
-        }
+      (exercises) => {
+        this.exercises = exercises;
       }
     )
 
@@ -52,7 +44,7 @@ export class RoutineComponent implements OnInit{
   saveRoutineAction() {
     const routineNameInput = document.getElementById("routine-name");
     this.userRoutine.name = (routineNameInput as HTMLInputElement).value;
-    this.serviceRoutine.editRoutine(this.userRoutine.rid, this.userRoutine.name);
+    this.serviceRoutine.editRoutine(this.userRoutine.rid, this.userRoutine.name).subscribe();
     this.toggleMode();
   }
 
@@ -73,10 +65,6 @@ export class RoutineComponent implements OnInit{
   }
 
   deleteExerciseAction(exercise: any) {
-    console.log("rid: ", this.userRoutine.rid);
-    console.log("Exercise: ", exercise.exercise);
-    console.log("Sets: ", exercise.sets);
-    console.log("Reps: ", exercise.reps);
     this.serviceRoutine.deleteExerciseFromRoutine(this.userRoutine.rid, exercise.exercise, exercise.sets, exercise.reps);
     const index = this.exercises?.indexOf(exercise);
     this.exercises?.splice(<number>index, 1);
