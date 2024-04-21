@@ -7,6 +7,8 @@ import { Chart } from "chart.js/auto";
 import 'chartjs-adapter-moment';
 import { ProgressService } from "../../services/progress.service";
 import { Progress } from "../../interfaces/progress";
+import { ExerciseService } from "../../services/exercise.service";
+import { NgForOf } from "@angular/common";
 
 @Component({
   selector: 'app-progress',
@@ -14,7 +16,8 @@ import { Progress } from "../../interfaces/progress";
   imports: [
     SidebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NgForOf
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
@@ -22,24 +25,41 @@ import { Progress } from "../../interfaces/progress";
 export class ProgressComponent {
   chart: any;
   private progress?: Progress;
+  protected exercises: string[] = [
+    "Bench Press",
+    "Dumbbell Curl"
+  ];
 
-  constructor(private userService: UserService, private progressService: ProgressService) {
+  constructor(private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
-    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, 'Squats');
-    console.log(this.progress)
-    this.createChart();
   }
 
-  createChart() {
+  private transformData(data: any) {
+    return data.map((entry: any) => {
+      return {
+        x: entry.date,
+        y: entry.weight
+      }
+    });
+  }
 
+  selectExercise(exercise: string) {
+    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise);
+    this.loadChart()
+  }
+
+  loadChart() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.chart = new Chart("canvas", {
       type: 'line', //this denotes tha type of chart
       data: {
         datasets: [{
           label: this.progress?.exercise,
-          data: this.progress?.data,
+          data: this.transformData(this.progress?.data),
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -78,9 +98,7 @@ export class ProgressComponent {
             }
           }
         },
-        aspectRatio: 2.5
       }
-
     });
   }
 }

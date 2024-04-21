@@ -8,49 +8,60 @@ export class ProgressService {
 
   constructor() { }
   getProgressMock(userEmail: string, exerciseName: string): Progress {
+    if (exerciseName === 'Bench Press') {
+      return {
+        exercise: exerciseName,
+        data: [
+          {
+            date: '2024-04-04',
+            weight: 40
+          },
+          {
+            date: '2024-04-05',
+            weight: 50
+          },
+          {
+            date: '2024-04-06',
+            weight: 60
+          },
+          {
+            date: '2024-04-07',
+            weight: 70
+          },
+          ]
+      }
+    }
     return {
       exercise: exerciseName,
       data: [
         {
-          x: '2024-04-01',
-          y: 10
+          date: '2024-04-01',
+          weight: 10
         },
         {
-          x: '2024-04-02',
-          y: 20
+          date: '2024-04-02',
+          weight: 20
         },
         {
-          x: '2024-04-03',
-          y: 30
+          date: '2024-04-03',
+          weight: 30
         },
         {
-          x: '2024-04-04',
-          y: 40
+          date: '2024-04-04',
+          weight: 40
         },
         {
-          x: '2024-04-05',
-          y: 50
+          date: '2024-04-05',
+          weight: 50
         },
         {
-          x: '2024-04-06',
-          y: 60
+          date: '2024-04-06',
+          weight: 60
         },
         {
-          x: '2024-04-07',
-          y: 70
+          date: '2024-04-07',
+          weight: 70
         },
-        {
-          x: '2024-04-08',
-          y: 80
-        },
-        {
-          x: '2024-04-09',
-          y: 90
-        },
-        {
-          x: '2024-04-10',
-          y: 100
-        }
       ]
     }
   }
