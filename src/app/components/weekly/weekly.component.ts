@@ -102,7 +102,9 @@ export class WeeklyComponent implements OnInit {
       }
     }
     this.numberOfDay = parseInt(String(this.numberOfDay)) + 1;
+    console.log('Antes');
     this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, this.selectedRid, this.numberOfDay);
+    console.log('Después');
     this.loadRoutines();
     this.loadRoutinesOfWeekly();
     this.togglePopup();
@@ -123,5 +125,18 @@ export class WeeklyComponent implements OnInit {
     }
     return this.routinesByWeekly.filter(entry => entry.day === day);
   }
+
+  getRoutineNameByRid(rid: number) {
+    if(!this.routinesByUser) return '';
+    let routineName : string = '';
+    for(const routine of this.routinesByUser){
+      if( routine.rid === rid){
+        routineName = routine.name;
+        break;
+      }
+    }
+    return routineName;
+  }
+
 }
 

@@ -7,7 +7,7 @@
       <h1 class="day-title">{{ day }}</h1>
       <div class="day-content">
         <div *ngFor=" let entry of filterRoutinesByDay(i+1)">
-          {{ entry.rid}}
+          {{ getRoutineNameByRid(entry.rid)}}
         </div>
       </div>
     </div>

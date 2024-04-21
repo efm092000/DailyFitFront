@@ -1,7 +1,6 @@
 export interface UserRoutines {
   rid: number;
-
-  name?: string;
+  name: string;
   email: string;
   day?: number;
 
