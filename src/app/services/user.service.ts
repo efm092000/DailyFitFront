@@ -9,7 +9,6 @@ export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
   private readonly USER_KEY = 'loggedInUser';
-  logged: boolean = false;
 
   constructor(private http: HttpClient) {
   }
