@@ -1,9 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Exercise} from "../../interfaces/exercise";
 import {ExerciseService} from "../../services/exercise.service";
 import {FormsModule} from "@angular/forms";
 import {ExerciseDetailsComponent} from "./exercise-details/exercise-details.component";
+import {NgxPaginationModule} from "ngx-pagination";
+
 
 @Component({
   selector: 'app-exercise-search',
@@ -11,7 +13,8 @@ import {ExerciseDetailsComponent} from "./exercise-details/exercise-details.comp
   imports: [
     NgForOf,
     FormsModule,
-    ExerciseDetailsComponent
+    ExerciseDetailsComponent,
+    NgxPaginationModule
   ],
   templateUrl: './exercise-search.component.html',
   styleUrl: './exercise-search.component.css'
@@ -25,8 +28,9 @@ export class ExerciseSearchComponent{
     name: "",
     type: "",
   };
+  public page: number | undefined;
 
-  constructor(private exerciseService: ExerciseService) {}
+  constructor(protected exerciseService: ExerciseService) {}
 
   onSubmit(event:Event){
     event.preventDefault();
@@ -41,6 +45,18 @@ export class ExerciseSearchComponent{
         console.error('Error al obtener los ejercicios:', error);
       }
     );
+  }
+  getImage(gif:String): String {
+    let image:String= "";
+    this.exerciseService.getImage(gif).subscribe(
+      response => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          image = reader.result as string;
+        };
+        reader.readAsDataURL(response);
+      });
+    return image;
   }
 
   openDialog(entry: Exercise) {

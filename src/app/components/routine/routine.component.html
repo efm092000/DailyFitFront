@@ -1,8 +1,7 @@
 <div class="container">
-  <label for="routine-name"></label>
   <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
-         placeholder="Routine Name" value="{{routine?.name}}">
-  <p *ngIf="!isEditMode">{{routine?.name}}</p>
+         placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
+  <p *ngIf="!isEditMode">{{userRoutine.name}}</p>
   <table id="table">
     <thead>
       <tr>
@@ -17,7 +16,7 @@
         <td>{{exercise.exercise}}</td>
         <td>{{exercise.sets}}</td>
         <td>{{exercise.reps}}</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button">X</span></td>
+        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button" (click)="deleteExerciseAction(exercise)">X</span></td>
       </tr>
       <tr class="add-exercise-button" *ngIf="isEditMode">
         <td colspan="3"><span>Add Exercise</span></td>
@@ -29,7 +28,7 @@
     <button (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
     <button (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
     <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
-    <button routerLink="/routines">Go Back</button>
+    <button (click)="goBack()" routerLink="/routines">Go Back</button>
   </div>
 </div>
 

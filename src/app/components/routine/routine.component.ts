@@ -3,7 +3,8 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {Routine} from "../../interfaces/routine.interface";
 import {RouterLink} from "@angular/router";
-import {UserRoutines} from "../../interfaces/user-routines.interface";
+import {UserRoutine} from "../../interfaces/user-routines.interface";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-routine',
@@ -12,7 +13,8 @@ import {UserRoutines} from "../../interfaces/user-routines.interface";
     NgForOf,
     AsyncPipe,
     NgIf,
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './routine.component.html',
   styleUrl: './routine.component.css'
@@ -22,44 +24,29 @@ export class RoutineComponent implements OnInit{
   }
 
   exercises?: Routine[] = [];
-  routineId: number = 0;
-  routine?: UserRoutines;
-  isEditMode: boolean = false;
+  userRoutine: UserRoutine = this.serviceRoutine.userRoutine;
+  isEditMode?: boolean;
   showDeleteConfirmation: boolean = false;
+
   ngOnInit(): void {
-    this.serviceRoutine.routine$.subscribe(routine => {
-      this.routineId = routine;
-    });
-    this.serviceRoutine.getRoutineExercises(this.routineId).subscribe(
-      {
-        next: (exercisesRoutine: Routine[] | undefined) => {
-          this.exercises = exercisesRoutine;
-        },
-        error: (err) => {
-          console.log(err);
-        }
+    this.isEditMode = this.serviceRoutine.isEditMode;
+    this.serviceRoutine.getRoutineExercises(this.userRoutine.rid).subscribe(
+      (exercises) => {
+        this.exercises = exercises;
       }
     )
-    this.serviceRoutine.getRoutine(this.routineId).subscribe(
-      {
-        next: (routine: UserRoutines | undefined) => {
-          this.routine = routine;
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      }
-    )
+
   }
 
-  addExerciseButton: boolean = false;
-  deleteRoutineButton: boolean = false;
-
   toggleMode(): void {
-    this.isEditMode = !this.isEditMode;
+    this.serviceRoutine.isEditMode = !this.serviceRoutine.isEditMode;
+    this.isEditMode = this.serviceRoutine.isEditMode;
   }
 
   saveRoutineAction() {
+    const routineNameInput = document.getElementById("routine-name");
+    this.userRoutine.name = (routineNameInput as HTMLInputElement).value;
+    this.serviceRoutine.editRoutine(this.userRoutine.rid, this.userRoutine.name).subscribe();
     this.toggleMode();
   }
 
@@ -76,10 +63,18 @@ export class RoutineComponent implements OnInit{
   }
 
   deleteRoutineAction() {
-    this.serviceRoutine.deleteRoutine(this.routineId);
+    this.serviceRoutine.deleteRoutine(this.userRoutine.rid);
   }
 
-  cancelDeleteRoutineAction() {
-    this.deleteRoutineButton = false;
+  deleteExerciseAction(exercise: any) {
+    this.serviceRoutine.deleteExerciseFromRoutine(this.userRoutine.rid, exercise.exercise, exercise.sets, exercise.reps);
+    const index = this.exercises?.indexOf(exercise);
+    this.exercises?.splice(<number>index, 1);
+  }
+
+  goBack(){
+    if(this.serviceRoutine.isEditMode){
+      this.toggleMode();
+    }
   }
 }

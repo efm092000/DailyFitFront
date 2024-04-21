@@ -1,0 +1,4 @@
+<div class="form-group">
+  <label for="weekSelector">Selecciona una semana:</label>
+  <input type="text" class="form-control" id="weekSelector" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" (bsValueChange)="onDateChanged($event)">
+</div>
