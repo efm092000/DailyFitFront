@@ -3,7 +3,8 @@ import {Exercise} from "../../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {RoutinesService} from "../../../services/routines.service";
-import {UserRoutine} from "../../../interfaces/user-routines.interface";
+import {UserRoutines} from "../../../interfaces/user-routines.interface";
+import {ExerciseService} from "../../../services/exercise.service";
 
 @Component({
   selector: 'app-exercise-details',
@@ -18,11 +19,18 @@ import {UserRoutine} from "../../../interfaces/user-routines.interface";
 export class ExerciseDetailsComponent implements OnInit{
   routines: UserRoutine[] | undefined;
   @Input() exercise!: Exercise;
-  constructor(private routineService: RoutinesService) {
+  image: String | undefined;
+  constructor(private routineService: RoutinesService,
+              private exerciseService: ExerciseService) {
   }
   ngOnInit(): void {
-    this.routineService.getAllUserRoutines().subscribe(
-      (routines: UserRoutine[] | undefined) => {
+    this.loadRoutineSelector();
+    this.getImage();
+  }
+
+  loadRoutineSelector() {
+    this.routineService.getUserRoutines().subscribe(
+      (routines: UserRoutines[] | undefined) => {
         this.routines = routines;
       },
       (error) => {
@@ -32,5 +40,15 @@ export class ExerciseDetailsComponent implements OnInit{
   }
   addExerciseToRoutine(){
     return;
+  }
+  getImage(): void {
+    this.exerciseService.getImage(this.exercise.gif).subscribe(
+      response => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.image = reader.result as string;
+        };
+        reader.readAsDataURL(response);
+      });
   }
 }
