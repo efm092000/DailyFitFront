@@ -49,7 +49,7 @@ export class ExerciseDetailsComponent implements OnInit{
     } else if(this.sets && this.reps && this.selectedRid){
       this.routineService.addExerciseToRoutine(this.selectedRid,exerciseName,this.sets,this.reps).subscribe();
     }
-    return;
+    this.closeDialog(exerciseName);
   }
   getImage(): void {
     this.exerciseService.getImage(this.exercise.gif).subscribe(
@@ -60,5 +60,13 @@ export class ExerciseDetailsComponent implements OnInit{
         };
         reader.readAsDataURL(response);
       });
+  }
+
+  closeDialog(entry: string) {
+    const dialogId = '#' + entry.split(' ').join('_');
+    const dialogElement = document.querySelector(dialogId);
+    if (dialogElement instanceof HTMLDialogElement) {
+      dialogElement.close();
+    }
   }
 }
