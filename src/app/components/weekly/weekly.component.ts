@@ -102,12 +102,10 @@ export class WeeklyComponent implements OnInit {
       }
     }
     this.numberOfDay = parseInt(String(this.numberOfDay)) + 1;
-    console.log('Antes');
-    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, this.selectedRid, this.numberOfDay);
-    console.log('Después');
-    this.loadRoutines();
-    this.loadRoutinesOfWeekly();
-    this.togglePopup();
+    this.weeklyService.addRoutineToWeeklyPlan(this.selectedWid, this.selectedRid, this.numberOfDay).subscribe(()=>{this.loadRoutines();
+      this.loadRoutinesOfWeekly();
+      this.togglePopup();},
+      (error) =>{console.error('Error al añadir una rutina', error)});
   }
 
   onWeeklyPlanChange(): void {
