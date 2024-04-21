@@ -17,7 +17,7 @@ import {ExerciseService} from "../../../services/exercise.service";
   styleUrl: './exercise-details.component.css'
 })
 export class ExerciseDetailsComponent implements OnInit{
-  routines: UserRoutines[] | undefined;
+  routines: UserRoutine[] | undefined;
   @Input() exercise!: Exercise;
   image: String | undefined;
   constructor(private routineService: RoutinesService,

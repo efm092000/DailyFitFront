@@ -39,3 +39,24 @@ button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+#create-routine-btn-container {
+  text-align: center;
+}
+
+.create-routine-btn {
+  background-color: #406E9B;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 16px;
+}
+
+.create-routine-btn:hover {
+  background-color: #304F78;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
