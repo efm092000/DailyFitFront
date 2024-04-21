@@ -5,6 +5,7 @@ import {Routine} from "../../interfaces/routine.interface";
 import {RouterLink} from "@angular/router";
 import {UserRoutine} from "../../interfaces/user-routines.interface";
 import {FormsModule} from "@angular/forms";
+import {ExerciseSearchComponent} from "../exercise-search/exercise-search.component";
 
 @Component({
   selector: 'app-routine',
@@ -14,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     AsyncPipe,
     NgIf,
     RouterLink,
-    FormsModule
+    FormsModule,
+    ExerciseSearchComponent
   ],
   templateUrl: './routine.component.html',
   styleUrl: './routine.component.css'
@@ -27,6 +29,7 @@ export class RoutineComponent implements OnInit{
   userRoutine: UserRoutine = this.serviceRoutine.userRoutine;
   isEditMode?: boolean;
   showDeleteConfirmation: boolean = false;
+  displaySearchExercises: boolean = false;
 
   ngOnInit(): void {
     this.isEditMode = this.serviceRoutine.isEditMode;
@@ -55,7 +58,7 @@ export class RoutineComponent implements OnInit{
   }
 
   addExerciseAction() {
-
+    this.displaySearchExercises = true;
   }
 
   toggleDeleteConfirmation(): void {
@@ -76,5 +79,9 @@ export class RoutineComponent implements OnInit{
     if(this.serviceRoutine.isEditMode){
       this.toggleMode();
     }
+  }
+
+  toggleSearch() {
+    this.displaySearchExercises = !this.displaySearchExercises;
   }
 }

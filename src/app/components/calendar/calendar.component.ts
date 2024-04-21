@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {FormsModule} from "@angular/forms";
-import {Weekly} from "../../interface/weekly";
+import {Weekly} from "../../interfaces/weekly";
 import {ProgressService} from "../../services/progress.service";
 
 @Component({

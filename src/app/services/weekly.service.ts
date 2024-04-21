@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Weekly} from "../interfaces/weekly";
 import {map, Observable} from "rxjs";
-import {UserRoutines} from "../interfaces/user-routines.interface";
+import {UserRoutine} from "../interfaces/user-routines.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,8 @@ export class WeeklyService {
     );
   }
 
-  getRoutinesOfWeeklyPlan(wid: number): Observable<UserRoutines[]> {
-    return this.http.get<UserRoutines[]>(`${this.apiUrl}${wid}/routines`);
+  getRoutinesOfWeeklyPlan(wid: number): Observable<UserRoutine[]> {
+    return this.http.get<UserRoutine[]>(`${this.apiUrl}${wid}/routines`);
   }
 
   addRoutineToWeeklyPlan(wid: number, rid: number, day: number) {

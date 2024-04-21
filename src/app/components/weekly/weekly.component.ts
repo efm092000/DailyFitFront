@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeeklyService } from '../../services/weekly.service';
 import { Weekly } from '../../interfaces/weekly';
-import { UserRoutines} from '../../interfaces/user-routines.interface';
+import { UserRoutine} from '../../interfaces/user-routines.interface';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RoutinesService} from "../../services/routines.service";
@@ -20,8 +20,8 @@ import {RoutinesService} from "../../services/routines.service";
 })
 export class WeeklyComponent implements OnInit {
   weeklyPlans: Weekly[] = [];
-  routinesByUser: UserRoutines[] | undefined = [];
-  routinesByWeekly: UserRoutines [] = [];
+  routinesByUser: UserRoutine[] | undefined = [];
+  routinesByWeekly: UserRoutine[] = [];
   selectedWeeklyPlanIndex: number = 0;
   editingMode: boolean = false;
   selectedWid: number = 0;
@@ -49,9 +49,9 @@ export class WeeklyComponent implements OnInit {
   }
 
   loadRoutines(): void {
-    this.routinesService.getUserRoutines().subscribe(
+    this.routinesService.getAllUserRoutines().subscribe(
       {
-        next: (routines: UserRoutines[] | undefined) => {
+        next: (routines: UserRoutine[] | undefined) => {
           this.routinesByUser = routines;
         }, error: (error) => {
           console.log('Error al cargar las rutinas', error);
@@ -60,7 +60,7 @@ export class WeeklyComponent implements OnInit {
   }
 
   loadRoutinesOfWeekly() {
-    this.weeklyService.getRoutinesOfWeeklyPlan(this.selectedWid).subscribe((routines: UserRoutines[]) => {
+    this.weeklyService.getRoutinesOfWeeklyPlan(this.selectedWid).subscribe((routines: UserRoutine[]) => {
       this.routinesByWeekly = routines;
     }, (error) => {
       console.error('Error al obtener las rutinas:', error);
@@ -85,7 +85,7 @@ export class WeeklyComponent implements OnInit {
 
   async addWeeklyPlan(name: string): Promise<void> {
     console.log("1");
-    this.weeklyService.createNewWeeklyPlan(`123@gmail.com`, name).subscribe((weekly: Weekly) => {
+    this.weeklyService.createNewWeeklyPlan(`123@gmail.com`, name).subscribe(() => {
         this.loadWeeklyPlans();
       },
       (error) => {
@@ -96,7 +96,7 @@ export class WeeklyComponent implements OnInit {
 
   async addRoutine(): Promise<void> {
     if (this.routinesByUser) {
-      const selectedRoutine: UserRoutines = this.routinesByUser[this.selectedRoutineIndex];
+      const selectedRoutine: UserRoutine = this.routinesByUser[this.selectedRoutineIndex];
       if(selectedRoutine){
         this.selectedRid = selectedRoutine.rid;
       }
