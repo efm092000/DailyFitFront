@@ -5,6 +5,7 @@ import {RoutinesService} from "../../services/routines.service";
 import {UserRoutine} from "../../interfaces/user-routines.interface";
 import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
+import {UserService} from "../../services/user.service";
 
 
 
@@ -26,7 +27,7 @@ export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
 
 
-  constructor(private serviceRoutines: RoutinesService) {
+  constructor(private serviceRoutines: RoutinesService, private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -50,7 +51,7 @@ export class RoutinesComponent implements OnInit{
   routineGenerator(): void{
     this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.isEditMode = true;
-    this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
+    this.serviceRoutines.createRoutine("NewRoutine", this.userService.getLoggedInUser().email).subscribe({
       next: (response: UserRoutine) => {
         console.log('Rutina creada:', response);
         this.serviceRoutines.userRoutine.rid = response.rid;

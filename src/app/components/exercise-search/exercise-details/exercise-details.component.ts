@@ -23,6 +23,8 @@ export class ExerciseDetailsComponent implements OnInit{
   @Input() rid!: number;
   image: String | undefined;
   selectedRid: number | undefined;
+  sets: number | undefined;
+  reps: number | undefined;
   constructor(private routineService: RoutinesService,
               private exerciseService: ExerciseService) {
   }
@@ -41,9 +43,11 @@ export class ExerciseDetailsComponent implements OnInit{
       }
     );
   }
-  addExerciseToRoutine(){
-    if(this.rid){
-      return;
+  addExerciseToRoutine(exerciseName:string){
+    if(this.rid && this.sets && this.reps){
+      this.routineService.addExerciseToRoutine(this.rid,exerciseName,this.sets,this.reps).subscribe();
+    } else if(this.sets && this.reps && this.selectedRid){
+      this.routineService.addExerciseToRoutine(this.selectedRid,exerciseName,this.sets,this.reps).subscribe();
     }
     return;
   }

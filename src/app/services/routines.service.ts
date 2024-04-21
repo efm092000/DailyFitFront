@@ -3,16 +3,26 @@ import {HttpClient} from "@angular/common/http";
 import { catchError, Observable, of} from "rxjs";
 import { UserRoutine} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RoutinesService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
-  userRoutinesUrl: string = 'http://localhost:8080/api/user/prueba@gmail.com/routines';
   routineUrl: string = 'http://localhost:8080/api/routine/';
+  userRoutinesUrl: string = 'http://localhost:8080/api/user/123@gmail.com/routines';
+  getRoutine(routineId: number): Observable <UserRoutine | undefined>{
+    return this.http.get<UserRoutine>(this.routineUrl+`${routineId}`).pipe(
+      catchError( (error) => {
+        console.log(error);
+        return of(undefined);
+      })
+    );
+  }
+
   userRoutine: UserRoutine = {rid:0,name:"name",email:"email"};
   rid?: number;
   name?: string;
@@ -28,6 +38,7 @@ export class RoutinesService {
 
   getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine | undefined>{
     return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`).pipe(
+
       catchError ((error) => {
         console.log(error)
         return of(undefined)
@@ -36,7 +47,7 @@ export class RoutinesService {
   }
 
   getAllUserRoutines(): Observable<UserRoutine[] | undefined>{
-    return this.http.get<UserRoutine[]>(this.userRoutinesUrl).pipe(
+    return this.http.get<UserRoutine[]>(`http://localhost:8080/api/user/${this.userService.getLoggedInUser().email}/routines`).pipe(
       catchError((error) => {
         console.log(error)
         return of(undefined)
@@ -89,5 +100,11 @@ export class RoutinesService {
       name: '',
       email: ''
     };
+  }
+
+  addExerciseToRoutine(rid:number, name:string, set:number, rep:number){
+    console.log(rid);
+    const url = `http://localhost:8080/api/routine/${rid}/exercise?name=${name}&sets=${set}&reps=${rep}`
+    return this.http.post(url, {});
   }
 }

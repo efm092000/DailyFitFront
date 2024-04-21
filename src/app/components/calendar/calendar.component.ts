@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {FormsModule} from "@angular/forms";
-import {Weekly} from "../../interface/weekly";
+import {Weekly} from "../../interfaces/weekly";
 import {ProgressService} from "../../services/progress.service";
 
 @Component({
@@ -40,6 +40,6 @@ export class CalendarComponent {
   }
 
   assignWeeklyToWeek(date: Date, plan: number): void {
-    this.progressService.setWeeklyToWeek(plan, "prueba@gmail.com" ,date);
+    this.progressService.setWeeklyToWeek(plan, date);
   }
 }

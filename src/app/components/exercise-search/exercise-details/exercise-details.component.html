@@ -16,11 +16,13 @@
       </div>
     </div>
   </div>
-   <select name="routine" *ngIf="rid" [(ngModel)]="selectedRid">
-      <option selected value ="">Select a Routine</option>
+  <label for="{{exercise.name}}-routine">Select a routine:</label>
+   <select id="{{exercise.name}}-routine" name="routine" *ngIf="!rid" [(ngModel)]="selectedRid">
       <option [value] ="routine.rid" *ngFor="let routine of routines">{{routine.name}}</option>
-    </select>
-    <button (click)="addExerciseToRoutine()">Add Exercise to Routine</button>
+   </select>
+  <input type="number" [(ngModel)]="sets" placeholder="Sets">
+  <input type="number" [(ngModel)]="reps" placeholder="Repetitions">
+    <button (click)="addExerciseToRoutine(exercise.name)" >Add Exercise to Routine</button>
 </div>
 </body>
 

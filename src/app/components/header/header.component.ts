@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {UserService} from "../../services/user.service";
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -12,5 +13,9 @@ import {RouterLink} from "@angular/router";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  constructor(private userService: UserService) {
+  }
+  logOut(){
+    this.userService.logout();
+  }
 }

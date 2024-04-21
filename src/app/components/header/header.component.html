@@ -1,10 +1,16 @@
 <div class="container-fluid" id="container-header">
   <div id="header-elements">
     <div class="header-logo">
-      <img ngSrc="assets/images/logo.png" id="logo" alt="" height="170" width="170" routerLink="">
+      <img ngSrc="assets/images/logo.png" id="logo" alt="" height="170" width="170" routerLink="/" priority>
+
     </div>
     <div class="search-container">
       <button id="search" routerLink="/search">Search exercises</button>
+    </div>
+    <div class="to-logout">
+      <button (click)="logOut()" routerLink="">
+        LogOut
+      </button>
     </div>
     <div class="to-login">
       <button id="profile-image-button">
