@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Exercise} from "../../interfaces/exercise";
 import {ExerciseService} from "../../services/exercise.service";
