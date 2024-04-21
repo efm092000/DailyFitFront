@@ -1,63 +1,105 @@
 import { Component } from '@angular/core';
-import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { SidebarComponent } from "../sidebar/sidebar.component";
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../footer/footer.component";
+import { UserService } from "../../services/user.service";
+import { Chart } from "chart.js/auto";
+import 'chartjs-adapter-moment';
+import { ProgressService } from "../../services/progress.service";
+import { Progress } from "../../interfaces/progress";
+import { ExerciseService } from "../../services/exercise.service";
+import { NgForOf } from "@angular/common";
+
 
 @Component({
   selector: 'app-progress',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [
+    SidebarComponent,
+    HeaderComponent,
+    FooterComponent,
+    NgForOf
+  ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
 })
 export class ProgressComponent {
-  single = [
-    {
-      name: 'Values',
-      series: [
-        {"name": "2024-04-01T00:00:00.000Z", "value": 65},
-        {"name": "2024-04-02T00:00:00.000Z", "value": 70},
-        {"name": "2024-04-03T00:00:00.000Z", "value": 75},
-        {"name": "2024-04-04T00:00:00.000Z", "value": 80},
-        {"name": "2024-04-05T00:00:00.000Z", "value": 85},
-        {"name": "2024-04-06T00:00:00.000Z", "value": 90},
-        {"name": "2024-04-07T00:00:00.000Z", "value": 95},
-        {"name": "2024-04-08T00:00:00.000Z", "value": 100},
-        {"name": "2024-04-09T00:00:00.000Z", "value": 65},
-        {"name": "2024-04-10T00:00:00.000Z", "value": 70},
-        {"name": "2024-04-11T00:00:00.000Z", "value": 75},
-        {"name": "2024-04-12T00:00:00.000Z", "value": 80},
-        {"name": "2024-04-13T00:00:00.000Z", "value": 85},
-        {"name": "2024-04-14T00:00:00.000Z", "value": 90},
-        {"name": "2024-04-15T00:00:00.000Z", "value": 95},
-        {"name": "2024-04-16T00:00:00.000Z", "value": 100},
-        {"name": "2024-04-17T00:00:00.000Z", "value": 65},
-        {"name": "2024-04-18T00:00:00.000Z", "value": 70},
-        {"name": "2024-04-19T00:00:00.000Z", "value": 75},
-        {"name": "2024-04-20T00:00:00.000Z", "value": 80},
-        {"name": "2024-04-21T00:00:00.000Z", "value": 85},
-        {"name": "2024-04-22T00:00:00.000Z", "value": 90},
-        {"name": "2024-04-23T00:00:00.000Z", "value": 95},
-        {"name": "2024-04-24T00:00:00.000Z", "value": 100},
-        {"name": "2024-04-25T00:00:00.000Z", "value": 65},
-        {"name": "2024-04-26T00:00:00.000Z", "value": 70},
-        {"name": "2024-04-27T00:00:00.000Z", "value": 75},
-        {"name": "2024-04-28T00:00:00.000Z", "value": 80},
-        {"name": "2024-04-29T00:00:00.000Z", "value": 85},
-        {"name": "2024-04-30T00:00:00.000Z", "value": 90}
-      ]
-    }
+  chart: any;
+  private progress?: Progress;
+  protected exercises: string[] = [
+    "Bench Press",
+    "Dumbbell Curl"
   ];
 
-  view: [number, number] = [700, 400];
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Date';
-  showYAxisLabel = true;
-  yAxisLabel = 'Weight';
-  timeline = true;
+  constructor(private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
+  }
 
-  constructor() {
+  ngOnInit(): void {
+  }
+
+  private transformData(data: any) {
+    return data.map((entry: any) => {
+      return {
+        x: entry.date,
+        y: entry.weight
+      }
+    });
+  }
+
+  selectExercise(exercise: string) {
+    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise);
+    this.loadChart()
+  }
+
+  loadChart() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart("canvas", {
+      type: 'line', //this denotes tha type of chart
+      data: {
+        datasets: [{
+          label: this.progress?.exercise,
+          data: this.transformData(this.progress?.data),
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }],
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day'
+            },
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Weight (kg)'
+            }
+          }
+        },
+      }
+    });
   }
 }
