@@ -13,6 +13,9 @@ export class RoutinesService {
   constructor(private http: HttpClient, private userService: UserService) { }
 
   routineUrl: string = 'http://localhost:8080/api/routine/';
+  userRoutinesUrl: string = 'http://localhost:8080/api/user/123@gmail.com/routines';
+  getRoutine(routineId: number): Observable <UserRoutines | undefined>{
+    return this.http.get<UserRoutines>(this.routineUrl+`${routineId}`).pipe(
   userRoutine: UserRoutine = {rid:0,name:"name",email:"email"};
   rid?: number;
   name?: string;
@@ -28,6 +31,7 @@ export class RoutinesService {
 
   getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine | undefined>{
     return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`).pipe(
+      
       catchError ((error) => {
         console.log(error)
         return of(undefined)
