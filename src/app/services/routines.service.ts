@@ -101,4 +101,10 @@ export class RoutinesService {
       email: ''
     };
   }
+
+  addExerciseToRoutine(rid:number, name:string, set:number, rep:number){
+    console.log(rid);
+    const url = `http://localhost:8080/api/routine/${rid}/exercise?name=${name}&sets=${set}&reps=${rep}`
+    return this.http.post(url, {});
+  }
 }

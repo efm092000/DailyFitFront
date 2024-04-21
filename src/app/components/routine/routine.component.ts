@@ -33,12 +33,15 @@ export class RoutineComponent implements OnInit{
 
   ngOnInit(): void {
     this.isEditMode = this.serviceRoutine.isEditMode;
+    this.reloadExercises();
+
+  }
+  reloadExercises(){
     this.serviceRoutine.getRoutineExercises(this.userRoutine.rid).subscribe(
       (exercises) => {
         this.exercises = exercises;
       }
     )
-
   }
 
   toggleMode(): void {
@@ -83,5 +86,6 @@ export class RoutineComponent implements OnInit{
 
   toggleSearch() {
     this.displaySearchExercises = !this.displaySearchExercises;
+    this.reloadExercises();
   }
 }
