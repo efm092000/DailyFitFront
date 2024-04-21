@@ -3,7 +3,7 @@ import {Exercise} from "../../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {RoutinesService} from "../../../services/routines.service";
-import {UserRoutines} from "../../../interfaces/user-routines.interface";
+import {UserRoutine} from "../../../interfaces/user-routines.interface";
 import {ExerciseService} from "../../../services/exercise.service";
 
 @Component({
@@ -29,8 +29,8 @@ export class ExerciseDetailsComponent implements OnInit{
   }
 
   loadRoutineSelector() {
-    this.routineService.getUserRoutines().subscribe(
-      (routines: UserRoutines[] | undefined) => {
+    this.routineService.getAllUserRoutines().subscribe(
+      (routines: UserRoutine[] | undefined) => {
         this.routines = routines;
       },
       (error) => {
