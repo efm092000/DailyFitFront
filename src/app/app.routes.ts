@@ -14,5 +14,6 @@ export const routes: Routes = [
   { path: 'sidebar', loadComponent: () => import('./components/sidebar/sidebar.component').then(m => m.SidebarComponent)},
   { path: 'routine', loadComponent: () => import('./components/routine/routine.component').then (m => m.RoutineComponent)},
   { path: 'today', loadComponent: () => import('./components/today-planning/today-planning.component').then (m => m.TodayPlanningComponent)},
-  { path: 'calendar', loadComponent: () => import('./components/calendar/calendar.component').then (m => m.CalendarComponent)}
+  { path: 'calendar', loadComponent: () => import('./components/calendar/calendar.component').then (m => m.CalendarComponent)},
+  { path: 'progress', loadComponent: () => import('./components/progress/progress.component').then (m => m.ProgressComponent)}
 ];
