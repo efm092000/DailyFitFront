@@ -35,17 +35,6 @@
 #routines-button:active {
     transform: scale(0.9);
 }
-
-#routines-button {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 2em;
-
-}
-
 #routines-button img {
     margin-right: 10px;
 }
@@ -54,15 +43,6 @@
     transform: scale(0.9);
 }
 
-#weekly-button {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 2em;
-
-}
 
 #weekly-button img {
     margin-right: 10px;
@@ -72,7 +52,7 @@ a {
     text-decoration: none;
 }
 
-#progress-button {
+#today-button, #progress-button,#weekly-button,#routines-button {
   display: flex;
   align-items: center;
   padding: 10px;
