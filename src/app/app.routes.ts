@@ -12,7 +12,8 @@ export const routes: Routes = [
 	{ path: 'login', loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)},
 	{ path: 'sign-up', loadComponent: () => import('./components/sign-up/sign-up.component').then(m => m.SignUpComponent)},
   { path: 'sidebar', loadComponent: () => import('./components/sidebar/sidebar.component').then(m => m.SidebarComponent)},
-  { path: 'routine', loadComponent: () => import('./components/routine/routine.component').then (m => m.RoutineComponent)},
+  { path: 'routine', loadComponent: () => import('./components/routine/routine.component').then(m => m.RoutineComponent)},
+  { path: 'progress', loadComponent: () => import('./components/progress/progress.component').then(m => m.ProgressComponent)},
   { path: 'today', loadComponent: () => import('./components/today-planning/today-planning.component').then (m => m.TodayPlanningComponent)},
   { path: 'calendar', loadComponent: () => import('./components/calendar/calendar.component').then (m => m.CalendarComponent)}
 ];

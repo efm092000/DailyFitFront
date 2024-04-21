@@ -1,0 +1,17 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div id="main-container" class="container">
+  <h1 class="text text-primary display-4">Progress Chart</h1>
+  <div class="d-flex flex-column gap-3">
+    <div class="dropdown d-flex justify-content-center">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select an exercise
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item" *ngFor="let exercise of exercises" (click)="selectExercise(exercise)">{{exercise}}</button>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+  </div>
+  <app-footer></app-footer>
+</div>
