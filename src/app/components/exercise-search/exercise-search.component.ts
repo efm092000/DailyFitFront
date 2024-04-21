@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Exercise} from "../../interfaces/exercise";
 import {ExerciseService} from "../../services/exercise.service";
@@ -20,6 +20,7 @@ import {NgxPaginationModule} from "ngx-pagination";
   styleUrl: './exercise-search.component.css'
 })
 export class ExerciseSearchComponent{
+  @Input() rid!: number;
   exercises: Exercise[] = [];
   searchFilters = {
     difficulty: "",

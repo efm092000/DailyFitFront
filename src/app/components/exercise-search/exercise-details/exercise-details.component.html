@@ -16,9 +16,9 @@
       </div>
     </div>
   </div>
-   <select name="routine">
+   <select name="routine" *ngIf="rid" [(ngModel)]="selectedRid">
       <option selected value ="">Select a Routine</option>
-      <option value ="{{routine.rid}}}" *ngFor="let routine of routines">{{routine.name}}</option>
+      <option [value] ="routine.rid" *ngFor="let routine of routines">{{routine.name}}</option>
     </select>
     <button (click)="addExerciseToRoutine()">Add Exercise to Routine</button>
 </div>

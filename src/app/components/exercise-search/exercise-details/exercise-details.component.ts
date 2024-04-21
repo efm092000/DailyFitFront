@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Exercise} from "../../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {RoutinesService} from "../../../services/routines.service";
 import {UserRoutine} from "../../../interfaces/user-routines.interface";
 import {ExerciseService} from "../../../services/exercise.service";
@@ -11,7 +11,8 @@ import {ExerciseService} from "../../../services/exercise.service";
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './exercise-details.component.html',
   styleUrl: './exercise-details.component.css'
@@ -19,7 +20,9 @@ import {ExerciseService} from "../../../services/exercise.service";
 export class ExerciseDetailsComponent implements OnInit{
   routines: UserRoutine[] | undefined;
   @Input() exercise!: Exercise;
+  @Input() rid!: number;
   image: String | undefined;
+  selectedRid: number | undefined;
   constructor(private routineService: RoutinesService,
               private exerciseService: ExerciseService) {
   }
@@ -39,6 +42,9 @@ export class ExerciseDetailsComponent implements OnInit{
     );
   }
   addExerciseToRoutine(){
+    if(this.rid){
+      return;
+    }
     return;
   }
   getImage(): void {
