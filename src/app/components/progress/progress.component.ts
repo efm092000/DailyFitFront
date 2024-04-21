@@ -5,6 +5,8 @@ import { FooterComponent } from "../footer/footer.component";
 import { UserService } from "../../services/user.service";
 import { Chart } from "chart.js/auto";
 import 'chartjs-adapter-moment';
+import { ProgressService } from "../../services/progress.service";
+import { Progress } from "../../interfaces/progress";
 
 @Component({
   selector: 'app-progress',
@@ -19,11 +21,14 @@ import 'chartjs-adapter-moment';
 })
 export class ProgressComponent {
   chart: any;
+  private progress?: Progress;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private progressService: ProgressService) {
   }
 
   ngOnInit(): void {
+    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, 'Squats');
+    console.log(this.progress)
     this.createChart();
   }
 
@@ -33,21 +38,8 @@ export class ProgressComponent {
       type: 'line', //this denotes tha type of chart
       data: {
         datasets: [{
-          label: 'Demo',
-          data: [
-            {
-              x: '2015-03-15',
-              y: 12
-            },
-            {
-              x: '2015-03-25',
-              y: 21
-            },
-            {
-              x: '2015-04-25',
-              y: 32
-            }
-          ],
+          label: this.progress?.exercise,
+          data: this.progress?.data,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
