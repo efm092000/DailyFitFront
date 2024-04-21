@@ -85,7 +85,7 @@ export class WeeklyComponent implements OnInit {
 
   async addWeeklyPlan(name: string): Promise<void> {
     console.log("1");
-    this.weeklyService.createNewWeeklyPlan(`123@gmail.com`, name).subscribe(() => {
+    this.weeklyService.createNewWeeklyPlan(name).subscribe(() => {
         this.loadWeeklyPlans();
       },
       (error) => {

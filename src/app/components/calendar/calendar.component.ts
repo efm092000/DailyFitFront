@@ -40,6 +40,6 @@ export class CalendarComponent {
   }
 
   assignWeeklyToWeek(date: Date, plan: number): void {
-    this.progressService.setWeeklyToWeek(plan, "prueba@gmail.com" ,date);
+    this.progressService.setWeeklyToWeek(plan, date);
   }
 }
