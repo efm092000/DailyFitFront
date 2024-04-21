@@ -20,4 +20,7 @@ export class ExerciseService {
     if (filters.muscleGroup) {filter = filter + `muscleGroup=${filters.muscleGroup}`;}
     return this.http.get<Exercise[]>(this.apiUrl + filter);
   }
+  getImage(image: String){
+    return this.http.get(this.apiUrl + `/image?gif=${image}`, { responseType: 'blob' })
+  }
 }

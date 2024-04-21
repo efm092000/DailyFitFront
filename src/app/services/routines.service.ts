@@ -1,7 +1,7 @@
 import { Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, Observable, of} from "rxjs";
-import { UserRoutines} from "../interfaces/user-routines.interface";
+import { catchError, Observable, of} from "rxjs";
+import { UserRoutine} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
 
 @Injectable({
@@ -10,22 +10,33 @@ import { Routine } from "../interfaces/routine.interface";
 
 export class RoutinesService {
   constructor(private http: HttpClient) { }
-  private routineSource = new BehaviorSubject<number>(0);
-  routine$ = this.routineSource.asObservable();
 
-
-  routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/prueba@gmail.com/routines';
-  getRoutine(routineId: number): Observable <UserRoutines | undefined>{
-    return this.http.get<UserRoutines>(this.routineUrl+`${routineId}`).pipe(
+  routineUrl: string = 'http://localhost:8080/api/routine/';
+  userRoutine: UserRoutine = {rid:0,name:"name",email:"email"};
+  rid?: number;
+  name?: string;
+  email?: string;
+  routine?: Routine;
+  isEditMode: boolean = false;
+
+  setUserRoutine(rid: number, name: string, email: string){
+    this.userRoutine.rid = rid;
+    this.userRoutine.name = name;
+    this.userRoutine.email = email;
+  }
+
+  getUserRoutine(userRoutine: UserRoutine): Observable <UserRoutine | undefined>{
+    return this.http.get<UserRoutine>(this.routineUrl+`${userRoutine.rid}`).pipe(
       catchError ((error) => {
         console.log(error)
         return of(undefined)
     })
     )
   }
-  getUserRoutines(): Observable<UserRoutines[] | undefined>{
-    return this.http.get<UserRoutines[]>(this.userRoutinesUrl).pipe(
+
+  getAllUserRoutines(): Observable<UserRoutine[] | undefined>{
+    return this.http.get<UserRoutine[]>(this.userRoutinesUrl).pipe(
       catchError((error) => {
         console.log(error)
         return of(undefined)
@@ -33,11 +44,9 @@ export class RoutinesService {
     )
   }
 
-  loadRoutine(routineId: number){
-    this.routineSource.next(routineId);
-  }
   getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
-    return this.http.get<Routine[]>(this.routineUrl+`${routineID}/exercises`).pipe(
+    this.routineUrl = `http://localhost:8080/api/routine/${routineID}/exercises`;
+    return this.http.get<Routine[]>(this.routineUrl).pipe(
       catchError( (err) => {
         console.log(err);
         return of(undefined);
@@ -47,22 +56,38 @@ export class RoutinesService {
 
   deleteRoutine(rid: number | undefined): void {
     this.routineUrl = `http://localhost:8080/api/routine/${rid}`;
-    this.http.delete(this.routineUrl).subscribe(() => {
-      alert("test");
-    });
+    this.http.delete(this.routineUrl).subscribe(
+      response => console.log(response),
+    );
   }
 
-  editRoutine(routine: UserRoutines): void {
-    this.routineUrl = `http://localhost:8080/api/routine/${routine.rid}?name=${routine.name}`;
-    this.http.put(this.routineUrl, {}).subscribe(
-        response => console.log(response),
-      );
+  editRoutine(rid: number, name: string): Observable<Routine | undefined> {
+    this.routineUrl = `http://localhost:8080/api/routine/${rid}?name=${name}`;
+    return this.http.put<Routine>(this.routineUrl, {rid: rid, name: name, email: this.userRoutine.email}).pipe(
+      catchError( (err) => {
+        console.log(err);
+        return of(undefined);
+      })
+    )
   }
 
-/*
-  createRoutine(): UserRoutines {
-    this.http.post(this.routineUrl+'/NewRoutine', {},{responseType: "json"} );
-    return
+  deleteExerciseFromRoutine(rid: number, name: string, sets: number, reps: number) {
+    this.routineUrl = `http://localhost:8080/api/routine/${rid}/exercises?name=${name}&sets=${sets}&reps=${reps}`;
+    this.http.delete(this.routineUrl).subscribe(
+      response => console.log(response),
+    );
   }
-  */
+
+  createRoutine(name: string, email: string): Observable<UserRoutine> {
+    this.routineUrl = `http://localhost:8080/api/routine/${name}?email=${email}`;
+    return this.http.post<UserRoutine>(this.routineUrl, {});
+  }
+
+  clearUserRoutine(): void {
+    this.userRoutine = {
+      rid: 0,
+      name: '',
+      email: ''
+    };
+  }
 }

@@ -1,28 +1,39 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Exercise} from "../../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {RoutinesService} from "../../../services/routines.service";
-import {UserRoutines} from "../../../interfaces/user-routines.interface";
+import {UserRoutine} from "../../../interfaces/user-routines.interface";
+import {ExerciseService} from "../../../services/exercise.service";
 
 @Component({
   selector: 'app-exercise-details',
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './exercise-details.component.html',
   styleUrl: './exercise-details.component.css'
 })
 export class ExerciseDetailsComponent implements OnInit{
-  routines: UserRoutines[] | undefined;
+  routines: UserRoutine[] | undefined;
   @Input() exercise!: Exercise;
-  constructor(private routineService: RoutinesService) {
+  @Input() rid!: number;
+  image: String | undefined;
+  selectedRid: number | undefined;
+  constructor(private routineService: RoutinesService,
+              private exerciseService: ExerciseService) {
   }
   ngOnInit(): void {
-    this.routineService.getUserRoutines().subscribe(
-      (routines: UserRoutines[] | undefined) => {
+    this.loadRoutineSelector();
+    this.getImage();
+  }
+
+  loadRoutineSelector() {
+    this.routineService.getAllUserRoutines().subscribe(
+      (routines: UserRoutine[] | undefined) => {
         this.routines = routines;
       },
       (error) => {
@@ -31,6 +42,19 @@ export class ExerciseDetailsComponent implements OnInit{
     );
   }
   addExerciseToRoutine(){
+    if(this.rid){
+      return;
+    }
     return;
+  }
+  getImage(): void {
+    this.exerciseService.getImage(this.exercise.gif).subscribe(
+      response => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.image = reader.result as string;
+        };
+        reader.readAsDataURL(response);
+      });
   }
 }

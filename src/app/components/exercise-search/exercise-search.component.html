@@ -46,15 +46,20 @@
 
 
   <section id="search-results" class="container-fluid">
-    <div class="row row-cols-4 justify-content-between">
-      <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises">
-        <p class="exercise-search-result-name">{{entry.name}}</p>
-        <p class="exercise-search-result-muscle">{{entry.muscleGroup}}</p>
+    <div class="row row-cols-4 justify-content-around">
+      <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises | paginate: { itemsPerPage: 5, currentPage: page } ">
+        <p class="exercise-search-result-name">Name: {{entry.name}}</p>
+        <p class="exercise-search-result-muscle">MuscleGroup: {{entry.muscleGroup}}</p>
       </article>
     </div>
   </section>
   <dialog id="{{entry.name.split(' ').join('_')}}" *ngFor="let entry of exercises">
-    <app-exercise-details [exercise]="entry"></app-exercise-details>
+    <app-exercise-details [exercise]="entry" [rid]="rid"></app-exercise-details>
     <button (click)="closeDialog(entry)">Close</button>
   </dialog>
 </div>
+
+<pagination-controls (pageChange)="page = $event"
+                     previousLabel= "Previous"
+                     nextLabel="Next" >
+</pagination-controls>

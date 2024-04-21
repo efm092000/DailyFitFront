@@ -10,6 +10,7 @@ import { Progress } from "../../interfaces/progress";
 import { ExerciseService } from "../../services/exercise.service";
 import { NgForOf } from "@angular/common";
 
+
 @Component({
   selector: 'app-progress',
   standalone: true,

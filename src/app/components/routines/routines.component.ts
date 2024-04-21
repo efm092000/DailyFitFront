@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import { RouterLink } from "@angular/router";
 import {JsonPipe, NgFor, NgIf} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
-import {UserRoutines} from "../../interfaces/user-routines.interface";
-import {Routine} from "../../interfaces/routine.interface";
+import {UserRoutine} from "../../interfaces/user-routines.interface";
 import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
+
 
 
 @Component({
@@ -23,32 +23,47 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
   styleUrl: './routines.component.css'
 })
 export class RoutinesComponent implements OnInit{
-  userRoutines?: UserRoutines[] = [];
-  routine?: Routine;
-  rid?: number
+  userRoutines?: UserRoutine[] = [];
 
-  constructor(private serviceRoutines: RoutinesService) {}
+
+  constructor(private serviceRoutines: RoutinesService) {
+  }
 
   ngOnInit(): void {
-    this.serviceRoutines.getUserRoutines().subscribe(
+    this.serviceRoutines.getAllUserRoutines().subscribe(
       {
-        next: (routines: UserRoutines[] | undefined) => {
+        next: (routines: UserRoutine[] | undefined) => {
           this.userRoutines = routines;
         },
         error: (err) => {
           console.log(err);
         }
-      })
+      });
   }
 
-  onClick(routineId: number){
-    this.serviceRoutines.loadRoutine(routineId);
-  }
-/*
-  createRoutine() {
+  routineAccess(rid: number, name: string, email: string){
+    console.log(rid);
+    this.serviceRoutines.setUserRoutine(rid,name,email);
 
   }
 
- */
+  routineGenerator(): void{
+    this.serviceRoutines.clearUserRoutine();
+    this.serviceRoutines.isEditMode = true;
+    this.serviceRoutines.createRoutine("NewRoutine", "prueba@gmail.com").subscribe({
+      next: (response: UserRoutine) => {
+        console.log('Rutina creada:', response);
+        this.serviceRoutines.userRoutine.rid = response.rid;
+        this.serviceRoutines.userRoutine.name = response.name;
+        this.serviceRoutines.userRoutine.email = response.email;
+
+
+      },
+      error: error => {
+        console.error('Error al crear la rutina:', error);
+      }
+    });
+
+  }
 }
 
