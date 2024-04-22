@@ -1,0 +1,28 @@
+<div class="form container d-flex flex-column vh-100 justify-content-center align-items-center">
+    <p class="text text-primary text-center display-1">Login</p>
+    <form class="d-flex flex-column gap-2" [formGroup]="formLogin">
+        <div class="input row row-cols-2 align-items-center justify-content-center">
+            <div class="col-1">
+                <i class="bi-envelope"></i>
+            </div>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="email" placeholder="Enter email">
+            </div>
+            <div class="alert alert-danger mt-2" *ngIf="email.invalid && password.touched">
+                <p>The email is not valid</p>
+            </div>
+        </div>
+        <div class="input row row-cols-2 align-items-center justify-content-center">
+            <div class="col-1">
+                <i class="bi-key"></i>
+            </div>
+            <div class="col-10">
+                <input class="form-control" formControlName="password" type="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="row">
+            <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/sign-up">here</span></p>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="formLogin.invalid" (click)="login()">Login</button>
+    </form>
+</div>

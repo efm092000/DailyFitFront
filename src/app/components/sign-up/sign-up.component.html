@@ -1,0 +1,70 @@
+<router-outlet></router-outlet>
+<div class="form container-fluid d-flex flex-column vh-100 justify-content-center align-items-center">
+  <p class="text text-primary text-center display-1">Sign Up</p>
+
+    <form class="d-flex flex-column gap-2" [formGroup]="formSignUp">
+      <div class="row row-cols-1 row-cols-lg-2 align-items-center">
+        <div class="col col-lg-6">
+          <div class="row row-cols-2 align-items-center justify-content-center">
+            <div class="col-1">
+              <i class="bi-envelope"></i>
+            </div>
+            <div class="col-10">
+              <input type="text" class="form-control" formControlName="email" placeholder="Enter email">
+            </div>
+          </div>
+          <div class="col alert alert-danger mt-2" *ngIf="email.invalid && email.touched">
+            <span>The email is not valid</span>
+          </div>
+
+          <div class="row row-cols-2 align-items-center justify-content-center mt-2">
+            <div class="col-1 col-lg-1">
+              <i class="bi-person"></i>
+            </div>
+            <div class="col-10">
+              <input class="form-control" formControlName="username" type="text" placeholder="Enter username">
+            </div>
+          </div>
+          <div class="alert alert-danger mt-2" *ngIf="username.invalid && username.touched">
+            <span>Username cannot be empty</span>
+          </div>
+
+          <div class="row row-cols-2 align-items-center justify-content-center mt-2">
+            <div class="col-1">
+              <i class="bi-key"></i>
+            </div>
+            <div class="col-10">
+              <input class="form-control" formControlName="password" type="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="row row-cols-2 align-items-center justify-content-center mt-2">
+            <div class="col-1">
+              <i class="bi-key"></i>
+            </div>
+            <div class="col-10">
+              <input class="form-control" formControlName="confirmPassword" type="password"
+                     placeholder="Confirm password">
+            </div>
+          </div>
+          <div *ngIf="!passwordsMatch() && confirmPassword.dirty" class="text-danger">
+            The passwords do not match
+          </div>
+        </div>
+        <div class="col col-lg-6">
+          <ul id="passwordRequirements" class="list-group">
+            <li class="list-group-item" [ngStyle]="{ 'background-color': password.value.length >= 8 ? 'DarkSeaGreen' : 'LightCoral' }">8 characters</li>
+            <li class="list-group-item" [ngStyle]="{ 'background-color': hasCapitalLetter() ? 'DarkSeaGreen' : 'LightCoral' }">One uppercase letter</li>
+            <li class="list-group-item" [ngStyle]="{ 'background-color': hasLowercaseLetter() ? 'DarkSeaGreen' : 'LightCoral' }">One lowercase letter</li>
+            <li class="list-group-item" [ngStyle]="{ 'background-color': hasNumber() ? 'DarkSeaGreen' : 'LightCoral' }">One number</li>
+            <li class="list-group-item" [ngStyle]="{ 'background-color': hasSpecialCharacter() ? 'DarkSeaGreen' : 'LightCoral' }">One special character</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/login">here</span>
+        </p>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="formSignUp.invalid || !passwordsMatch()" (click)="signUp()">Sign Up</button>
+    </form>
+
+  </div>

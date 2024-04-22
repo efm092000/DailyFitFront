@@ -1,0 +1,63 @@
+#main-routine {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+#routines-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.routine {
+  background-color: #fff;
+  border: 2px solid #406E9B;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.routine:hover {
+  transform: translateY(-5px);
+}
+
+button {
+  background-color: #406E9B;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #304F78;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-routine-btn-container {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.create-routine-btn {
+  background-color: #406E9B;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 16px;
+}
+
+.create-routine-btn:hover {
+  background-color: #304F78;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

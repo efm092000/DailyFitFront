@@ -1,0 +1,12 @@
+<div class="form-group">
+  <form (ngSubmit)="onSubmit()">
+    <label for="weekSelector">Selecciona una semana:</label>
+    <input type="text" class="form-control" id="weekSelector" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" (bsValueChange)="onDateChanged($event)">
+
+    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan">
+      <option selected value="{{weekly.wid}}" *ngFor="let weekly of userWeeklies">{{weekly.name}}</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
