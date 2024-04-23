@@ -28,20 +28,28 @@
   padding: 1em;
 }
 
-.weekly-add-routine-button {
+.weekly-edit-button{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  padding: 2em 4em;
   width: 5em;
-  height: auto;
-  background-color: rgba(0, 90, 150, 0.16);
-  border-radius: 1em;
+  background-color:#406E9B;
+  color: white;
+  border-radius: 11em;
   border: none;
   cursor: pointer;
 }
-
+.weekly-add-routine-button, .weekly-add-weekly-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  background-color:#406E9B;
+  color: white;
+  border-radius: 11em;
+  border: none;
+  cursor: pointer;
+}
 #schedule {
   display: flex;
   justify-content: space-between;

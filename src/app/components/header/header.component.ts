@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import { Component, Renderer2} from '@angular/core';
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
 @Component({
@@ -7,15 +7,32 @@ import {UserService} from "../../services/user.service";
   standalone: true,
   imports: [
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private userService: UserService) {
+  loggedIn: boolean = false;
+  constructor(private userService: UserService, private renderer: Renderer2) {
   }
+
   logOut(){
     this.userService.logout();
+    this.loggedIn = false;
+  }
+  logIn(){
+
+    this.loggedIn = true;
+  }
+
+  loadMenuToggle() {
+    const dropdownMenu = document.querySelector(".dropdown-menu");
+    if (dropdownMenu) {
+      const currentDisplay = window.getComputedStyle(dropdownMenu).display;
+      const newDisplay = currentDisplay === 'none' ? 'block' : 'none';
+      this.renderer.setStyle(dropdownMenu, 'display', newDisplay);
+    }
   }
 }

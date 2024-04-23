@@ -13,24 +13,21 @@
     </div>
   </div>
 
-  <button (click)="toggleEditMode()" class="weekly-add-routine-button">{{ editingMode ? 'Save' : 'Edit' }}</button>
+  <button (click)="toggleEditMode()" class="weekly-edit-button">{{ editingMode ? 'Save' : 'Edit' }}</button>
 
 
-  <div *ngIf="editingMode" class="col align-items-center">
-    <div class="row row-cols-2 align-items-center justify-content-between">
-      <button (click)="togglePopup()" class="weekly-add-routine-button col-1">Add Routine</button>
-      <button (click)="toggleInput()" class="weekly-add-routine-button col-2">Add New Weekly Plan</button>
+  <div *ngIf="editingMode" class="align-items-center">
+    <div class="row row-cols-2 align-items-center">
+      <button (click)="togglePopup()" class="weekly-add-routine-button">Add Routine</button>
+      <button (click)="toggleInput()" class="weekly-add-weekly-button">Add New Weekly Plan</button>
     </div>
   </div>
 
-  <div *ngIf="showInput" class="add-weekly-name-input col-1 align-items-center justify-content-between">
-    <div class="d-flex col justify-content-between">
+  <div *ngIf="showInput" class="add-weekly-name-input">
       <div class="input-container">
         <input type="text" class="weekly-title" [(ngModel)] = "newWeeklyName">
       </div>
-      <button (click)="addWeeklyPlan(newWeeklyName)" id="weekly-input-btn-add">Add</button>
-    </div>
-
+      <button (click)="addWeeklyPlan(newWeeklyName)" id="weekly-input-btn-add" class="weekly-add-weekly-button" >Add</button>
   </div>
 
   <div *ngIf="showPopup" class="add-routine-popup">
@@ -46,6 +43,6 @@
         <option *ngFor="let i = index, let routine of routinesByUser;" [value]="i">{{ routine.name}}</option>
       </select>
     </div>
-    <button (click)="addRoutine()" id="weekly-popup-btn-add">Add</button>
+    <button (click)="addRoutine()" id="weekly-popup-btn-add" class="weekly-add-weekly-button" >Add</button>
   </div>
 </div>
