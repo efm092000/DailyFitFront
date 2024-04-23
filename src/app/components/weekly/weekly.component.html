@@ -1,3 +1,4 @@
+
 <div class="weekly-page d-flex flex-column col-1 align-items-center">
   <select class="weekly-plans-selector" [(ngModel)]="selectedWeeklyPlanIndex" (change) = "onWeeklyPlanChange()">
     <option *ngFor="let entry of weeklyPlans, let i = index" [value]="i" >{{ entry.name }}</option>

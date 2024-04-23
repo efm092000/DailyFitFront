@@ -37,12 +37,13 @@ export class WeeklyComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWeeklyPlans();
-    this.loadRoutines()
   }
 
   loadWeeklyPlans(): void {
     this.weeklyService.getWeeklyPlans().subscribe((weeklyPlans: Weekly[]) => {
       this.weeklyPlans = weeklyPlans;
+      this.loadRoutines();
+      this.onWeeklyPlanChange();
     }, (error) => {
       console.error('Error al obtener los weeklies:', error);
     });
