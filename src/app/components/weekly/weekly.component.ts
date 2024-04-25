@@ -5,6 +5,7 @@ import { UserRoutine} from '../../interfaces/user-routines.interface';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RoutinesService} from "../../services/routines.service";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 
 @Component({
@@ -14,7 +15,8 @@ import {RoutinesService} from "../../services/routines.service";
   imports: [
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    SidebarComponent
   ],
   styleUrls: ['./weekly.component.css']
 })

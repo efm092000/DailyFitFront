@@ -2,3 +2,16 @@
   margin-top: 20px;
   margin-left: 15em;
 }
+.progress-button{
+  width: 10em;
+  height: 3em;
+  background-color:#406E9B;
+  color: white;
+  border-radius: 11em;
+  border: none;
+  cursor: pointer;
+}
+
+.progress-title {
+  color: #000000;
+}
