@@ -7,35 +7,23 @@
     <div class="search-filters">
       <select [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
         <option selected value="">Muscle Group?</option>
-        <option value="Chest">Chest</option>
-        <option value="Upper Arms">Back</option>
-        <option value="Thigh">Thigh</option>
-        <option value="Calf">Calf</option>
-        <option value="Forearms">Forearms</option>
-        <option value="Shoulders">Shoulders</option>
-        <option value="Hips">Hips</option>
+        <option value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
       </select>
 
       <select [(ngModel)]="searchFilters.material" name = "material">
         <option selected value ="">Material needed?</option>
-        <option value="true">Material needed</option>
-        <option value="false">Material not needed</option>
+        <option value="{{material.value}}" *ngFor="let material of materialFilters">{{material.name}}</option>
       </select>
 
       <select [(ngModel)]="searchFilters.type" name="type">
         <option selected value="">Type?</option>
-        <option value="Push">Push</option>
-        <option value="Pull">Pull</option>
-        <option value="Hypertrofy">Hypertrofy</option>
+        <option value="{{type}}" *ngFor="let type of typeFilters">{{type}}</option>
       </select>
 
 
       <select [(ngModel)]="searchFilters.difficulty" name="difficulty">
         <option selected value="">Difficulty?</option>
-        <option value="1">Easy</option>
-        <option value="2">Medium</option>
-        <option value="3">Hard</option>
-        <option value="4">Super Hard</option>
+        <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
       </select>
     </div>
 
