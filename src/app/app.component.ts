@@ -9,10 +9,11 @@ import { LoginComponent } from "./components/login/login.component";
 import {RoutineComponent} from "./components/routine/routine.component";
 import {ExerciseSearchComponent} from "./components/exercise-search/exercise-search.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
+import {SubscriptionComponent} from "./components/subscription/subscription.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, PruebaComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent, SidebarComponent],
+  imports: [HeaderComponent, PruebaComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent, SidebarComponent, SubscriptionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
