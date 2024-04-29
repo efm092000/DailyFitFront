@@ -9,6 +9,7 @@ import { ProgressService } from "../../services/progress.service";
 import { Progress } from "../../interfaces/progress";
 import { ExerciseService } from "../../services/exercise.service";
 import { NgForOf } from "@angular/common";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -31,10 +32,13 @@ export class ProgressComponent {
     "Dumbbell Curl"
   ];
 
-  constructor(private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
+  constructor(private router: Router, private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
+    if (!this.userService.getLoggedInUser()) {
+      this.router.navigate(['/login'])
+    }
   }
 
   private transformData(data: any) {
