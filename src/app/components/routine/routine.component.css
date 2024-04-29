@@ -54,9 +54,18 @@ td {
   flex-direction: column;
 }
 
-.button-container{
-  flex-direction: row;
-  text-align: center;
+.routine-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10em;
+  height: 2em;
+  margin: 1em 0;
+  background-color:#406E9B;
+  color: white;
+  border-radius: 11em;
+  border: none;
+  cursor: pointer;
 }
 
 .add-exercise-button:hover {

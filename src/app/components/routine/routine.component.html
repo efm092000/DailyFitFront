@@ -1,5 +1,5 @@
 <div class="container" *ngIf="!displaySearchExercises">
-  <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
+  <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name" class="form-control"
          placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
   <p *ngIf="!isEditMode">{{userRoutine.name}}</p>
   <table id="table">
@@ -24,11 +24,11 @@
       </tr>
     </tbody>
   </table>
-  <div id="edit-button">
-    <button (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
-    <button (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
-    <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
-    <button (click)="goBack()" routerLink="/routines">Go Back</button>
+  <div class="d-flex justify-content-center">
+    <button (click)="saveRoutineAction()" *ngIf="isEditMode" class="routine-button">Save Routine</button>
+    <button (click)="editRoutineAction()" *ngIf="!isEditMode" class="routine-button">Edit Routine</button>
+    <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode" class="routine-button">Delete Routine</button>
+    <button (click)="goBack()" routerLink="/routines" class="routine-button">Go Back</button>
   </div>
 </div>
 
