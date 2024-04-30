@@ -1,17 +1,22 @@
-<div id="left-sidebar-routine" class="sidebar-items">
+<div class="left-sidebar-routine sidebar-items" [ngClass]="{'hidden': hideElements}">
+  <button id="hide-sidebar-button" (click)="hideSidebar()">
+    <img class="sidebar-icons" src='{{image}}' id="arrow" alt="">
+  </button>
     <a routerLink="/routines"><button id="routines-button">
     <img class="sidebar-icons" src="/assets/images/routines-icon.jpg" id="logo" alt="">
-    Routines
+    <span *ngIf="!hideElements">Routines</span>
     </button></a>
     <a routerLink="/weekly"><button id="weekly-button">
         <img class="sidebar-icons" src="/assets/images/barbell.png" id="barbell" alt="">
-        Weekly
+        <span *ngIf="!hideElements">Weekly</span>
     </button></a>
   <a routerLink="/progress"><button id="progress-button">
-    Progress
+    <img class="sidebar-icons" src="assets/images/graph-icon.png" id="progress" alt="">
+    <span *ngIf="!hideElements">Progress</span>
   </button></a>
   <a routerLink="/today"><button id="today-button">
-    Today
+    <img class="sidebar-icons" src="assets/images/today.png" id="today" alt="">
+    <span *ngIf="!hideElements">Today</span>
   </button></a>
 
 </div>
