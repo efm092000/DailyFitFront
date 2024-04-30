@@ -1,6 +1,6 @@
 .sidebar-items {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     width: max-content;
     gap: 1em;
 }
@@ -11,26 +11,21 @@
 }
 
 #left-sidebar-routine {
-    p {
-        font-size: 2em;
-    }
+  p {
+    font-size: 2em;
+  }
 
-    display: flex;
-    flex-direction: column;
-    border-right: 4px solid #195DA2;
+  display: flex;
+  flex-direction: column;
+  border-right: 4px solid #195DA2;
 
-    padding-top: 4em;
-    padding-left: 2em;
-    padding-right: 2em;
-    width: 15em;
+  padding-top: 4em;
+  padding-left: 1em;
+  padding-right: 2em;
 
-    height: 100%;
-    background-color: white;
-    z-index: 1;
-    left: 0;
-    position: fixed;
+  height: 100%;
+  background-color: white;
 }
-
 
 #routines-button:active {
     transform: scale(0.9);

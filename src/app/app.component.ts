@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {HeaderComponent} from "./components/header/header.component";
-import {PruebaComponent} from "./components/prueba/prueba.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import { HomePageComponent } from './components/home-page/home-page.component';
 import {RouterModule } from '@angular/router';
@@ -11,7 +10,7 @@ import {ExerciseSearchComponent} from "./components/exercise-search/exercise-sea
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, PruebaComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent],
+  imports: [HeaderComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
