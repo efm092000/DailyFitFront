@@ -7,7 +7,7 @@
         Select an exercise
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <button class="dropdown-item" *ngFor="let exercise of exercises" (click)="selectExercise(exercise)">{{exercise}}</button>
+        <button class="dropdown-item" *ngFor="let exercise of exercises" (click)="onSelectExercise(exercise)">{{exercise}}</button>
       </div>
     </div>
     <canvas id="canvas"></canvas>
