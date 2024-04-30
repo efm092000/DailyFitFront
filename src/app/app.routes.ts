@@ -15,56 +15,24 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: HomePageComponent}]
+    children: [
+      { path: '', component: HomePageComponent },
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'details', component: ExerciseDetailsComponent },
+      { path: 'progress', component: ProgressComponent },
+      { path: 'routine', component: RoutineComponent },
+      { path: 'routines', component: RoutinesComponent },
+      { path: 'search', component: ExerciseSearchComponent },
+      { path: 'today', component: TodayPlanningComponent },
+      { path: 'weekly', component: WeeklyComponent },
+    ]
   },
   {
-    path: 'weekly',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: WeeklyComponent}]
-  },
-  {
-    path: 'search',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: ExerciseSearchComponent}]
-  },
-  {
-    path: 'details',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: ExerciseDetailsComponent}]
-  },
-  {
-    path: 'routines',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: RoutinesComponent}]
-  },
-  {
-    path: 'sign-up',
+    path: '',
     loadComponent: () => import('./components/header-only-layout/header-only-layout.component').then(m => m.HeaderOnlyLayoutComponent),
-    children: [{path: '', component: SignUpComponent}]
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./components/header-only-layout/header-only-layout.component').then(m => m.HeaderOnlyLayoutComponent),
-    children: [{path: '', component: LoginComponent}]
-  },
-  {
-    path: 'routine',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: RoutineComponent}]
-  },
-  {
-    path: 'progress',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: ProgressComponent}]
-  },
-  {
-    path: 'today',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: TodayPlanningComponent}]
-  },
-  {
-    path: 'calendar',
-    loadComponent: () => import('./components/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
-    children: [{path: '', component: CalendarComponent}]
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'sign-up', component: SignUpComponent },
+    ]
   },
 ];

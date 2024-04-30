@@ -17,7 +17,4 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrl: './main-layout.component.css'
 })
 export class MainLayoutComponent {
-  ngOnInit(): void {
-    console.log("Main layout component initialized");
-  }
 }
