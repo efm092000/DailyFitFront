@@ -1,14 +1,14 @@
 <div class="container" *ngIf="!displaySearchExercises">
-  <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
+  <input *ngIf="isEditMode" name="routine-name"
          placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
-  <p *ngIf="!isEditMode">{{userRoutine.name}}</p>
-  <table id="table">
+  <p *ngIf="!isEditMode" class="title">{{userRoutine.name}}</p>
+  <table id="table" class="mt-4">
     <thead>
       <tr>
         <th>Exercises</th>
         <th>Sets</th>
         <th>Repetitions</th>
-        <td class="delete-exercise-column" *ngIf="isEditMode"></td>
+        <td class="delete-exercise-column mt-3" *ngIf="isEditMode"></td>
       </tr>
     </thead>
     <tbody>
@@ -24,11 +24,11 @@
       </tr>
     </tbody>
   </table>
-  <div id="edit-button">
-    <button (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
-    <button (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
-    <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
-    <button (click)="goBack()" routerLink="/routines">Go Back</button>
+  <div id="edit-buttons" class="p-3 d-flex align-items-center justify-content-between">
+    <button class="routine-buttons button-small mx-auto" (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="goBack()" routerLink="/routines">Go Back</button>
   </div>
 </div>
 

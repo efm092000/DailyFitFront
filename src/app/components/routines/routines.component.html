@@ -1,11 +1,11 @@
 <app-sidebar></app-sidebar>
-<div id="main-routine" class="d-flex flex-column align-items-center justify-content-between">
-  <div id="routines-container" class="grid-container row row-cols-3 g-3">
-    <div *ngFor="let userRoutine of userRoutines" class="routine col">
-      <button (click)="routineAccess(userRoutine.rid, userRoutine.name, userRoutine.email)" routerLink="/routine">{{ userRoutine.name }}</button>
+<div class="d-flex flex-column align-items-center justify-content-between">
+  <div id="routines-container" class="grid-container justify-content-between d-grid row-cols-4 gap-4">
+    <div *ngFor="let userRoutine of userRoutines" class="col p-3" id="routine-decor">
+      <button id="routine-access" class="button-small" (click)="routineAccess(userRoutine.rid, userRoutine.name, userRoutine.email)" routerLink="/routine">{{ userRoutine.name }}</button>
     </div>
   </div>
-  <div  class="create-routine-btn-container">
-    <button class="create-routine-btn" (click)="routineGenerator()" routerLink="/routine">Create routine</button>
+  <div  class="align-text-center pt-4">
+    <button class="button" (click)="routineGenerator()" routerLink="/routine">Create routine</button>
   </div>
 </div>

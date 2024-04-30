@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
-import { PruebaComponent } from "./components/prueba/prueba.component";
-import {WeeklyComponent} from "./components/weekly/weekly.component";
 
 export const routes: Routes = [
-  {path: 'prueba', component:PruebaComponent},
   { path: '', loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent)},
   { path: 'weekly', loadComponent: () => import('./components/weekly/weekly.component').then(m => m.WeeklyComponent)},
   { path: 'search', loadComponent: () => import('./components/exercise-search/exercise-search.component').then(m => m.ExerciseSearchComponent)},
