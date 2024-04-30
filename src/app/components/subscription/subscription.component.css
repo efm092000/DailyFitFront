@@ -5,3 +5,7 @@ input {
 select {
   margin: 5px;
 }
+
+h1 {
+  color: #195DA2;
+}
