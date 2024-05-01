@@ -15,9 +15,7 @@ table:hover {
 th,
 td {
   padding: 12px;
-  text-align: center;
   font-size: 16px;
-  border: 2px solid #406E9B;
 }
 
 .delete-exercise-column {
@@ -35,19 +33,6 @@ td {
   cursor: pointer;
 }
 
-
-.container{
-  display: flex;
-  width: 468px;
-  height: 600px;
-  right: 50%;
-  flex-direction: column;
-}
-
-.button-container{
-  flex-direction: row;
-  text-align: center;
-}
 
 .add-exercise-button:hover {
   background-color: rgb(214, 214, 214);

@@ -1,26 +1,26 @@
-<div class="container" *ngIf="!displaySearchExercises">
+<div class="page d-flex flex-column align-items-center" *ngIf="!displaySearchExercises">
   <input *ngIf="isEditMode" name="routine-name"
          placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
   <p *ngIf="!isEditMode" class="title">{{userRoutine.name}}</p>
-  <table id="table" class="mt-4">
+  <table id="table" class="">
     <thead>
       <tr>
-        <th>Exercises</th>
-        <th>Sets</th>
-        <th>Repetitions</th>
+        <th class="text-align-center ">Exercises</th>
+        <th class="text-align-center ">Sets</th>
+        <th class="text-align-center ">Repetitions</th>
         <td class="delete-exercise-column mt-3" *ngIf="isEditMode"></td>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let exercise of exercises">
-        <td>{{exercise.exercise}}</td>
-        <td>{{exercise.sets}}</td>
-        <td>{{exercise.reps}}</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button" (click)="deleteExerciseAction(exercise)">X</span></td>
+        <td class="text-align-center p-3">{{exercise.exercise}}</td>
+        <td class="text-align-center p-3">{{exercise.sets}}</td>
+        <td class="text-align-center p-3">{{exercise.reps}}</td>
+        <td class="delete-exercise-column p-3" *ngIf="isEditMode"><span class="delete-exercise-button p-3" (click)="deleteExerciseAction(exercise)">X</span></td>
       </tr>
       <tr class="add-exercise-button" *ngIf="isEditMode">
         <td colspan="3" (click)="toggleSearch()" *ngIf="isEditMode">Add Exercise</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode" (click)="addExerciseAction()"></td>
+        <td class="delete-exercise-column " *ngIf="isEditMode" (click)="addExerciseAction()"></td>
       </tr>
     </tbody>
   </table>
