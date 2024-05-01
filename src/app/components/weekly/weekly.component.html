@@ -1,11 +1,11 @@
-
-<div class="page d-flex flex-column col-1 align-items-center">
+<app-sidebar></app-sidebar>
+<div class="d-flex flex-column align-items-center">
   <select  id="weekly-selector" class="container mb-4" [(ngModel)]="selectedWeeklyPlanIndex" (change) = "onWeeklyPlanChange()">
     <option *ngFor="let entry of weeklyPlans, let i = index" [value]="i" >{{ entry.name }}</option>
   </select>
   <div class="d-flex justify-content-center mb-3">
     <div id="weekly-{{day}}" class="d-flex flex-column row-cols-7 justify-content-between container-fluid align-items-center g-3" *ngFor="let i = index, let day of daysOfWeek">
-      <h1 class="title">{{ day }}</h1>
+      <h1 class="small-text">{{ day }}</h1>
       <div id="day-container" class="container d-flex flex-column align-items-center g-1 mt-4">
         <div *ngFor=" let entry of filterRoutinesByDay(i+1)">
           {{ getRoutineNameByRid(entry.rid)}}

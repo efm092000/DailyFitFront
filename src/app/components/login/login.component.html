@@ -1,6 +1,6 @@
-<div class="form container d-flex flex-column vh-100 justify-content-center align-items-center">
-    <p class="text text-primary text-center display-1">Login</p>
-    <form class="d-flex flex-column gap-2" [formGroup]="formLogin">
+<div class="form container d-flex flex-column justify-content-center align-items-center">
+    <p class="title">Login</p>
+    <form class="d-flex flex-column gap-2 align-items-center" [formGroup]="formLogin">
         <div class="input row row-cols-2 align-items-center justify-content-center">
             <div class="col-1">
                 <i class="bi-envelope"></i>
@@ -23,6 +23,6 @@
         <div class="row">
             <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/sign-up">here</span></p>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="formLogin.invalid" (click)="login()">Login</button>
+        <button class="button" type="submit" [disabled]="formLogin.invalid" (click)="login()">Login</button>
     </form>
 </div>

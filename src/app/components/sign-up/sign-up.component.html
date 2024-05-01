@@ -1,8 +1,8 @@
 <router-outlet></router-outlet>
-<div class="form container-fluid d-flex flex-column vh-100 justify-content-center align-items-center">
-  <p class="text text-primary text-center display-1">Sign Up</p>
+<div class="form container-fluid d-flex flex-column justify-content-center align-items-center">
+  <p class="title">Sign Up</p>
 
-    <form class="d-flex flex-column gap-2" [formGroup]="formSignUp">
+    <form class="d-flex flex-column gap-2 align-items-center" [formGroup]="formSignUp">
       <div class="row row-cols-1 row-cols-lg-2 align-items-center">
         <div class="col col-lg-6">
           <div class="row row-cols-2 align-items-center justify-content-center">
@@ -64,7 +64,7 @@
         <p class="text text-black text-center">{{ question }}<span class="hover-effect" routerLink="/login">here</span>
         </p>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="formSignUp.invalid || !passwordsMatch()" (click)="signUp()">Sign Up</button>
+      <button class="button" type="submit" [disabled]="formSignUp.invalid || !passwordsMatch()" (click)="signUp()">Sign Up</button>
     </form>
 
   </div>

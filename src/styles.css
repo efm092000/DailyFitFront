@@ -35,6 +35,7 @@ button:hover{
 .title{
   font-weight: bold;
   font-size: 3em;
+  color: #195DA2;
 }
 
 .small-text{
@@ -44,7 +45,7 @@ button:hover{
 .page{
   padding: 5em;
   gap: 1em;
-  width: 468px;
+  width: 100%;
   height: 600px;
   right: 50%;
 }
@@ -62,8 +63,8 @@ button:hover{
 #day-container{
   border-color: transparent;
   background-color: #D9EAFA;
-  width: 10em;
-  height: 20em;
+  width: 8em;
+  height: 16em;
 }
 .routine-buttons{
   width: auto;
@@ -87,15 +88,12 @@ button:hover{
   transition: transform 0.3s ease;
 }
 
-
-
-table {
-  margin: auto 50% 0;
-  transform: translateX(-50%);
-  width: 100%;
-  border: 2px solid #406E9B;
-  font-size:1.3em;
+.hover-effect {
+  color: #406E9B; /* Change this to your preferred color */
+  font-weight: bold; /* Makes the text bold */
 }
-th,td{
-  border-collapse: collapse;
+
+.hover-effect:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
