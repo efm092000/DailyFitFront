@@ -9,6 +9,7 @@ import { ProgressService } from "../../services/progress.service";
 import { Progress } from "../../interfaces/progress";
 import { ExerciseService } from "../../services/exercise.service";
 import { NgForOf } from "@angular/common";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -26,28 +27,20 @@ import { NgForOf } from "@angular/common";
 export class ProgressComponent {
   chart: any;
   private progress?: Progress;
-  protected exercises: string[] = [
-    "Bench Press",
-    "Dumbbell Curl"
-  ];
-
-  constructor(private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
+  protected exercises: string[] = [];
+  constructor(private router: Router, private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
+    if (!this.userService.getLoggedInUser()) {
+      this.router.navigate(['/login'])
+    }
+    this.exercises = this.progressService.getProgressExercises(this.userService.getLoggedInUser().email)
   }
 
-  private transformData(data: any) {
-    return data.map((entry: any) => {
-      return {
-        x: entry.date,
-        y: entry.weight
-      }
-    });
-  }
-
-  selectExercise(exercise: string) {
+  onSelectExercise(exercise: string) {
     this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise);
+    // this.progress = this.progressService.getMonthlyProgress(
     this.loadChart()
   }
 
@@ -99,6 +92,15 @@ export class ProgressComponent {
             }
           }
         },
+      }
+    });
+  }
+
+  private transformData(data: any) {
+    return data.map((entry: any) => {
+      return {
+        x: entry.date,
+        y: entry.weight
       }
     });
   }

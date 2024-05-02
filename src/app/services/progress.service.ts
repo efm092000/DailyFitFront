@@ -8,6 +8,12 @@ import {UserService} from "./user.service";
   providedIn: 'root'
 })
 export class ProgressService {
+  getProgressExercises(userEmail:string): string[] {
+    return [
+      "Dumbbell curl",
+      "Bench Press"
+    ]
+  }
   getProgressMock(userEmail: string, exerciseName: string): Progress {
     if (exerciseName === 'Bench Press') {
       return {
@@ -44,24 +50,20 @@ export class ProgressService {
           weight: 20
         },
         {
-          date: '2024-04-03',
-          weight: 30
-        },
-        {
           date: '2024-04-04',
-          weight: 40
-        },
-        {
-          date: '2024-04-05',
-          weight: 50
+          weight: 30
         },
         {
           date: '2024-04-06',
           weight: 55
         },
         {
-          date: '2024-04-07',
-          weight: 80
+          date: '2024-04-15',
+          weight: 50
+        },
+        {
+          date: '2024-04-20',
+          weight: 70
         },
       ]
     }
