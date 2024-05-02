@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Exercise} from "../interfaces/exercise";
+import {IntegerFilter} from "../interfaces/integer-filter";
+import {BooleanFilter} from "../interfaces/boolean-filter";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +24,17 @@ export class ExerciseService {
   }
   getImage(image: String){
     return this.http.get(this.apiUrl + `/image?gif=${image}`, { responseType: 'blob' })
+  }
+  getMuscleGroupFilters(){
+    return this.http.get<string[]>(this.apiUrl + "/filters/muscle");
+  }
+  getTypeFilters(){
+    return this.http.get<string[]>(this.apiUrl + "/filters/type");
+  }
+  getDifficultyFilters(){
+    return this.http.get<IntegerFilter[]>(this.apiUrl + "/filters/difficulty");
+  }
+  getMaterialFilters(){
+    return this.http.get<BooleanFilter[]>(this.apiUrl + "/filters/material");
   }
 }

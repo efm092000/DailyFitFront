@@ -23,7 +23,7 @@ export class ProgressService {
           },
           {
             date: '2024-04-06',
-            weight: 60
+            weight: 20
           },
           {
             date: '2024-04-07',
@@ -57,11 +57,11 @@ export class ProgressService {
         },
         {
           date: '2024-04-06',
-          weight: 60
+          weight: 55
         },
         {
           date: '2024-04-07',
-          weight: 70
+          weight: 80
         },
       ]
     }

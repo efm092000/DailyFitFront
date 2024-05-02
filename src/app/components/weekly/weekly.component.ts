@@ -5,6 +5,7 @@ import { UserRoutine} from '../../interfaces/user-routines.interface';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RoutinesService} from "../../services/routines.service";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 
 @Component({
@@ -14,7 +15,8 @@ import {RoutinesService} from "../../services/routines.service";
   imports: [
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    SidebarComponent
   ],
   styleUrls: ['./weekly.component.css']
 })
@@ -37,12 +39,13 @@ export class WeeklyComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWeeklyPlans();
-    this.loadRoutines()
   }
 
   loadWeeklyPlans(): void {
     this.weeklyService.getWeeklyPlans().subscribe((weeklyPlans: Weekly[]) => {
       this.weeklyPlans = weeklyPlans;
+      this.loadRoutines();
+      this.onWeeklyPlanChange();
     }, (error) => {
       console.error('Error al obtener los weeklies:', error);
     });
@@ -84,7 +87,6 @@ export class WeeklyComponent implements OnInit {
   }
 
   async addWeeklyPlan(name: string): Promise<void> {
-    console.log("1");
     this.weeklyService.createNewWeeklyPlan(name).subscribe(() => {
         this.loadWeeklyPlans();
       },

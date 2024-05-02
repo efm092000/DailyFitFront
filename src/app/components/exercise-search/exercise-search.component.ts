@@ -1,10 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Exercise} from "../../interfaces/exercise";
 import {ExerciseService} from "../../services/exercise.service";
 import {FormsModule} from "@angular/forms";
 import {ExerciseDetailsComponent} from "./exercise-details/exercise-details.component";
 import {NgxPaginationModule} from "ngx-pagination";
+import {IntegerFilter} from "../../interfaces/integer-filter";
+import {BooleanFilter} from "../../interfaces/boolean-filter";
 
 
 @Component({
@@ -19,7 +21,7 @@ import {NgxPaginationModule} from "ngx-pagination";
   templateUrl: './exercise-search.component.html',
   styleUrl: './exercise-search.component.css'
 })
-export class ExerciseSearchComponent{
+export class ExerciseSearchComponent implements OnInit{
   @Input() rid!: number;
   exercises: Exercise[] = [];
   searchFilters = {
@@ -30,8 +32,17 @@ export class ExerciseSearchComponent{
     type: "",
   };
   public page: number | undefined;
+  materialFilters: BooleanFilter[] = [];
+  difficultyFilters: IntegerFilter[] = [];
+  typeFilters: string[] = [];
+  muscleGroupFilters: string[] = [];
 
   constructor(protected exerciseService: ExerciseService) {}
+
+  ngOnInit(): void {
+    this.search(this.searchFilters);
+    this.getFilters();
+  }
 
   onSubmit(event:Event){
     event.preventDefault();
@@ -74,5 +85,52 @@ export class ExerciseSearchComponent{
     if (dialogElement instanceof HTMLDialogElement) {
       dialogElement.close();
     }
+  }
+
+  getFilters(){
+    this.getDifficultyFilters();
+    this.getMuscleGroupFilters();
+    this.getTypeFilters();
+    this.getMaterialFilters();
+  }
+  getDifficultyFilters(){
+    this.exerciseService.getDifficultyFilters().subscribe(
+      (filters: IntegerFilter[]) => {
+        this.difficultyFilters = filters;
+      },
+      (error) => {
+        console.error('Error al obtener los filtros:', error);
+      }
+    );
+  }
+  getMuscleGroupFilters(){
+    this.exerciseService.getMuscleGroupFilters().subscribe(
+      (filters: string[]) => {
+        this.muscleGroupFilters = filters;
+      },
+      (error) => {
+        console.error('Error al obtener los filtros:', error);
+      }
+    );
+  }
+  getTypeFilters(){
+    this.exerciseService.getTypeFilters().subscribe(
+      (filters: string[]) => {
+        this.typeFilters = filters;
+      },
+      (error) => {
+        console.error('Error al obtener los filtros:', error);
+      }
+    );
+  }
+  getMaterialFilters(){
+    this.exerciseService.getMaterialFilters().subscribe(
+      (filters: BooleanFilter[]) => {
+        this.materialFilters = filters;
+      },
+      (error) => {
+        console.error('Error al obtener los filtros:', error);
+      }
+    );
   }
 }
