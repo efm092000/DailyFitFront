@@ -23,8 +23,9 @@ export class HeaderComponent {
     this.loggedIn = false;
   }
   logIn(){
-
-    this.loggedIn = true;
+    if(this.userService.getLoggedInUser()){
+      this.loggedIn = true;
+    }
   }
 
   loadMenuToggle() {

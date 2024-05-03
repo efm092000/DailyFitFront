@@ -97,3 +97,13 @@ button:hover{
   text-decoration: underline;
   cursor: pointer;
 }
+.logo{
+
+}
+.search-button {
+  width: 30em;
+  border-radius: 2em;
+  font-size: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #195DA2;
+}
