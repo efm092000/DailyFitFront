@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
-  user: User = {name:"", email:""};
+  user: User = {name:"", email:"", premium: false};
   numRoutines: number = 0;
   newName: string = '';
   isEditModalOpen: boolean = false;
@@ -48,5 +48,7 @@ export class ProfileComponent implements OnInit{
     this.userService.updateName(this.user.email, this.newName);
     this.closeEditModal();
   }
+
+  protected readonly JSON = JSON;
 }
 

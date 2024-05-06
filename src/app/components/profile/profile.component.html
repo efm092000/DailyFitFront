@@ -9,7 +9,8 @@
               <img src="assets/images/icon.png"
                    alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               <h5>{{ user.name }}</h5>
-              <p>Premium/Free</p>
+              <p *ngIf="user.premium">Premium</p>
+              <p *ngIf="!user.premium">Free</p>
               <i class="far fa-edit mb-5" (click)="openEditModal()"></i>
             </div>
             <div class="col-md-8">
@@ -61,3 +62,4 @@
     </div>
   </div>
 </div>
+
