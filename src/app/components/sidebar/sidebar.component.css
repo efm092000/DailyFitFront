@@ -10,7 +10,7 @@
     width: 1.5em;
 }
 
-#left-sidebar-routine {
+.left-sidebar-routine {
     p {
         font-size: 2em;
     }
@@ -32,7 +32,7 @@
 }
 
 .left-sidebar-routine.hidden {
-  width: 6em;
+  width: 8em;
 }
 
 
