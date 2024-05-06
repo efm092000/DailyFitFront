@@ -76,6 +76,7 @@ export class ProgressService {
     return this.http.get<number>(this.apiUrl+ `weekly/get?email=${this.userService.getLoggedInUser().email}&week=${this.formattedDate(week)}`)
   }
   getDoneExercisesByUserAndDay(day:Date){
+    console.log(this.apiUrl+ `get_exercises_of_day?email=${this.userService.getLoggedInUser().email}&day=${this.formattedDate(day)}`)
     return this.http.get<ExerciseDone[]>(this.apiUrl+ `get_exercises_of_day?email=${this.userService.getLoggedInUser().email}&day=${this.formattedDate(day)}`)
   }
   getDoneExerciseOfUser(name:string){
@@ -84,8 +85,8 @@ export class ProgressService {
   setWeeklyToWeek(wid:number,week:Date){
     return this.http.post(this.apiUrl+ `weekly/set?email=${this.userService.getLoggedInUser().email}&wid=${wid}&week=${this.formattedDate(week)}`, {})
   }
-  markExerciseAsDone(exerciseName:string, date:Date,weight:number,rid:number){
-    return this.http.post(this.apiUrl+ `exercise/mark?email=${this.userService.getLoggedInUser().email}&date=${this.formattedDate(date)}&weight=${weight}&exerciseName=${exerciseName}&rid=${rid}`, {})
+  markExerciseAsDone(exerciseName:string, date:Date,weight:number,rid:number, sets:number, reps: number){
+    return this.http.post(this.apiUrl+ `exercise/mark?email=${this.userService.getLoggedInUser().email}&date=${this.formattedDate(date)}&weight=${weight}&exerciseName=${exerciseName}&rid=${rid}&sets=${sets}&reps=${reps}`, {})
   }
   getDoneExerciseNamesOfUser(){
     return this.http.get<string[]>(this.apiUrl+ `get_done_exercises_names?email=${this.userService.getLoggedInUser().email}`)
