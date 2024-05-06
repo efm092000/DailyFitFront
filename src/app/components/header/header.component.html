@@ -1,5 +1,5 @@
-<div class="ml-container-fluid bg-white position-relative">
-  <div class="d-flex gap-10 justify-content-between align-items-center">
+<div class="container-fluid">
+  <div class="d-flex gap-3 justify-content-between align-items-center">
     <div class="col-auto">
       <img alt="logo" class="logo" id="logo" style="width: 10em; height: 10em;" src="assets/images/logo.png" routerLink="/">
     </div>
@@ -10,15 +10,15 @@
     </div>
     <div *ngIf="loggedIn" class="col-auto">
       <div class="dropdown">
-        <button (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle bg-transparent border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="mr-4" title="icon" src="assets/images/icon.png" style="width: 3em; height: 3em;" routerLink="/login" alt="">
+        <button (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle bg-transparent border-nonep-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="mr-4" title="icon" src="assets/images/icon.png" style="width: 3em; height: 3em;" alt="">
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 0;">
           <li routerLink="/profile" class="btn" style="display: flex; align-items: center;">
             <img src="assets/images/usersettings.png" style="width: 2em; height: 2em;" alt="profile" class="small-icon">
             Profile
           </li>
-          <li (click)="logOut()" routerLink="" class="btn bg-transparent border-0" style="display: flex; align-items: center; width: 5em; height: 3em; color: #195DA2;">
+          <li (click)="logOut()" routerLink="" class="btn bg-transparent border-0" style="display: flex; align-items: center;  color: #195DA2;">
             Log out
           </li>
         </ul>
@@ -26,7 +26,7 @@
     </div>
     <div *ngIf="!loggedIn" class="col-auto">
       <div class="to-login">
-        <button class="button" routerLink="/login" (click)="logIn()"> Log in </button>
+        <button class="button" routerLink="/login"> Log in </button>
       </div>
     </div>
   </div>

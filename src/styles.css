@@ -211,8 +211,33 @@ td {
   z-index: 1;
 }
 
+.edit-buttons{
+  width: 7em;
+  font-size: 1em;
+}
+
 /*Sidebar*/
+
 /*Lay-out*/
+#header {
+  top: 0;
+  position: sticky;
+  z-index: 99;
+  background: white;
+  display: block
+}
+
+#sidebar {
+  z-index: 3;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+}
+
+#content{
+  margin-left: 15em
+}
+
 /*Exercise-search*/
 .filters{
   border-radius: 2em;

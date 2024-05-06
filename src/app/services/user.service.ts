@@ -12,7 +12,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {
   }
-
   saveUserToLocalStorage(user: User) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
