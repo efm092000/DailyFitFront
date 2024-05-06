@@ -9,3 +9,7 @@ select {
 h1 {
   color: #195DA2;
 }
+
+.features {
+  margin-left: 2em;
+}

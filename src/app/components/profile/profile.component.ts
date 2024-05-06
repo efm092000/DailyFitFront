@@ -4,6 +4,7 @@ import {User} from "../../interfaces/user";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {RoutinesService} from "../../services/routines.service";
 import {FormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     NgOptimizedImage,
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'

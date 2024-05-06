@@ -15,6 +15,7 @@ export const routes: Routes = [
       { path: 'today', loadComponent: () => import('./components/today-planning/today-planning.component').then(m => m.TodayPlanningComponent) },
       { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'weekly', loadComponent: () => import('./components/weekly/weekly.component').then(m => m.WeeklyComponent) },
+      { path: 'premium', loadComponent: () => import('./components/subscription/subscription.component').then(m => m.SubscriptionComponent)}
     ]
   },
   {
