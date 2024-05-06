@@ -10,7 +10,7 @@ export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
   private readonly USER_KEY = 'loggedInUser';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: ''});
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false});
   //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
   }
