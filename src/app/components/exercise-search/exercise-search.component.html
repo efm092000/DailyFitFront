@@ -1,39 +1,39 @@
 <div class="search-page">
 
-  <form id="exerciseForm" (submit)="onSubmit($event)">
+  <form id="exerciseForm" style="margin: 1em auto; text-align: center;" (submit)="onSubmit($event)">
 
-    <input type="text" [(ngModel)]="searchFilters.name" name="name" placeholder="Search exercises">
+    <input type="text" class="search-button p-3 border-0" [(ngModel)]="searchFilters.name" name="name" placeholder="Search exercises">
 
-    <div class="search-filters">
-      <select [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
-        <option selected value="">Muscle Group?</option>
+    <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
+      <select class="filters" [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
+        <option selected value="">Muscle Group</option>
         <option value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
       </select>
 
-      <select [(ngModel)]="searchFilters.material" name = "material">
-        <option selected value ="">Material needed?</option>
+      <select class="filters" [(ngModel)]="searchFilters.material" name = "material">
+        <option selected value ="">Material needed</option>
         <option value="{{material.value}}" *ngFor="let material of materialFilters">{{material.name}}</option>
       </select>
 
-      <select [(ngModel)]="searchFilters.type" name="type">
-        <option selected value="">Type?</option>
+      <select class="filters" [(ngModel)]="searchFilters.type" name="type">
+        <option selected value="">Type</option>
         <option value="{{type}}" *ngFor="let type of typeFilters">{{type}}</option>
       </select>
 
 
-      <select [(ngModel)]="searchFilters.difficulty" name="difficulty">
-        <option selected value="">Difficulty?</option>
+      <select class="filters" [(ngModel)]="searchFilters.difficulty" name="difficulty">
+        <option selected value="">Difficulty</option>
         <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
       </select>
     </div>
 
-    <button type="submit" class="search-button">Search</button>
+    <button type="submit" class="button" style="margin-top: 3em;">Search</button>
 
   </form>
 
 
 
-  <section id="search-results" class="container-fluid">
+  <section id="search-results" class="container-fluid" style="margin-top: 5em">
     <div class="row row-cols-4 justify-content-around">
       <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises | paginate: { itemsPerPage: 5, currentPage: page } ">
         <p class="exercise-search-result-name">Name: {{entry.name}}</p>

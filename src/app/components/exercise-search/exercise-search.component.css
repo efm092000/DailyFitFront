@@ -1,53 +1,5 @@
-#exerciseForm{
-  text-align: center;
-  width:100%;
-  margin: 1em auto;
-}
-.search-filters{
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  margin: 1em;
-}
-
-#search-name{
-  height: 3em;
-  width: 70%;
-  border: 1px solid #333;
-  border-radius: 5px;
-  padding: 8px;
-  font-size: 16px;
-}
-#exerciseForm select {
-  height: 4em;
-  width: 15em;
-}
-#exerciseForm button {
-  background-color: #195DA2;
-  height: 3em;
-  width: 15em;
-}
-#search-results {
-  margin-top: 5em;
-}
-.exercise-search-result{
-  background-color: #195DA2;
-  color:white;
-  text-align: center;
-  border-radius: 5%;
-  margin: 2em;
-}
 dialog{
   text-align: center;
   background: #D9EAFA;
 }
 
-.search-button{
-  width: 10em;
-  height: 3em;
-  background-color:#406E9B;
-  color: white;
-  border-radius: 11em;
-  border: none;
-  cursor: pointer;
-}
