@@ -22,9 +22,11 @@ export class HeaderComponent {
     this.userService.logout();
     this.loggedIn = false;
   }
-  logIn(){
 
-    this.loggedIn = true;
+  ngOnInit() {
+    if (this.userService.getLoggedInUser()) {
+      this.loggedIn = true;
+    }
   }
 
   loadMenuToggle() {

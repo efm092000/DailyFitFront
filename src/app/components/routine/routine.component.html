@@ -1,34 +1,34 @@
-<div class="container" *ngIf="!displaySearchExercises">
-  <input *ngIf="isEditMode" type="text" id="routine-name" name="routine-name"
+<div class="page d-flex flex-column align-items-center" *ngIf="!displaySearchExercises">
+  <input *ngIf="isEditMode" name="routine-name"
          placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
-  <p *ngIf="!isEditMode">{{userRoutine.name}}</p>
-  <table id="table">
+  <p *ngIf="!isEditMode" class="title">{{userRoutine.name}}</p>
+  <table id="table" class="">
     <thead>
       <tr>
-        <th>Exercises</th>
-        <th>Sets</th>
-        <th>Repetitions</th>
-        <td class="delete-exercise-column" *ngIf="isEditMode"></td>
+        <th class="text-align-center ">Exercises</th>
+        <th class="text-align-center ">Sets</th>
+        <th class="text-align-center ">Repetitions</th>
+        <td class="delete-exercise-column mt-3" *ngIf="isEditMode"></td>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let exercise of exercises">
-        <td>{{exercise.exercise}}</td>
-        <td>{{exercise.sets}}</td>
-        <td>{{exercise.reps}}</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode"><span class="delete-exercise-button" (click)="deleteExerciseAction(exercise)">X</span></td>
+        <td class="text-align-center p-3">{{exercise.exercise}}</td>
+        <td class="text-align-center p-3">{{exercise.sets}}</td>
+        <td class="text-align-center p-3">{{exercise.reps}}</td>
+        <td class="delete-exercise-column p-3" *ngIf="isEditMode"><span class="delete-exercise-button p-3" (click)="deleteExerciseAction(exercise)">X</span></td>
       </tr>
       <tr class="add-exercise-button" *ngIf="isEditMode">
         <td colspan="3" (click)="toggleSearch()" *ngIf="isEditMode">Add Exercise</td>
-        <td class="delete-exercise-column" *ngIf="isEditMode" (click)="addExerciseAction()"></td>
+        <td class="delete-exercise-column " *ngIf="isEditMode" (click)="addExerciseAction()"></td>
       </tr>
     </tbody>
   </table>
-  <div id="edit-button">
-    <button (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
-    <button (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
-    <button (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
-    <button (click)="goBack()" routerLink="/routines">Go Back</button>
+  <div id="edit-buttons" class="p-3 d-flex align-items-center justify-content-between">
+    <button class="routine-buttons button-small mx-auto" (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="goBack()" routerLink="/routines">Go Back</button>
   </div>
 </div>
 
