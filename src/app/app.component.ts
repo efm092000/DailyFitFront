@@ -7,11 +7,10 @@ import {RoutinesComponent} from "./components/routines/routines.component";
 import { LoginComponent } from "./components/login/login.component";
 import {RoutineComponent} from "./components/routine/routine.component";
 import {ExerciseSearchComponent} from "./components/exercise-search/exercise-search.component";
-import {SidebarComponent} from "./components/sidebar/sidebar.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent, SidebarComponent],
+  imports: [HeaderComponent, FooterComponent, RouterModule, LoginComponent, RoutinesComponent, RoutineComponent, ExerciseSearchComponent, HomePageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
