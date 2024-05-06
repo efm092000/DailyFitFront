@@ -4,7 +4,10 @@ import {FormsModule} from "@angular/forms";
 import {Weekly} from "../../interfaces/weekly";
 import {ProgressService} from "../../services/progress.service";
 import {WeeklyService} from "../../services/weekly.service";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {CalendarModule} from "primeng/calendar";
+
+
 
 @Component({
   selector: 'app-calendar',
@@ -12,7 +15,11 @@ import {NgForOf} from "@angular/common";
   imports: [
     BsDatepickerModule,
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgClass,
+    NgSwitch,
+    NgSwitchCase,
+    CalendarModule
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
@@ -21,6 +28,8 @@ export class CalendarComponent implements OnInit{
   selectedDate: Date | undefined;
   selectedPlan: number | undefined;
   userWeeklies: Weekly[] =[];
+  date: Date | undefined;
+
 
   constructor(private progressService:ProgressService, private weeklyService:WeeklyService) {
   }
@@ -55,4 +64,5 @@ export class CalendarComponent implements OnInit{
   assignWeeklyToWeek(date: Date, plan: number): void {
     this.progressService.setWeeklyToWeek(plan, date).subscribe(()=>{});
   }
+
 }

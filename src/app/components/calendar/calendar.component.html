@@ -1,9 +1,16 @@
+<p-calendar
+  class="max-w-full"
+  [(ngModel)]="date"
+  [inline]="true"
+  [showWeek]="true" />
 <div class="form-group">
   <form (ngSubmit)="onSubmit()">
+    <h1>Vincular un Plan Semanal con una Semana</h1>
     <label for="weekSelector">Selecciona una semana:</label>
-    <input type="text" class="form-control" id="weekSelector" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" (bsValueChange)="onDateChanged($event)">
+    <input type="text" class="form-control" id="weekSelector" placeholder="dd/mm/yyyy (puede poner cualquier día dentro de la semana deseada)" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" (bsValueChange)="onDateChanged($event)">
 
-    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan">
+    <label for="selectorOfWeekly">Selecciona una planificación semanal:</label>
+    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan" id="selectorOfWeekly">
       <option selected value="{{weekly.wid}}" *ngFor="let weekly of userWeeklies">{{weekly.name}}</option>
     </select>
 
