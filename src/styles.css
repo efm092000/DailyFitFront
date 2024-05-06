@@ -122,7 +122,26 @@ button:hover{
   border: 0.125em solid #406E9B;
   height: 0.25em;
 }
+
+
 /*Home*/
+.hero {
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  padding: 200px 200px 200px 50px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+
 /*Footer*/
 .subheader{
   font-size: 2em;
