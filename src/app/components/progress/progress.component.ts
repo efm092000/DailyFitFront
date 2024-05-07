@@ -10,6 +10,7 @@ import { Progress } from "../../interfaces/progress";
 import { ExerciseService } from "../../services/exercise.service";
 import { NgForOf } from "@angular/common";
 import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 
 @Component({
@@ -19,7 +20,8 @@ import { Router } from "@angular/router";
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
@@ -28,20 +30,37 @@ export class ProgressComponent {
   chart: any;
   private progress?: Progress;
   protected exercises: string[] = [];
-  constructor(private router: Router, private userService: UserService, private progressService: ProgressService, private exerciseService: ExerciseService) {
-  }
+  selectedExerciseName: string = "";
+
+  years: number[] = Array.from({length: 1}, (v, k) => k + 2024);
+  months: number[] = Array.from({length: 12}, (v, k) => k + 1);
+  weeks: number[] = Array.from({length: 4}, (v, k) => k + 1);
+
+  constructor(private router: Router, private userService: UserService, private progressService: ProgressService) { }
 
   ngOnInit(): void {
     if (!this.userService.getLoggedInUser()) {
       this.router.navigate(['/login'])
     }
-    this.exercises = this.progressService.getProgressExercises(this.userService.getLoggedInUser().email)
+    this.progressService.getProgressExerciseName(this.userService.getLoggedInUser().email).then(
+      (exercises: string[]) => {
+        this.exercises = exercises;
+      }
+    )
   }
 
   onSelectExercise(exercise: string) {
-    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise);
-    // this.progress = this.progressService.getMonthlyProgress(
-    this.loadChart()
+    this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise).then(
+      (progress: Progress) => {
+        this.progress = progress;
+        this.loadChart();
+      }
+    )
+  }
+
+  onGenerateChart() {
+    console.log(this.selectedExerciseName)
+
   }
 
   loadChart() {
@@ -99,7 +118,7 @@ export class ProgressComponent {
   private transformData(data: any) {
     return data.map((entry: any) => {
       return {
-        x: entry.date,
+        x: entry.day,
         y: entry.weight
       }
     });

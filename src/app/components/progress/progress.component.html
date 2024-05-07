@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center">
   <h1 class="title">Progress Chart</h1>
   <div class="d-flex flex-column gap-3">
-    <div class="dropdown d-flex justify-content-center">
+    <div class="d-flex justify-content-center gap-3">
       <button class="button dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select an exercise
       </button>
@@ -10,11 +10,30 @@
       </div>
 
       <div class="d-flex align-items-center gap-2">
+        <label for="select-month">Exercise:</label>
+        <select id="select-exercise" class="form-select" [(ngModel)]="selectedExerciseName">
+          <option value="" selected disabled>Select an exercise</option>
+          <option *ngFor="let exercise of exercises" [value]="exercise">
+            {{ exercise }}
+          </option>
+        </select>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <label for="select-month">Year:</label>
+        <select id="select-year" class="form-select">
+          <option *ngFor="let year of years">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
         <label for="select-month">Month:</label>
         <select id="select-month" class="form-select">
           <option value="0" selected>All</option>
-          <option *ngFor="let exercise of exercises">
-            {{ exercise }}
+          <option *ngFor="let month of months">
+            {{ month }}
           </option>
         </select>
       </div>
@@ -23,13 +42,15 @@
         <label for="select-week">Week:</label>
         <select id="select-week" class="form-select">
           <option value="0" selected>All</option>
-          <option *ngFor="let exercise of exercises">
-            {{ exercise }}
+          <option *ngFor="let week of weeks">
+            {{ week }}
           </option>
         </select>
       </div>
 
+      <button class="btn btn-primary" (click)="onGenerateChart()">Show Chart</button>
+
     </div>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" width=1000px></canvas>
   </div>
 </div>

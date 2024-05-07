@@ -1,7 +1,7 @@
 export interface Progress {
   exercise: string;
   data: {
-    date: string;
+    day: string;
     weight: number;
   }[];
 }
