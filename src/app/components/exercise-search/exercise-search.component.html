@@ -43,7 +43,7 @@
   </section>
   <dialog id="{{entry.name.split(' ').join('_')}}" *ngFor="let entry of exercises">
     <app-exercise-details [exercise]="entry" [rid]="rid"></app-exercise-details>
-    <button (click)="closeDialog(entry)">Close</button>
+    <button (click)="closeDialog(entry)" class="button-small">Close</button>
   </dialog>
 </div>
 
