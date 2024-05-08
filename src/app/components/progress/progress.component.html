@@ -2,53 +2,42 @@
   <h1 class="title">Progress Chart</h1>
   <div class="d-flex flex-column gap-3">
     <div class="d-flex justify-content-center gap-3">
-      <button class="button dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select an exercise
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <button class="dropdown-item" *ngFor="let exercise of exercises" (click)="onSelectExercise(exercise)">{{exercise}}</button>
-      </div>
+      <form [formGroup]="progressForm" class="d-flex gap-3" (ngSubmit)="onGenerateChart()">
 
-      <div class="d-flex align-items-center gap-2">
-        <label for="select-month">Exercise:</label>
-        <select id="select-exercise" class="form-select" [(ngModel)]="selectedExerciseName">
-          <option value="" selected disabled>Select an exercise</option>
-          <option *ngFor="let exercise of exercises" [value]="exercise">
-            {{ exercise }}
-          </option>
-        </select>
-      </div>
+        <div class="d-flex align-items-center gap-2">
+          <label for="select-month">Exercise:</label>
+          <select id="select-exercise" class="form-select" formControlName="exercise">
+            <option value="" selected disabled hidden>Select an exercise</option>
+            <option *ngFor="let exercise of exercises" [value]="exercise">
+              {{ exercise }}
+            </option>
+          </select>
+        </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <label for="select-month">Year:</label>
-        <select id="select-year" class="form-select">
-          <option *ngFor="let year of years">
-            {{ year }}
-          </option>
-        </select>
-      </div>
+        <div class="d-flex align-items-center gap-2">
+          <label for="select-month">Year:</label>
+          <select id="select-year" class="form-select" formControlName="year">
+            <option value="" selected disabled hidden>Select a year</option>
+            <option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <label for="select-month">Month:</label>
-        <select id="select-month" class="form-select">
-          <option value="0" selected>All</option>
-          <option *ngFor="let month of months">
-            {{ month }}
-          </option>
-        </select>
-      </div>
+        <div class="d-flex align-items-center gap-2">
+          <label for="select-month">Month:</label>
+          <select id="select-month" class="form-select" formControlName="month">
+            <option value="0" selected>All</option>
+            <option *ngFor="let month of months" [value]="month">
+              {{ month }}
+            </option>
+          </select>
+        </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <label for="select-week">Week:</label>
-        <select id="select-week" class="form-select">
-          <option value="0" selected>All</option>
-          <option *ngFor="let week of weeks">
-            {{ week }}
-          </option>
-        </select>
-      </div>
+        <button class="btn btn-primary" type="submit" [disabled]="progressForm.invalid">Show Chart</button>
 
-      <button class="btn btn-primary" (click)="onGenerateChart()">Show Chart</button>
+      </form>
+
 
     </div>
     <canvas id="canvas" width=1000px></canvas>

@@ -10,7 +10,7 @@ import { Progress } from "../../interfaces/progress";
 import { ExerciseService } from "../../services/exercise.service";
 import { NgForOf } from "@angular/common";
 import { Router } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 
 
 @Component({
@@ -21,22 +21,31 @@ import { FormsModule } from "@angular/forms";
     HeaderComponent,
     FooterComponent,
     NgForOf,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
 })
 export class ProgressComponent {
-  chart: any;
-  private progress?: Progress;
+  private chart: any;
+  private progress: Progress = {
+    exercise: '',
+    data: []
+  };
   protected exercises: string[] = [];
-  selectedExerciseName: string = "";
 
   years: number[] = Array.from({length: 1}, (v, k) => k + 2024);
   months: number[] = Array.from({length: 12}, (v, k) => k + 1);
-  weeks: number[] = Array.from({length: 4}, (v, k) => k + 1);
+  progressForm: FormGroup = this.fb.group(
+    {
+      'exercise': ['', Validators.required],
+      'year': ['', Validators.required],
+      'month': ['0', Validators.required]
+    }
+  );
 
-  constructor(private router: Router, private userService: UserService, private progressService: ProgressService) { }
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService, private progressService: ProgressService) { }
 
   ngOnInit(): void {
     if (!this.userService.getLoggedInUser()) {
@@ -49,18 +58,18 @@ export class ProgressComponent {
     )
   }
 
-  onSelectExercise(exercise: string) {
-    this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise).then(
-      (progress: Progress) => {
-        this.progress = progress;
+  onGenerateChart() {
+    this.progress.exercise = this.exercise.value;
+    this.progressService.getProgressByYearAndMonth(this.userService.getLoggedInUser().email, this.exercise.value, this.year.value, this.month.value).then(
+      data => {
+        this.progress.data = data;
+        if (this.progress.data.length == 0) {
+          alert('No data found for the selected exercise, year and month');
+          return;
+        }
         this.loadChart();
       }
     )
-  }
-
-  onGenerateChart() {
-    console.log(this.selectedExerciseName)
-
   }
 
   loadChart() {
@@ -122,5 +131,17 @@ export class ProgressComponent {
         y: entry.weight
       }
     });
+  }
+
+  get exercise() {
+    return this.progressForm.get('exercise') as FormControl;
+  }
+
+  get year() {
+    return this.progressForm.get('year') as FormControl;
+  }
+
+  get month() {
+    return this.progressForm.get('month') as FormControl;
   }
 }
