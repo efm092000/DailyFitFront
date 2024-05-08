@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import { User } from "../interfaces/user";
+import {User} from "../interfaces/user";
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
@@ -60,5 +60,10 @@ export class UserService {
       user => this.user$.next(user)
     );
     return response;
+  }
+
+  getPremium(email: String): Observable<User> {
+    const url = `${this.userApiUrl}/${email}?premium=1`;
+    return this.http.put<User>(url, {}, {});
   }
 }

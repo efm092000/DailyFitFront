@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {countries} from "./country-data";
 import {NgForOf} from "@angular/common";
+import {UserService} from "../../services/user.service";
+import {User} from "../../interfaces/user";
 
 @Component({
   selector: 'app-subscription',
@@ -13,11 +15,19 @@ import {NgForOf} from "@angular/common";
 })
 export class SubscriptionComponent implements OnInit{
   public countries: any = countries
+  user: User = {name:'',email: '', premium: false};
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(
+      user => this.user = user
+    );
+  }
+
+  buyPremium(){
+    this.userService.getPremium(this.user.email)
   }
 
 }
