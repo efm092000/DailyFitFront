@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
-  private readonly USER_KEY = 'loggedInUser';
+  private USER_KEY = 'loggedInUser';
   user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false});
   //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
@@ -20,6 +20,7 @@ export class UserService {
   }
 
   getLoggedInUser() {
+    console.log(this.user$.value)
     const userJson = localStorage.getItem(this.USER_KEY);
     if (userJson) {
       return JSON.parse(userJson);
@@ -64,6 +65,8 @@ export class UserService {
 
   getPremium(email: String): Observable<User> {
     const url = `${this.userApiUrl}/${email}?premium=1`;
+    this.user$.value.premium = true;
+    this.saveUserToLocalStorage(this.user$.value);
     return this.http.put<User>(url, {}, {});
   }
 }
