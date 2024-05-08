@@ -51,13 +51,12 @@ export class RoutinesComponent implements OnInit{
 
   }
 
-  routineGenerator(): void{
+  routineLimitReached() {
     // @ts-ignore
-    if (this.userRoutines.length > 5 && !this.userService.getLoggedInUser().premium) {
-      this.showPopup = true;
-      return;
-    }
+    return this.userRoutines.length >= 5 && !this.userService.getLoggedInUser().premium;
+  }
 
+  routineGenerator(): void {
     this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.isEditMode = true;
     this.serviceRoutines.createRoutine("NewRoutine", this.userService.getLoggedInUser().email).subscribe({
