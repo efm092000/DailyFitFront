@@ -6,6 +6,7 @@ import {UserRoutine} from "../../interfaces/user-routines.interface";
 import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {UserService} from "../../services/user.service";
+import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
 
 
 
@@ -19,12 +20,14 @@ import {UserService} from "../../services/user.service";
     RoutineComponent,
     NgIf,
     SidebarComponent,
+    PremiumPopupComponent,
   ],
   templateUrl: './routines.component.html',
   styleUrl: './routines.component.css'
 })
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
+  showPopup: boolean = false;
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {
@@ -48,7 +51,12 @@ export class RoutinesComponent implements OnInit{
 
   }
 
-  routineGenerator(): void{
+  routineLimitReached() {
+    // @ts-ignore
+    return this.userRoutines.length >= 5 && !this.userService.getLoggedInUser().premium;
+  }
+
+  routineGenerator(): void {
     this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.isEditMode = true;
     this.serviceRoutines.createRoutine("NewRoutine", this.userService.getLoggedInUser().email).subscribe({
@@ -65,6 +73,10 @@ export class RoutinesComponent implements OnInit{
       }
     });
 
+  }
+
+  closePopup() {
+    this.showPopup = false;
   }
 }
 
