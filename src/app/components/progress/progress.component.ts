@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
@@ -7,9 +7,12 @@ import { Chart } from "chart.js/auto";
 import 'chartjs-adapter-moment';
 import { ProgressService } from "../../services/progress.service";
 import { Progress } from "../../interfaces/progress";
-import { NgForOf } from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { RecommendationComponent } from "./recommendation/recommendation.component";
+import { last } from "rxjs";
+import { Goal } from "../../enums/goal.enum";
 
 
 @Component({
@@ -21,14 +24,18 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
     FooterComponent,
     NgForOf,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RecommendationComponent,
+    NgIf
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
 })
-export class ProgressComponent {
+export class ProgressComponent implements OnInit {
   private chart: any;
-  private progress: Progress = {
+  chartLoaded: boolean = false;
+  showRecommendation: boolean = false;
+  progress: Progress = {
     exercise: '',
     data: []
   };
@@ -139,6 +146,7 @@ export class ProgressComponent {
         },
       }
     });
+    this.chartLoaded = true;
   }
 
   private mapToWeight(data: any) {
@@ -179,4 +187,16 @@ export class ProgressComponent {
   get month() {
     return this.progressForm.get('month') as FormControl;
   }
+
+  onShowRecommendation() {
+    this.showRecommendation = true;
+  }
+
+  get lastEntry() {
+    return this.progress.data[this.progress.data.length - 1];
+  }
+
+  protected readonly JSON = JSON;
+  protected readonly last = last;
+  protected readonly Goal = Goal;
 }
