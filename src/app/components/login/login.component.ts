@@ -24,9 +24,11 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
-    if (this.userService.getLoggedInUser()) {
-      this.router.navigate(['/']);
-    }
+    this.userService.loggedInUser.subscribe(user => {
+      if (user !== null) {
+        this.router.navigate(['/']); // Redirigir al usuario si ya está autenticado
+      }
+    });
   }
 
   formLogin = this.fb.group({
@@ -46,7 +48,7 @@ export class LoginComponent {
     this.userService.login(this.email.value, this.password.value)
     .subscribe({
         next: response => {
-          this.userService.saveUserToLocalStorage(response);
+          this.userService.updateLoggedInUSer(response);
           this.router.navigate(['/']);
         },
         error: response => alert(response.error)

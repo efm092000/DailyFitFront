@@ -47,8 +47,15 @@ export class ProgressComponent {
   }
 
   selectExercise(exercise: string) {
-    this.progress = this.progressService.getProgressMock(this.userService.getLoggedInUser().email, exercise);
-    this.loadChart()
+    this.userService.loggedInUser.subscribe(user => {
+      if (user) {
+        this.progress = this.progressService.getProgressMock(user.email, exercise);
+        this.loadChart();
+      } else {
+        // Manejar caso cuando el usuario no está autenticado
+        console.log("Usuario not authenticated");
+      }
+    });
   }
 
   loadChart() {

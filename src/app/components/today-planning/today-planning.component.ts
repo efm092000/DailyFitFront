@@ -31,9 +31,13 @@ export class TodayPlanningComponent implements OnInit{
 
   ngOnInit(): void {
     this.progressService.getWeeklyFromWeek(this.currentMonday()).subscribe(
-      (w: number) => {
-        this.currentWeekly = w;
-        this.getRoutinesOfWeekly();
+      (w: number | null) => {
+        if (w !== null) {
+          this.currentWeekly = w;
+          this.getRoutinesOfWeekly();
+        } else {
+          console.error("Error: No se pudo obtener la semana actual.");
+        }
       });
   }
 
