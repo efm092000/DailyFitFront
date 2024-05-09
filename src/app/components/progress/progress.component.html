@@ -41,5 +41,13 @@
 
     </div>
     <canvas id="canvas" width=1000px></canvas>
+
+    <div class="d-flex justify-content-center" *ngIf="chartLoaded">
+      <button class="btn btn-primary" (click)="onShowRecommendation()">More information</button>
+    </div>
+
+    <div class="container" *ngIf="showRecommendation">
+      <app-recommendation [sets]="lastEntry.sets" [reps]="lastEntry.reps" [weight]="lastEntry.weight" [goal]="Goal.Strength"></app-recommendation>
+    </div>
   </div>
 </div>

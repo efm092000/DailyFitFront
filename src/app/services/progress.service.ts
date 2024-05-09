@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Progress } from "../interfaces/progress";
 import {HttpClient} from "@angular/common/http";
 import {ExerciseDone} from "../interfaces/exercise-done";
 import {UserService} from "./user.service";
+import { Goal } from "../enums/goal.enum";
+import { ProgressRecommendation } from "../interfaces/progress-recommendation.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,6 @@ export class ProgressService {
   private apiUrl = "http://localhost:8080/api/progress/";
 
   constructor(private http: HttpClient, private userService: UserService) { }
-
-  async getProgressMock(userEmail: string, exerciseName: string): Promise<Progress> {
-    const response = await fetch(this.apiUrl + `get_done_exercises?email=${userEmail}&name=${exerciseName}`);
-    const data = await response.json();
-    console.log(data)
-    return {
-      exercise: exerciseName,
-      data: data
-    };
-  }
 
   async getProgressExerciseName(userEmail:string) {
     const request = fetch(this.apiUrl + `get_done_exercises_names?email=${userEmail}`);
@@ -58,5 +49,11 @@ export class ProgressService {
     const month = String(week.getMonth() + 1).padStart(2,'0');
     const year = week.getFullYear();
     return `${month}/${day}/${year}`
+  }
+
+  async getRecommendationMock(sets: number, reps: number, weight: number, goal: Goal): Promise<ProgressRecommendation> {
+    return fetch(this.apiUrl + `recommendation?reps=${reps}&weight=${weight}&goal=${goal}`).then(
+      (response) => response.json()
+    )
   }
 }
