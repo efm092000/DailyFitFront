@@ -14,6 +14,7 @@ export const routes: Routes = [
       { path: 'search', loadComponent: () => import('./components/exercise-search/exercise-search.component').then(m => m.ExerciseSearchComponent) },
       { path: 'today', loadComponent: () => import('./components/today-planning/today-planning.component').then(m => m.TodayPlanningComponent) },
       { path: 'weekly', loadComponent: () => import('./components/weekly/weekly.component').then(m => m.WeeklyComponent) },
+      { path: 'exercise', loadComponent: () => import('./components/exercise-create/exercise-create.component').then(m => m.ExerciseCreateComponent)},
     ]
   },
   {
