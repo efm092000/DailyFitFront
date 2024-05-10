@@ -9,8 +9,8 @@
               <img src="assets/images/icon.png"
                    alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               <h5>{{ user.name }}</h5>
-              <p *ngIf="user.premium">Premium</p>
-              <p *ngIf="!user.premium">Free</p>
+              <p *ngIf="user.isPremium">Premium</p>
+              <p *ngIf="!user.isPremium">Free</p>
               <i class="far fa-edit mb-5" (click)="openEditModal()"></i>
             </div>
             <div class="col-md-8">
@@ -28,7 +28,7 @@
                 <hr class="mt-0 mb-4">
                 <div class="d-flex justify-content-around">
                   <button class="btn btn-primary" (click)="openEditModal()">Edit Profile</button>
-                  <button class="btn btn-primary" routerLink="/premium">Get Premium</button>
+                  <button class="btn btn-primary" routerLink="/premium" *ngIf="!user.isPremium">Get Premium</button>
                 </div>
               </div>
             </div>

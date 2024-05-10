@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {countries} from "./country-data";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {User} from "../../interfaces/user";
 import {UserService} from "../../services/user.service";
 
@@ -8,14 +8,15 @@ import {UserService} from "../../services/user.service";
   selector: 'app-subscription',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './subscription.component.html',
   styleUrl: './subscription.component.css'
 })
 export class SubscriptionComponent implements OnInit{
   public countries: any = countries
-  user: User = {name:'',email: '', premium: false};
+  user: User = this.userService.getLoggedInUser();
 
   constructor(private userService: UserService) {
   }
@@ -28,6 +29,10 @@ export class SubscriptionComponent implements OnInit{
 
   buyPremium(){
     this.userService.getPremium(this.user.email)
+  }
+
+  isUserPremium() {
+    return this.userService.isUserPremium();
   }
 
 }

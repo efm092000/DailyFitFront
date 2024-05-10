@@ -7,6 +7,7 @@ import {RoutineComponent} from "../routine/routine.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {UserService} from "../../services/user.service";
 import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
+import {User} from "../../interfaces/user";
 
 
 
@@ -28,6 +29,7 @@ import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
   showPopup: boolean = false;
+  user: User = this.userService.getLoggedInUser();
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {
@@ -43,6 +45,9 @@ export class RoutinesComponent implements OnInit{
           console.log(err);
         }
       });
+    this.userService.user$.subscribe(
+      user => this.user = user
+    );
   }
 
   routineAccess(rid: number, name: string, email: string){
@@ -53,7 +58,7 @@ export class RoutinesComponent implements OnInit{
 
   routineLimitReached() {
     // @ts-ignore
-    return this.userRoutines.length >= 5 && !this.userService.getLoggedInUser().premium;
+    return this.userRoutines.length >= 5 && !this.user.isPremium;
   }
 
   routineGenerator(): void {

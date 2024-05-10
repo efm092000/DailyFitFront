@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {HeaderComponent} from "./components/header/header.component";
-import {PruebaComponent} from "./components/prueba/prueba.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import { HomePageComponent } from './components/home-page/home-page.component';
 import {RouterModule } from '@angular/router';

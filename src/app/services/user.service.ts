@@ -10,7 +10,7 @@ export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
   private USER_KEY = 'loggedInUser';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false});
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
   //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
   }
@@ -20,7 +20,6 @@ export class UserService {
   }
 
   getLoggedInUser() {
-    console.log(this.user$.value)
     const userJson = localStorage.getItem(this.USER_KEY);
     if (userJson) {
       return JSON.parse(userJson);
@@ -63,10 +62,17 @@ export class UserService {
     return response;
   }
 
-  getPremium(email: String): Observable<User> {
+  getPremium(email: String) {
     const url = `${this.userApiUrl}/${email}?premium=1`;
-    this.user$.value.premium = true;
-    this.saveUserToLocalStorage(this.user$.value);
-    return this.http.put<User>(url, {}, {});
+    let response = this.http.put<User>(url, {}, {});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
+  }
+
+  isUserPremium() {
+    console.log(this.user$.value);
+    return this.user$.value.isPremium;
   }
 }
