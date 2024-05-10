@@ -1,4 +1,3 @@
-<app-sidebar></app-sidebar>
 <div class="d-flex flex-column align-items-center justify-content-between">
   <div id="routines-container" class="grid-container justify-content-between d-grid row-cols-4 gap-4">
     <div *ngFor="let userRoutine of userRoutines" class="col p-3" id="routine-decor">
@@ -6,6 +5,9 @@
     </div>
   </div>
   <div  class="align-text-center pt-4">
-    <button class="button" (click)="routineGenerator()" routerLink="/routine">Create routine</button>
+    <button *ngIf="!routineLimitReached()" class="button" (click)="routineGenerator()" routerLink = "/routine">Create routine</button>
+    <button *ngIf="routineLimitReached()" (click)="showPopup = true" class="button">Create routine</button>
   </div>
 </div>
+
+<app-premium-popup *ngIf="showPopup" (closePopup)="closePopup()"></app-premium-popup>

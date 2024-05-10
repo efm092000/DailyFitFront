@@ -1,6 +1,6 @@
 import { Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import { catchError, Observable, of} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import { UserRoutine} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
 import {UserService} from "./user.service";
@@ -53,6 +53,16 @@ export class RoutinesService {
         return of(undefined)
       })
     )
+  }
+
+  getNumberOfRoutines(): Observable<number> {
+    return this.getAllUserRoutines().pipe(
+      map((routines: UserRoutine[] | undefined) => routines ? routines.length : 0),
+      catchError((error) => {
+        console.log(error);
+        return of(0);
+      })
+    );
   }
 
   getRoutineExercises(routineID: number): Observable<Routine[] |undefined> {
