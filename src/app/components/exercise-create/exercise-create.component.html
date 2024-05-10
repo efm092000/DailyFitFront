@@ -1,0 +1,41 @@
+<div id="exercise-create-page" class="d-flex flex-column align-items-center">
+  <h1 class="title"> New Exercise</h1>
+  <div id="info-group" class="d-flex flex-column align-items-right">
+    <div>
+      <label for="exerciseName">Name</label>
+      <input type="text" id="exerciseName">
+    </div>
+    <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
+      <select class="filters" [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
+        <option selected value="">Muscle Group</option>
+        <option value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
+      </select>
+
+      <select class="filters" [(ngModel)]="searchFilters.material" name = "material">
+        <option selected value ="">Material needed</option>
+        <option value="{{material.value}}" *ngFor="let material of materialFilters">{{material.name}}</option>
+      </select>
+
+      <select class="filters" [(ngModel)]="searchFilters.type" name="type">
+        <option selected value="">Type</option>
+        <option value="{{type}}" *ngFor="let type of typeFilters">{{type}}</option>
+      </select>
+
+
+      <select class="filters" [(ngModel)]="searchFilters.difficulty" name="difficulty">
+        <option selected value="">Difficulty</option>
+        <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
+      </select>
+    </div>
+
+    <div id="button-group">
+      <label>
+        <input type="radio" name="buttonGroup" [(ngModel)]="selectedButton" value="Pull"> Pull
+      </label>
+      <label>
+        <input type="radio" name="buttonGroup" [(ngModel)]="selectedButton" value="Push"> Push
+      </label>
+    </div>
+  </div>
+  <button class="button">Create Exercise</button>
+</div>

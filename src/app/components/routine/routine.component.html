@@ -39,4 +39,5 @@
 </div>
 
 <app-exercise-search *ngIf="displaySearchExercises" [rid] = userRoutine.rid></app-exercise-search>
+<button class="button-small" routerLink="/exercise" *ngIf="displaySearchExercises">Create Exercise</button>
 <button class="button-small" (click)="toggleSearch()" *ngIf="displaySearchExercises">Finish</button>
