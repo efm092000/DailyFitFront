@@ -11,6 +11,7 @@ export class UserService {
   userApiUrl: string = 'http://localhost:8080/api/user';
   private USER_KEY = 'loggedInUser';
   user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
+  userIsLogged: boolean = false;
   //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
   }
@@ -39,12 +40,16 @@ export class UserService {
     }
     const response = this.http.post<User>(loginUrl, body);
     response.subscribe(
-      user => this.user$.next(user)
+      user => {
+        this.user$.next(user)
+        this.userIsLogged = true;
+      }
     );
     return response;
   }
 
   logout() {
+    this.userIsLogged = false;
     localStorage.removeItem(this.USER_KEY);
   }
 
@@ -74,5 +79,9 @@ export class UserService {
   isUserPremium() {
     console.log(this.user$.value);
     return this.user$.value.isPremium;
+  }
+
+  isLogged() {
+    return this.userIsLogged;
   }
 }

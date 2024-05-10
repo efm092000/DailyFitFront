@@ -59,9 +59,6 @@ export class ProgressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.userService.getLoggedInUser()) {
-      this.router.navigate(['/login'])
-    }
     this.progressService.getProgressExerciseName(this.userService.getLoggedInUser().email).then(
       (exercises: string[]) => {
         this.exercises = exercises;
