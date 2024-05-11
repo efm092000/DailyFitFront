@@ -3,4 +3,5 @@ export interface User {
   email: string
   premium: boolean;
   profilePicture: string;
+  isPremium: boolean;
 }

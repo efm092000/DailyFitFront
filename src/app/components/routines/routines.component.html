@@ -5,6 +5,9 @@
     </div>
   </div>
   <div  class="align-text-center pt-4">
-    <button class="button" (click)="routineGenerator()" routerLink="/routine">Create routine</button>
+    <button *ngIf="!routineLimitReached()" class="button" (click)="routineGenerator()" routerLink = "/routine">Create routine</button>
+    <button *ngIf="routineLimitReached()" (click)="togglePopup()" class="button">Create routine</button>
   </div>
 </div>
+
+<app-premium-popup *ngIf="showPopup" (closePopup)="togglePopup()"></app-premium-popup>

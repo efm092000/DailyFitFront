@@ -38,7 +38,8 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <button type="submit">Confirm Payment</button>
+      <button class="button" type="submit" (click)="buyPremium()" *ngIf="!isUserPremium()">Confirm Payment</button>
+      <p *ngIf="isUserPremium()">You're already premium.</p>
     </div>
   </div>
 </div>

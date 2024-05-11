@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import { User } from "../interfaces/user";
+import {User} from "../interfaces/user";
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
@@ -9,9 +9,10 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
-  private readonly USER_KEY = 'loggedInUser';
   user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false, profilePicture: ''});
-  //readonly user$ = this._user$;
+  private USER_KEY = 'loggedInUser';
+  userIsLogged: boolean = false;
+
   constructor(private http: HttpClient) {
   }
 
@@ -39,12 +40,16 @@ export class UserService {
     }
     const response = this.http.post<User>(loginUrl, body);
     response.subscribe(
-      user => this.user$.next(user)
+      user => {
+        this.user$.next(user)
+        this.userIsLogged = true;
+      }
     );
     return response;
   }
 
   logout() {
+    this.userIsLogged = false;
     localStorage.removeItem(this.USER_KEY);
   }
 
@@ -74,6 +79,24 @@ export class UserService {
 
    );
    return response;
+  }
+
+  getPremium(email: String) {
+    const url = `${this.userApiUrl}/${email}?premium=1`;
+    let response = this.http.put<User>(url, {}, {});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
+  }
+
+  isUserPremium() {
+    console.log(this.user$.value);
+    return this.user$.value.isPremium;
+  }
+
+  isLogged() {
+    return this.userIsLogged;
   }
 
 }

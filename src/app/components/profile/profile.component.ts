@@ -19,7 +19,9 @@ import {RouterLink} from "@angular/router";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
+
   user: User = {name:"", email:"", premium: false, profilePicture: ''};
+
   numRoutines: number = 0;
   newName: string = '';
   isEditModalOpen: boolean = false;
