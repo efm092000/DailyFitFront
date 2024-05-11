@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-4 features">
+    <h1>Premium features</h1>
+    <ul>
+      <li>Create unlimited routines.</li>
+      <li>Access to more detailed progress information.</li>
+    </ul>
+    <h2>Price: 20$</h2>
+  </div>
+
+  <div class="col">
+    <h1>Enter your payment details</h1>
+    <div class="row">
+      <div class="col">
+        <input class="form-control" placeholder="Card Number">
+      </div>
+      <div class="col-3">
+        <input class="form-control" placeholder="MM/YY">
+      </div>
+      <div class="col-2">
+        <input class="form-control" placeholder="CVC">
+      </div>
+    </div>
+
+    <input class="form-control" placeholder="Street Address">
+    <select class="form-control" name="country" id="country">
+      <option value="" disabled selected>Select a country</option>
+      <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+    </select>
+
+    <div class="row">
+      <div class="col">
+        <input class="form-control" placeholder="City">
+      </div>
+      <div class="col-3">
+        <input class="form-control" placeholder="Zip Code">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button class="button" type="submit" (click)="buyPremium()" *ngIf="!isUserPremium()">Confirm Payment</button>
+      <p *ngIf="isUserPremium()">You're already premium.</p>
+    </div>
+  </div>
+</div>

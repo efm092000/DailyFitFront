@@ -23,11 +23,7 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
   }
 
-  ngOnInit(): void {
-    if (this.userService.getLoggedInUser()) {
-      this.router.navigate(['/']);
-    }
-  }
+  ngOnInit(): void { }
 
   formLogin = this.fb.group({
     'email': ['', [Validators.required, Validators.email]],

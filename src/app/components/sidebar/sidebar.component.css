@@ -1,6 +1,6 @@
 .sidebar-items {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     width: max-content;
     gap: 1em;
 }
@@ -10,7 +10,7 @@
     width: 1.5em;
 }
 
-#left-sidebar-routine {
+.left-sidebar-routine {
     p {
         font-size: 2em;
     }
@@ -31,6 +31,10 @@
     position: fixed;
 }
 
+.left-sidebar-routine.hidden {
+  width: 8em;
+}
+
 
 #routines-button:active {
     transform: scale(0.9);
@@ -48,11 +52,29 @@
     margin-right: 10px;
 }
 
+#progress-button:active {
+  transform: scale(0.9);
+}
+#progress-button img {
+  margin-right: 10px;
+}
+
+#today-button:active {
+  transform: scale(0.9);
+}
+#today-button img {
+  margin-right: 10px;
+}
+
+#hide-sidebar-button img {
+  transform: scale(0.7);
+}
+
 a {
     text-decoration: none;
 }
 
-#today-button, #progress-button,#weekly-button,#routines-button {
+#today-button, #progress-button,#weekly-button,#routines-button,#hide-sidebar-button {
   display: flex;
   align-items: center;
   padding: 10px;

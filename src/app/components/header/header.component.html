@@ -9,7 +9,7 @@
     <div *ngIf="loggedIn" >
       <div class="dropdown">
         <button  (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img id="icon" title="icon" src="assets/images/icon.png"  routerLink="/login">
+          <img id="icon" title="icon" src="assets/images/icon.png">
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 0;">
           <li routerLink="/profile" class="btn " style="display: flex; align-items: center;">
@@ -23,7 +23,7 @@
     </div>
 
     <div *ngIf="!loggedIn" class="to-login">
-      <button class="button-login" routerLink="/login" (click)="logIn()"> Log in </button>
+      <button class="button-login" routerLink="/login"> Log in </button>
     </div>
   </div>
   <hr class="line" id="horizontal-line">
