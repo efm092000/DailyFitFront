@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import { User } from "../interfaces/user";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
   private readonly USER_KEY = 'loggedInUser';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false});
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false, profilePicture: ''});
   //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
   }
@@ -61,4 +61,19 @@ export class UserService {
     );
     return response;
   }
+
+  uploadProfilePicture(email: string, file: File): Observable<User> {
+    const formData = new FormData();
+    formData.append('file', file);
+   const response: Observable<User> =  this.http.post<User>(`${this.userApiUrl}/${email}/profile-picture`, formData);
+   response.subscribe(
+     user  => {
+       console.log(user);
+       this.user$.next(user)
+     }
+
+   );
+   return response;
+  }
+
 }
