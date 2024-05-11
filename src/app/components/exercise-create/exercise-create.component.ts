@@ -4,6 +4,7 @@ import { IntegerFilter } from "../../interfaces/integer-filter";
 import { BooleanFilter } from "../../interfaces/boolean-filter";
 import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {Exercise} from "../../interfaces/exercise";
 
 @Component({
   selector: 'app-exercise-create',
@@ -17,7 +18,6 @@ import {FormsModule} from "@angular/forms";
 })
 
 export class ExerciseCreateComponent implements OnInit {
-  selectedButton: string = 'none';
   searchFilters = {
     difficulty: "",
     material: "",
@@ -29,6 +29,16 @@ export class ExerciseCreateComponent implements OnInit {
   difficultyFilters: IntegerFilter[] = [];
   typeFilters: string[] = [];
   muscleGroupFilters: string[] = [];
+
+  newExercise:Exercise ={
+    name: '',
+    material: false,
+    muscleGroup: '',
+    difficulty: 0,
+    type: '',
+    gif: '',
+    description: ''
+  };
 
   constructor(private exerciseService: ExerciseService) { }
 
@@ -86,4 +96,23 @@ export class ExerciseCreateComponent implements OnInit {
       }
     );
   }
+  createExercise(){
+    if (!this.newExercise.name || !this.newExercise.difficulty || !this.newExercise.muscleGroup || !this.newExercise.type ) {
+      console.error('Please complete all fields.');
+      return;
+    }const exerciseToCreate: Exercise = {
+      name: this.newExercise.name,
+      material: this.newExercise.material,
+      muscleGroup: this.newExercise.muscleGroup,
+      difficulty: this.newExercise.difficulty,
+      type: this.newExercise.type,
+      gif: this.newExercise.gif,
+      description: this.newExercise.description
+    };
+
+    this.exerciseService.createExercise(exerciseToCreate).subscribe(response => {}, error => {
+      console.error('Error al crear el ejercicio:', error);
+    });
+  }
+
 }

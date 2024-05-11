@@ -1,9 +1,9 @@
 <div id="exercise-create-page" class="d-flex flex-column align-items-center">
   <h1 class="title"> New Exercise</h1>
-  <div id="info-group" class="d-flex flex-column align-items-right">
+  <div id="info-group" class="container mb-4 align-items-right">
     <div>
-      <label for="exerciseName">Name</label>
-      <input type="text" id="exerciseName">
+      <label for="exerciseName" class="subheader" >Name:</label>
+      <input type="text" id="exerciseName" class="container m-3 small-text" style="width: 10em;">
     </div>
     <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
       <select class="filters" [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
@@ -27,15 +27,6 @@
         <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
       </select>
     </div>
-
-    <div id="button-group">
-      <label>
-        <input type="radio" name="buttonGroup" [(ngModel)]="selectedButton" value="Pull"> Pull
-      </label>
-      <label>
-        <input type="radio" name="buttonGroup" [(ngModel)]="selectedButton" value="Push"> Push
-      </label>
-    </div>
   </div>
-  <button class="button">Create Exercise</button>
+  <button class="button" (click)="createExercise()">Create Exercise</button>
 </div>
