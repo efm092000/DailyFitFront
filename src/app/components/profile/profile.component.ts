@@ -19,38 +19,65 @@ import {RouterLink} from "@angular/router";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
-  user: User = {name:"", email:"", premium: false};
+  user: User = {name:"", email:"", premium: false, profilePicture: ''};
   numRoutines: number = 0;
   newName: string = '';
   isEditModalOpen: boolean = false;
+  selectedFile: File | null = null;
   constructor(private userService: UserService, private routinesService: RoutinesService) { }
 
   ngOnInit(): void {
 
-    //this.user = this.userService.getLoggedInUser();
     this.userService.user$.subscribe(
       user => this.user = user
     );
     this.routinesService.getNumberOfRoutines().subscribe(
       num => this.numRoutines = num
     );
+
   }
+
   openEditModal(): void {
-    this.newName = this.user.name; // Pre-fill the input with current name
+    this.newName = this.user.name;
     this.isEditModalOpen = true;
-    console.log(this.isEditModalOpen);
   }
 
   closeEditModal(): void {
-    this.isEditModalOpen = false; // Hide the modal
+    this.isEditModalOpen = false;
   }
 
   submitEditProfile(): void {
-    // Update user name
-    this.userService.updateName(this.user.email, this.newName);
+
+    if (this.selectedFile) {
+
+      this.userService.uploadProfilePicture(this.user.email, this.selectedFile).subscribe({
+        next: (user: User) => {
+          console.log('Upload successful:', user);
+        },
+        error: error => {
+          console.error('Error uploading profile picture:', error);
+        }
+      });
+    }
+
+    if (this.newName) {
+      this.userService.updateName(this.user.email, this.newName).subscribe({
+        next: (user: User) => {
+          this.user.name = user.name;
+        },
+        error: error => {
+          console.error('Error updating name:', error);
+        }
+      });
+    }
+
     this.closeEditModal();
   }
 
-  protected readonly JSON = JSON;
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+
 }
 

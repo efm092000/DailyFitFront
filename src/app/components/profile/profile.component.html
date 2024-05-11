@@ -6,7 +6,7 @@
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white"
                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <img src="assets/images/icon.png"
+              <img [src]="user.profilePicture"
                    alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               <h5>{{ user.name }}</h5>
               <p *ngIf="user.premium">Premium</p>
@@ -53,6 +53,10 @@
             <label for="newName" class="form-label">New Username</label>
             <input type="text" class="form-control" id="newName" [(ngModel)]="newName" name="newName">
           </div>
+          <div class="mb-3">
+            <label for="profilePic" class="form-label">New Profile Picture</label>
+            <input type="file" class="form-control" id="profilePic" (change)="onFileSelected($event)" accept="image/*">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -62,4 +66,3 @@
     </div>
   </div>
 </div>
-
