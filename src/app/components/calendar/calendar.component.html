@@ -1,9 +1,22 @@
+
 <div class="form-group">
   <form (ngSubmit)="onSubmit()">
-    <label for="weekSelector">Selecciona una semana:</label>
-    <input type="text" class="form-control" id="weekSelector" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" (bsValueChange)="onDateChanged($event)">
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
 
-    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan">
+    <h1>Link a Weekly Planning to a week</h1>
+    <p-calendar
+      class="max-w-full form-control"
+      id="weekSelector"
+      [(ngModel)]="date"
+      [inline]="true"
+      [showWeek]="false"
+      [showOtherMonths]="false"
+      [firstDayOfWeek]="1"
+      (onSelect)="onDateChanged()"
+      [ngModelOptions]="{standalone: true}"
+    ></p-calendar>
+    <label for="selectorOfWeekly">Select a Weekly Planning</label>
+    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan" id="selectorOfWeekly">
       <option selected value="{{weekly.wid}}" *ngFor="let weekly of userWeeklies">{{weekly.name}}</option>
     </select>
 
