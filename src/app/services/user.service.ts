@@ -9,10 +9,10 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false, profilePicture: ''});
   private USER_KEY = 'loggedInUser';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
   userIsLogged: boolean = false;
-  //readonly user$ = this._user$;
+
   constructor(private http: HttpClient) {
   }
 
@@ -67,6 +67,20 @@ export class UserService {
     return response;
   }
 
+  uploadProfilePicture(email: string, file: File): Observable<User> {
+    const formData = new FormData();
+    formData.append('file', file);
+   const response: Observable<User> =  this.http.post<User>(`${this.userApiUrl}/${email}/profile-picture`, formData);
+   response.subscribe(
+     user  => {
+       console.log(user);
+       this.user$.next(user)
+     }
+
+   );
+   return response;
+  }
+
   getPremium(email: String) {
     const url = `${this.userApiUrl}/${email}?premium=1`;
     let response = this.http.put<User>(url, {}, {});
@@ -84,4 +98,5 @@ export class UserService {
   isLogged() {
     return this.userIsLogged;
   }
+
 }
