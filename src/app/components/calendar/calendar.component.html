@@ -1,7 +1,7 @@
 
 <div class="form-group">
   <form (ngSubmit)="onSubmit()">
-    <full-calendar [options]="calendarOptions"></full-calendar>
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
 
     <h1>Link a Weekly Planning to a week</h1>
     <p-calendar
