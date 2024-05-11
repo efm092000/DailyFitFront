@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class UserService {
 
   userApiUrl: string = 'http://localhost:8080/api/user';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', premium: false, profilePicture: ''});
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false, profilePicture: ''});
   private USER_KEY = 'loggedInUser';
   userIsLogged: boolean = false;
 

@@ -20,7 +20,7 @@ import {RouterLink} from "@angular/router";
 })
 export class ProfileComponent implements OnInit{
 
-  user: User = {name:"", email:"", premium: false, profilePicture: ''};
+  user: User = {name:"", email:"", isPremium: false, profilePicture: ''};
 
   numRoutines: number = 0;
   newName: string = '';
