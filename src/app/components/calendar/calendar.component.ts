@@ -1,11 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {FormsModule} from "@angular/forms";
 import {Weekly} from "../../interfaces/weekly";
 import {ProgressService} from "../../services/progress.service";
 import {WeeklyService} from "../../services/weekly.service";
-import {NgClass, NgForOf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {NgClass, NgForOf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {CalendarModule} from "primeng/calendar";
+import {FullCalendarModule} from "@fullcalendar/angular";
+import {CalendarOptions} from "@fullcalendar/core";
+import dayGridPlugin from '@fullcalendar/daygrid';
+
 
 
 
@@ -19,16 +23,19 @@ import {CalendarModule} from "primeng/calendar";
     NgClass,
     NgSwitch,
     NgSwitchCase,
-    CalendarModule
+    CalendarModule,
+    NgStyle,
+    FullCalendarModule
   ],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+  styleUrl: './calendar.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CalendarComponent implements OnInit{
   selectedDate: Date | undefined;
   selectedPlan: number | undefined;
   userWeeklies: Weekly[] =[];
-  date: Date | undefined;
+  date: Date = new Date();
 
 
   constructor(private progressService:ProgressService, private weeklyService:WeeklyService) {
@@ -37,8 +44,9 @@ export class CalendarComponent implements OnInit{
   ngOnInit(): void {
         this.getUserWeeklies();
     }
-  onDateChanged(date: Date): void {
-    const startDate = this.getMonday(date);
+
+  onDateChanged(): void {
+    const startDate = this.getMonday(this.date);
     console.log(startDate);
   }
 
@@ -51,7 +59,7 @@ export class CalendarComponent implements OnInit{
 
   onSubmit(): void {
     if (this.selectedDate && this.selectedPlan) {
-      console.log(this.selectedPlan)
+      console.log(this.selectedDate)
       this.assignWeeklyToWeek(this.selectedDate, this.selectedPlan);
     } else {
       console.log('Please select a date and a weekly plan.');
@@ -63,6 +71,25 @@ export class CalendarComponent implements OnInit{
 
   assignWeeklyToWeek(date: Date, plan: number): void {
     this.progressService.setWeeklyToWeek(plan, date).subscribe(()=>{});
+  }
+
+  calendarOptions: CalendarOptions = {
+    plugins:[dayGridPlugin],
+    eventClick: this.handleDateClick.bind(this),
+    events: [
+      // Define your events here
+    ],
+    headerToolbar: {
+      left: 'prev,next',
+      center: 'title',
+    },
+    selectable:true,
+    selectMirror: true,
+    dayMaxEvents: true
+  };
+
+  handleDateClick(arg:any) {
+    alert('Date clicked: ' + arg.dateStr);
   }
 
 }
