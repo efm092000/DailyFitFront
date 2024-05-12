@@ -24,20 +24,19 @@
       </tr>
     </tbody>
   </table>
-  <div id="edit-buttons" class="p-3 d-flex align-items-center gap-2 justify-content-between">
-    <button class="button-small edit-buttons" (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
-    <button class="button-small edit-buttons" (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
-    <button class="button-small edit-buttons" style="width: 10em;" (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
-    <button class="button-small edit-buttons" (click)="goBack()" routerLink="/routines">Go Back</button>
+  <div id="edit-buttons" class="p-3 d-flex align-items-center justify-content-between">
+    <button class="routine-buttons button-small mx-auto" (click)="saveRoutineAction()" *ngIf="isEditMode">Save Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="editRoutineAction()" *ngIf="!isEditMode">Edit Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="toggleDeleteConfirmation()" *ngIf="isEditMode">Delete Routine</button>
+    <button class="routine-buttons button-small mx-auto" (click)="goBack()" routerLink="/routines">Go Back</button>
   </div>
 </div>
 
 <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
   <p>Are you sure you want to delete this routine?</p>
-  <button class="button-small" (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
-  <button class="button-small" style=" filter: saturate(30%); background-color: white;   color:darkred" (click)="toggleDeleteConfirmation()">Cancel</button>
+  <button (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
+  <button (click)="toggleDeleteConfirmation()">Cancel</button>
 </div>
 
 <app-exercise-search *ngIf="displaySearchExercises" [rid] = userRoutine.rid></app-exercise-search>
-<button class="button-small" (click)="toggleSearch()" *ngIf="displaySearchExercises">Finish</button>
-
+<button (click)="toggleSearch()" *ngIf="displaySearchExercises">Finish</button>

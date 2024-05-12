@@ -37,7 +37,6 @@ export class ExerciseSearchComponent implements OnInit{
   typeFilters: string[] = [];
   muscleGroupFilters: string[] = [];
 
-
   constructor(protected exerciseService: ExerciseService) {}
 
   ngOnInit(): void {

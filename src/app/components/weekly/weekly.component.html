@@ -16,9 +16,9 @@
   <button (click)="toggleEditMode()" class="button">{{ editingMode ? 'View' : 'Edit' }}</button>
 
 
-  <div *ngIf="editingMode" class="row align-items-center">
-      <button (click)="togglePopup()" class="button m-2">Add Routine</button>
-      <button (click)="toggleInput()" class="button m-2">Add New Weekly Plan</button>
+  <div *ngIf="editingMode" class="row  justify-content-center align-items-center">
+      <button (click)="togglePopup()" class="button">Add Routine</button>
+      <button (click)="toggleInput()" class="button">Add New Weekly Plan</button>
   </div>
 
   <div *ngIf="showInput" class="d-flex flex-column align-items-center">

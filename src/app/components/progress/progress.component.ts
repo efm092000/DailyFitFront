@@ -74,7 +74,6 @@ export class ProgressComponent implements OnInit {
         this.loadChart();
       }
     )
-
   }
 
   loadChart() {

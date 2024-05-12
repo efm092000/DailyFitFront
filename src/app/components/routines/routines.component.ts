@@ -64,24 +64,20 @@ export class RoutinesComponent implements OnInit{
   routineGenerator(): void {
     this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.isEditMode = true;
-    this.userService.loggedInUser.subscribe(user => {
-      if (user) {
-        this.serviceRoutines.createRoutine("NewRoutine", user.email).subscribe({
-          next: (response: UserRoutine) => {
-            console.log('Rutina creada:', response);
-            this.serviceRoutines.userRoutine.rid = response.rid;
-            this.serviceRoutines.userRoutine.name = response.name;
-            this.serviceRoutines.userRoutine.email = response.email;
-          },
-          error: error => {
-            console.error('Error al crear la rutina:', error);
-          }
-        });
-      } else {
-        // Manejar caso cuando el usuario no está autenticado
-        console.log("Usuario no autenticado");
+    this.serviceRoutines.createRoutine("NewRoutine", this.userService.getLoggedInUser().email).subscribe({
+      next: (response: UserRoutine) => {
+        console.log('Rutina creada:', response);
+        this.serviceRoutines.userRoutine.rid = response.rid;
+        this.serviceRoutines.userRoutine.name = response.name;
+        this.serviceRoutines.userRoutine.email = response.email;
+
+
+      },
+      error: error => {
+        console.error('Error al crear la rutina:', error);
       }
     });
+
   }
 
   closePopup() {

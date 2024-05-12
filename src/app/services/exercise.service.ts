@@ -11,7 +11,6 @@ import {BooleanFilter} from "../interfaces/boolean-filter";
 export class ExerciseService {
   private apiUrl = "http://localhost:8080/api/exercise";
 
-
   constructor(private http: HttpClient) {}
 
   getExercises(filters: Exercise): Observable<Exercise[]> {
@@ -37,10 +36,5 @@ export class ExerciseService {
   }
   getMaterialFilters(){
     return this.http.get<BooleanFilter[]>(this.apiUrl + "/filters/material");
-  }
-
-  createExercise(muscleGroup: string, type: string, name: string, difficulty: number, material: boolean, gif: string, description: string ):Observable<any>{
-    return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}&name=${name}`, {});
-
   }
 }

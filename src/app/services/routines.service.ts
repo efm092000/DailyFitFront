@@ -45,21 +45,14 @@ export class RoutinesService {
     })
     )
   }
-  getAllUserRoutines(): Observable<UserRoutine[] | undefined> {
-    return this.userService.loggedInUser.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.http.get<UserRoutine[]>(`http://localhost:8080/api/user/${user.email}/routines`).pipe(
-            catchError(error => {
-              console.log(error);
-              return of(undefined);
-            })
-          );
-        } else {
-          return of(undefined);
-        }
+
+  getAllUserRoutines(): Observable<UserRoutine[] | undefined>{
+    return this.http.get<UserRoutine[]>(`http://localhost:8080/api/user/${this.userService.getLoggedInUser().email}/routines`).pipe(
+      catchError((error) => {
+        console.log(error)
+        return of(undefined)
       })
-    );
+    )
   }
 
   getNumberOfRoutines(): Observable<number> {
