@@ -13,6 +13,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { RecommendationComponent } from "./recommendation/recommendation.component";
 import { last } from "rxjs";
 import { Goal } from "../../enums/goal.enum";
+import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
 
 
 @Component({
@@ -26,7 +27,8 @@ import { Goal } from "../../enums/goal.enum";
     FormsModule,
     ReactiveFormsModule,
     RecommendationComponent,
-    NgIf
+    NgIf,
+    PremiumPopupComponent
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.css'
@@ -40,6 +42,8 @@ export class ProgressComponent implements OnInit {
     data: []
   };
   protected exercises: string[] = [];
+  isPremium: boolean = false;
+  showPopup: boolean = false;
 
   years: number[] = Array.from({ length: 1 }, (v, k) => k + 2024);
   months: number[] = Array.from({ length: 12 }, (v, k) => k + 1);
@@ -60,6 +64,7 @@ export class ProgressComponent implements OnInit {
         this.exercises = exercises;
       }
     )
+    this.isPremium = this.userService.user$.value.isPremium;
   }
 
 
@@ -201,11 +206,15 @@ export class ProgressComponent implements OnInit {
     this.showRecommendation = true;
   }
 
+  togglePopup() {
+    this.showPopup = !this.showPopup;
+  }
+
   get lastEntry() {
     return this.progress.data[this.progress.data.length - 1];
   }
-
   protected readonly JSON = JSON;
   protected readonly last = last;
+
   protected readonly Goal = Goal;
 }

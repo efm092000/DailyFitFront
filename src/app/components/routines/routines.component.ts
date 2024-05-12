@@ -84,8 +84,8 @@ export class RoutinesComponent implements OnInit{
     });
   }
 
-  closePopup() {
-    this.showPopup = false;
+  togglePopup() {
+    this.showPopup = !this.showPopup;
   }
 }
 

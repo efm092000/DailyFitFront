@@ -1,17 +1,22 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {User} from "../interfaces/user";
-import {BehaviorSubject, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { User } from "../interfaces/user";
+import { BehaviorSubject, firstValueFrom, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userApiUrl: string = 'http://localhost:8080/api/user';
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({
+    email: '',
+    name: '',
+    isPremium: false,
+    profilePicture: ''
+  });
   private USER_KEY = 'loggedInUser';
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
   userIsLogged: boolean = false;
-  //readonly user$ = this._user$;
+
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem(this.USER_KEY);
     this._loggedInUser = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser): null);
@@ -31,15 +36,26 @@ export class UserService {
     }
   }
 
-  createUser(email: string, username: string, password: string): Observable<any> {
-    const signUpUrl = `${this.userApiUrl}/${email}?name=${username}&password=${password}`;
-    return this.http.post(signUpUrl, {}, { responseType: 'text' });
+
+  createUser(email: string, username: string, password: string) {
+    let signUpUrl = `${ this.userApiUrl }/${ email }?name=${ username }&password=${ password }`;
+    return this.http.post(signUpUrl, {}, { responseType: 'text' })
   }
 
-  login(email: string, password: string): Observable<User> {
-    const loginUrl = `${this.userApiUrl}/authenticate`;
-    const body = { email, password };
-    return this.http.post<User>(loginUrl, body);
+  login(email: string, password: string) {
+    let loginUrl = `${ this.userApiUrl }/authenticate`;
+    let body = {
+      email: email,
+      password: password
+    }
+    const response = this.http.post<User>(loginUrl, body);
+    response.subscribe(
+      user => {
+        this.user$.next(user)
+        this.userIsLogged = true;
+      }
+    );
+    return response;
   }
 
   logout() {
@@ -49,20 +65,28 @@ export class UserService {
 
   updateName(email: string, name?: string): Observable<User> {
 
-    const url = `${this.userApiUrl}/${email}`;
+    const url = `${ this.userApiUrl }/${ email }`;
     let params = new HttpParams();
     if (name) {
       params = params.set('name', name);
     }
-    const response = this.http.put<User>(url, {}, {params: params});
+    const response = this.http.put<User>(url, {}, { params: params });
     response.subscribe(
       user => this.user$.next(user)
     );
     return response;
   }
 
+  uploadProfilePicture(email: string, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    firstValueFrom(this.http.post<User>(`${ this.userApiUrl }/${ email }/profile-picture`, formData)).then(
+      user => this.user$.next(user)
+    );
+  }
+
   getPremium(email: String) {
-    const url = `${this.userApiUrl}/${email}?premium=1`;
+    const url = `${ this.userApiUrl }/${ email }?premium=1`;
     let response = this.http.put<User>(url, {}, {});
     response.subscribe(
       user => this.user$.next(user)
@@ -78,4 +102,5 @@ export class UserService {
   isLogged() {
     return this.userIsLogged;
   }
+
 }

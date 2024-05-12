@@ -43,7 +43,8 @@
     <canvas id="canvas" width=1000px></canvas>
 
     <div class="d-flex justify-content-center" *ngIf="chartLoaded">
-      <button class="btn btn-primary" (click)="onShowRecommendation()">More information</button>
+      <button class="btn btn-primary" *ngIf="isPremium" (click)="onShowRecommendation()">More information</button>
+      <button class="btn btn-primary" *ngIf="!isPremium" (click)="togglePopup()">More information</button>
     </div>
 
     <div class="container" *ngIf="showRecommendation">
@@ -52,3 +53,5 @@
     <canvas id="canvas" style=" height: 10em; width: 10em"></canvas>
   </div>
 </div>
+
+<app-premium-popup *ngIf="showPopup" (closePopup)="togglePopup()"></app-premium-popup>
