@@ -5,6 +5,7 @@ import { BooleanFilter } from "../../interfaces/boolean-filter";
 import { Exercise } from "../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-exercise-create',
@@ -12,7 +13,8 @@ import {NgForOf} from "@angular/common";
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   styleUrls: ['./exercise-create.component.css']
 })
