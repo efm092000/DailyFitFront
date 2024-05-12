@@ -7,7 +7,6 @@ import { BehaviorSubject, firstValueFrom, Observable } from "rxjs";
   providedIn: 'root'
 })
 export class UserService {
-
   userApiUrl: string = 'http://localhost:8080/api/user';
   user$: BehaviorSubject<User> = new BehaviorSubject<User>({
     email: '',
@@ -19,18 +18,24 @@ export class UserService {
   userIsLogged: boolean = false;
 
   constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem(this.USER_KEY);
+    this._loggedInUser = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser): null);
+
   }
 
-  saveUserToLocalStorage(user: User) {
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+  get loggedInUser(): Observable<User| null>{
+    return this._loggedInUser.asObservable();
   }
 
-  getLoggedInUser() {
-    const userJson = localStorage.getItem(this.USER_KEY);
-    if (userJson) {
-      return JSON.parse(userJson);
+  updateLoggedInUSer(user: User | null){
+    this._loggedInUser.next(user);
+    if (user){
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    }else{
+      localStorage.removeItem(this.USER_KEY);
     }
   }
+
 
   createUser(email: string, username: string, password: string) {
     let signUpUrl = `${ this.userApiUrl }/${ email }?name=${ username }&password=${ password }`;
@@ -54,9 +59,9 @@ export class UserService {
   }
 
   logout() {
-    this.userIsLogged = false;
-    localStorage.removeItem(this.USER_KEY);
+    this.updateLoggedInUSer(null);
   }
+
 
   updateName(email: string, name?: string): Observable<User> {
 

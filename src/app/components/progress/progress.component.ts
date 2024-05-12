@@ -67,6 +67,18 @@ export class ProgressComponent implements OnInit {
     this.isPremium = this.userService.user$.value.isPremium;
   }
 
+
+  selectExercise(exercise: string) {
+    this.userService.loggedInUser.subscribe(user => {
+      if (user) {
+        this.progress = this.progressService.getProgressMock(user.email, exercise);
+        this.loadChart();
+      } else {
+        // Manejar caso cuando el usuario no está autenticado
+        console.log("Usuario not authenticated");
+      }
+    });
+
   onGenerateChart() {
     this.progress.exercise = this.exercise.value;
     this.progressService.getProgressByYearAndMonth(this.userService.getLoggedInUser().email, this.exercise.value, this.year.value, this.month.value).then(
