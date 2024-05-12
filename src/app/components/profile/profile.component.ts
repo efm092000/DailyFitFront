@@ -50,21 +50,14 @@ export class ProfileComponent implements OnInit{
 
   submitEditProfile(): void {
 
-    if (this.selectedFile) {
-
-      this.userService.uploadProfilePicture(this.user.email, this.selectedFile).subscribe({
-        next: (user: User) => {
-          console.log('Upload successful:', user);
-        },
-        error: error => {
-          console.error('Error uploading profile picture:', error);
-        }
-      });
+    if (this.selectedFile !== null) {
+      this.userService.uploadProfilePicture(this.user.email, this.selectedFile);
     }
 
-    if (this.newName) {
+    if (this.newName !== this.user.name && this.newName !== '') {
       this.userService.updateName(this.user.email, this.newName).subscribe({
         next: (user: User) => {
+          console.log("Name updated")
           this.user.name = user.name;
         },
         error: error => {
