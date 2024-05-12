@@ -18,15 +18,14 @@ export class HeaderComponent {
   constructor(private userService: UserService, private renderer: Renderer2) {
   }
 
+  ngOnInit(){
+    this.userService.loggedInUser.subscribe(user => {
+      this.loggedIn = user !== null;
+    });
+  }
   logOut(){
     this.userService.logout();
     this.loggedIn = false;
-  }
-
-  ngOnInit() {
-    if (this.userService.getLoggedInUser()) {
-      this.loggedIn = true;
-    }
   }
 
   loadMenuToggle() {

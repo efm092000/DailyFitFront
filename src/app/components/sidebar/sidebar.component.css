@@ -74,7 +74,7 @@ a {
     text-decoration: none;
 }
 
-#today-button, #progress-button,#weekly-button,#routines-button,#hide-sidebar-button {
+#today-button, #progress-button,#weekly-button,#routines-button, .sidebar_button{
   display: flex;
   align-items: center;
   padding: 10px;

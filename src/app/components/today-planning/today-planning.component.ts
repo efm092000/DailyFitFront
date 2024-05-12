@@ -33,6 +33,7 @@ export class TodayPlanningComponent implements OnInit{
 
   ngOnInit(): void {
     this.progressService.getWeeklyFromWeek(this.currentMonday()).subscribe(
+
       (w: number) => {
         this.currentWeekly = w;
         this.getRoutinesOfWeeklyByDay();

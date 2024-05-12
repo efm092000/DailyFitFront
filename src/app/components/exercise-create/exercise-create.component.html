@@ -1,0 +1,40 @@
+<div id="exercise-create-page" class="d-flex flex-column align-items-center m-5">
+  <h1 class="title"> New Exercise</h1>
+  <div id="info-group" class="container mb-8 align-items-right">
+    <div>
+      <label for="exerciseName" class="subheader">Name:</label>
+      <input type="text" id="exerciseName" class="container small-text" style="width: 10em;" [(ngModel)]="newExercise.name">
+    </div>
+    <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
+      <select class="filters" [(ngModel)]="newExercise.muscleGroup" name="muscleGroup">
+        <option selected value="">Muscle Group</option>
+        <option *ngFor="let muscle of muscleGroupFilters" [value]="muscle">{{muscle}}</option>
+      </select>
+
+      <select class="filters" [(ngModel)]="newExercise.material" name="material">
+        <option selected value="">Material needed</option>
+        <option *ngFor="let material of materialFilters" [value]="material.value">{{material.name}}</option>
+      </select>
+
+      <select class="filters" [(ngModel)]="newExercise.type" name="type">
+        <option selected value="">Type</option>
+        <option *ngFor="let type of typeFilters" [value]="type">{{type}}</option>
+      </select>
+
+      <select class="filters" [(ngModel)]="newExercise.difficulty" name="difficulty">
+        <option selected value="">Difficulty</option>
+        <option *ngFor="let diff of difficultyFilters" [value]="diff.value">{{diff.name}}</option>
+      </select>
+    </div>
+    <div>
+      <label for="exerciseName" class="subheader">Gif:</label>
+      <input type="text" id="exerciseGif" class="container m-3 small-text" style="width: 10em;" [(ngModel)]="newExercise.gif">
+    </div>
+    <div>
+      <label for="exerciseName" class="subheader">Description:</label>
+      <input type="text" id="exerciseDescription" class="container m-3 small-text" style="width: 20em;" [(ngModel)]="newExercise.description">
+    </div>
+  </div>
+  <button class="button"  routerLink="/" (click)="createExercise()" >Save</button>
+</div>
+

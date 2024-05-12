@@ -24,7 +24,7 @@ export class LoginComponent {
   }
 
   ngOnInit(): void { }
-
+  
   formLogin = this.fb.group({
     'email': ['', [Validators.required, Validators.email]],
     'password': ['', [Validators.required]]
@@ -42,7 +42,7 @@ export class LoginComponent {
     this.userService.login(this.email.value, this.password.value)
     .subscribe({
         next: response => {
-          this.userService.saveUserToLocalStorage(response);
+          this.userService.updateLoggedInUSer(response);
           this.router.navigate(['/']);
         },
         error: response => alert(response.error)
