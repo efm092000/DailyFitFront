@@ -38,6 +38,8 @@
   <button class="button-small" style=" filter: saturate(30%); background-color: white;   color:darkred" (click)="toggleDeleteConfirmation()">Cancel</button>
 </div>
 
-<app-exercise-search *ngIf="displaySearchExercises" [rid] = userRoutine.rid></app-exercise-search>
-<button class="button-small" routerLink="/exercise" *ngIf="displaySearchExercises">Create Exercise</button>
+<app-exercise-search *ngIf="displaySearchExercises" [rid] = userRoutine.rid>
+  <button class="button" routerLink="/exercise" *ngIf="displaySearchExercises">Create Exercise</button>
+</app-exercise-search>
+
 <button class="button-small" (click)="toggleSearch()" *ngIf="displaySearchExercises">Finish</button>

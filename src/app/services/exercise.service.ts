@@ -39,8 +39,8 @@ export class ExerciseService {
     return this.http.get<BooleanFilter[]>(this.apiUrl + "/filters/material");
   }
 
-  createExercise(exercise:Exercise): Observable<Exercise>{
-    return this.http.post<Exercise>(this.apiUrl, exercise);
+  createExercise(muscleGroup: string, type: string, name: string, difficulty: number, material: boolean, gif: string, description: string ):Observable<any>{
+    return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}`, {});
 
   }
 }
