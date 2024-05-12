@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ProgressService} from "../../services/progress.service";
-import {Weekly} from "../../interfaces/weekly";
-import {Observable} from "rxjs";
 import {WeeklyService} from "../../services/weekly.service";
 import {RoutinesService} from "../../services/routines.service";
 import {UserRoutine} from "../../interfaces/user-routines.interface";
-import {NgForOf} from "@angular/common";
-import {Exercise} from "../../interfaces/exercise";
+import {NgForOf, NgIf} from "@angular/common";
+import {Routine} from "../../interfaces/routine.interface";
+import {FormsModule} from "@angular/forms";
+import {ExerciseDone} from "../../interfaces/exercise-done";
 
 
 
@@ -14,15 +14,17 @@ import {Exercise} from "../../interfaces/exercise";
   selector: 'app-today-planning',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf,
+    FormsModule
   ],
   templateUrl: './today-planning.component.html',
   styleUrl: './today-planning.component.css'
 })
 export class TodayPlanningComponent implements OnInit{
   private currentWeekly: number = 0;
-  isDateInCurrentWeek: boolean = false;
   protected routines: UserRoutine[] | undefined;
+  protected exercises: {[clave: number]: Routine[]}= {};
 
   constructor(private progressService: ProgressService,
               private weeklyService: WeeklyService,
@@ -31,13 +33,9 @@ export class TodayPlanningComponent implements OnInit{
 
   ngOnInit(): void {
     this.progressService.getWeeklyFromWeek(this.currentMonday()).subscribe(
-      (w: number | null) => {
-        if (w !== null) {
-          this.currentWeekly = w;
-          this.getRoutinesOfWeekly();
-        } else {
-          console.error("Error: No se pudo obtener la semana actual.");
-        }
+      (w: number) => {
+        this.currentWeekly = w;
+        this.getRoutinesOfWeeklyByDay();
       });
   }
 
@@ -47,13 +45,29 @@ export class TodayPlanningComponent implements OnInit{
     const diffDays = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
     return new Date(today.setDate(diffDays));
   }
-  getRoutinesOfWeekly(){
+
+  filterDoneRoutines(){
+    this.progressService.getDoneExercisesByUserAndDay(new Date()).subscribe(
+      (e:ExerciseDone[]) => {
+        if(this.routines){
+          console.log(e.length)
+          this.routines = this.routines.filter(routine => !e.some(exercise => exercise.rid === routine.rid))
+          this.exercises = Array(this.routines.length);
+          this.getRoutineNames();
+          for (let routine of this.routines) {
+            this.getExercisesOfRoutine(routine.rid);
+          }
+        }
+    }
+    );
+  }
+  getRoutinesOfWeeklyByDay(){
     if (this.currentWeekly == 0) return;
     console.log(this.currentWeekly)
     this.weeklyService.getRoutinesOfWeeklyPlan(this.currentWeekly).subscribe(
       (r:UserRoutine[])=>{
-        this.routines = r;
-        this.getRoutineNames();
+        this.routines = r.filter(routine => routine.day == (new Date().getDay() == 0 ? 7 : new Date().getDay()));
+        this.filterDoneRoutines();
       }
     );
   }
@@ -69,6 +83,31 @@ export class TodayPlanningComponent implements OnInit{
         }
       );
     }
+  }
+
+  getExercisesOfRoutine(rid:number){
+    this.routineService.getRoutineExercises(rid).subscribe(
+      (exercises) => {
+        if (exercises){
+          this.exercises[rid] = exercises;
+        }
+      }
+    )
+  }
+  onRoutineDone(rid:number){
+    for (let exercise of this.exercises[rid]) {
+      this.progressService.markExerciseAsDone(
+        exercise.exercise,
+        new Date(),
+        exercise.weight,
+        rid,
+        exercise.sets,
+        exercise.reps
+      ).subscribe(()=> {
+        console.log(`Ejercicio ${exercise.exercise} terminado`);
+      })
+    }
+    this.ngOnInit()
   }
 
 }

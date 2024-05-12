@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { User } from "../interfaces/user";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {User} from "../interfaces/user";
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
@@ -8,8 +8,10 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class UserService {
   userApiUrl: string = 'http://localhost:8080/api/user';
-  private readonly USER_KEY = 'loggedInUser';
-  private _loggedInUser: BehaviorSubject<User | null>;
+  private USER_KEY = 'loggedInUser';
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
+  userIsLogged: boolean = false;
+  //readonly user$ = this._user$;
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem(this.USER_KEY);
     this._loggedInUser = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser): null);
@@ -44,33 +46,36 @@ export class UserService {
     this.updateLoggedInUSer(null);
   }
 
-  /*
-  saveUserToLocalStorage(user: User) {
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-  }
 
-  getLoggedInUser() {
-    const userJson = localStorage.getItem(this.USER_KEY);
-    if (userJson) {
-      return JSON.parse(userJson);
+  updateName(email: string, name?: string): Observable<User> {
+
+    const url = `${this.userApiUrl}/${email}`;
+    let params = new HttpParams();
+    if (name) {
+      params = params.set('name', name);
     }
-  }
-   createUser(email: string, username: string, password: string) {
-    let signUpUrl = `${this.userApiUrl}/${email}?name=${username}&password=${password}`;
-    return this.http.post(signUpUrl, {}, {responseType: 'text'})
-  }
-
-  login(email: string, password: string) {
-    let loginUrl = `${this.userApiUrl}/authenticate`;
-    let body = {
-      email: email,
-      password: password
-    }
-    return this.http.post<User>(loginUrl, body);
+    const response = this.http.put<User>(url, {}, {params: params});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
   }
 
-  logout() {
-    localStorage.removeItem(this.USER_KEY);
+  getPremium(email: String) {
+    const url = `${this.userApiUrl}/${email}?premium=1`;
+    let response = this.http.put<User>(url, {}, {});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
   }
-*/
+
+  isUserPremium() {
+    console.log(this.user$.value);
+    return this.user$.value.isPremium;
+  }
+
+  isLogged() {
+    return this.userIsLogged;
+  }
 }

@@ -23,6 +23,7 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
   }
 
+
   ngOnInit(): void {
     this.userService.loggedInUser.subscribe(user => {
       if (user !== null) {
