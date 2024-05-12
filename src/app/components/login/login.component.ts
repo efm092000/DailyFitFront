@@ -23,7 +23,14 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
   }
 
-  ngOnInit(): void { }
+
+  ngOnInit(): void {
+    this.userService.loggedInUser.subscribe(user => {
+      if (user !== null) {
+        this.router.navigate(['/']); // Redirigir al usuario si ya está autenticado
+      }
+    });
+  }
 
   formLogin = this.fb.group({
     'email': ['', [Validators.required, Validators.email]],
@@ -42,7 +49,7 @@ export class LoginComponent {
     this.userService.login(this.email.value, this.password.value)
     .subscribe({
         next: response => {
-          this.userService.saveUserToLocalStorage(response);
+          this.userService.updateLoggedInUSer(response);
           this.router.navigate(['/']);
         },
         error: response => alert(response.error)

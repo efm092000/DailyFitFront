@@ -88,4 +88,6 @@ export class RoutineComponent implements OnInit{
     this.displaySearchExercises = !this.displaySearchExercises;
     this.reloadExercises();
   }
+
+  protected readonly RouterLink = RouterLink;
 }
