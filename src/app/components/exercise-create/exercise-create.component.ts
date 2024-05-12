@@ -26,8 +26,8 @@ export class ExerciseCreateComponent implements OnInit {
     muscleGroup: '',
     difficulty: 0,
     type: '',
-    gif: 'a',
-    description: 'a'
+    gif: '',
+    description: ''
   };
 
   materialFilters: BooleanFilter[] = [];
@@ -93,7 +93,7 @@ export class ExerciseCreateComponent implements OnInit {
   }
 
   createExercise() {
-    if (!this.newExercise.name || !this.newExercise.difficulty || !this.newExercise.muscleGroup || !this.newExercise.type ) {
+    if (!this.newExercise.name || !this.newExercise.difficulty || !this.newExercise.muscleGroup || !this.newExercise.type || this.newExercise.gif ||this.newExercise.description ) {
       console.error('Please complete all fields.');
       return;
     }
