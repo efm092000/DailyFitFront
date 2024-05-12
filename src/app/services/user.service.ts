@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { User } from "../interfaces/user";
+
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {User} from "../interfaces/user";
+
 import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
@@ -8,8 +10,11 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class UserService {
   userApiUrl: string = 'http://localhost:8080/api/user';
-  private readonly USER_KEY = 'loggedInUser';
-  private _loggedInUser: BehaviorSubject<User | null>;
+  private USER_KEY = 'loggedInUser';
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>({email: '', name: '', isPremium: false});
+  userIsLogged: boolean = false;
+  //readonly user$ = this._user$;
+
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem(this.USER_KEY);
     this._loggedInUser = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser): null);
@@ -66,11 +71,52 @@ export class UserService {
       email: email,
       password: password
     }
-    return this.http.post<User>(loginUrl, body);
+    const response = this.http.post<User>(loginUrl, body);
+    response.subscribe(
+      user => {
+        this.user$.next(user)
+        this.userIsLogged = true;
+      }
+    );
+    return response;
   }
 
   logout() {
+    this.userIsLogged = false;
     localStorage.removeItem(this.USER_KEY);
   }
 */
+
+  updateName(email: string, name?: string): Observable<User> {
+
+    const url = `${this.userApiUrl}/${email}`;
+    let params = new HttpParams();
+    if (name) {
+      params = params.set('name', name);
+    }
+    const response = this.http.put<User>(url, {}, {params: params});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
+  }
+
+  getPremium(email: String) {
+    const url = `${this.userApiUrl}/${email}?premium=1`;
+    let response = this.http.put<User>(url, {}, {});
+    response.subscribe(
+      user => this.user$.next(user)
+    );
+    return response;
+  }
+
+  isUserPremium() {
+    console.log(this.user$.value);
+    return this.user$.value.isPremium;
+  }
+
+  isLogged() {
+    return this.userIsLogged;
+  }
+
 }

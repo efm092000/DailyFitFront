@@ -10,8 +10,8 @@
     </div>
     <div *ngIf="loggedIn" class="col-auto">
       <div class="dropdown">
-        <button (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle bg-transparent border-nonep-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="mr-4" title="icon" src="assets/images/icon.png" style="width: 3em; height: 3em;" alt="">
+        <button  (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img id="icon" title="icon" src="assets/images/icon.png">
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 0;">
           <li routerLink="/profile" class="btn" style="display: flex; align-items: center;">
