@@ -1,8 +1,7 @@
 
-<div class="form-group">
+<div class="form-group d-flex justify-content-center">
   <form (ngSubmit)="onSubmit()">
     <full-calendar #calendar [options]="calendarOptions"></full-calendar>
-
     <h1>Link a Weekly Planning to a week</h1>
     <p-calendar
       class="max-w-full form-control"
@@ -20,6 +19,6 @@
       <option selected value="{{weekly.wid}}" *ngFor="let weekly of userWeeklies">{{weekly.name}}</option>
     </select>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="button">Submit</button>
   </form>
 </div>
