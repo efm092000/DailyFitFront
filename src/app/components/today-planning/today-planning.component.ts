@@ -107,7 +107,7 @@ export class TodayPlanningComponent implements OnInit{
         console.log(`Ejercicio ${exercise.exercise} terminado`);
       })
     }
-    window.location.reload();
+    this.ngOnInit()
   }
 
 }

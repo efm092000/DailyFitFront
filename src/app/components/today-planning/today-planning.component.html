@@ -1,10 +1,10 @@
 <div class="container">
-  <div *ngIf="routines == null || routines.length == 0">
+  <div *ngIf="routines == undefined || routines.length == 0">
     There are no routines planned today or they've been completed already
   </div>
   <div *ngFor="let routine of routines" class="card mt-4">
     <div class="card-body">
-      <h5 class="card-title">{{routine.name}}</h5>
+      <h1>{{routine.name}}</h1>
       <ul class="list-group list-group-flush">
         <li *ngFor="let exercise of exercises[routine.rid]" class="list-group-item">
           <p>{{exercise.exercise}}</p>
