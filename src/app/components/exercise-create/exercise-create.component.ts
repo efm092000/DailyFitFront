@@ -93,7 +93,7 @@ export class ExerciseCreateComponent implements OnInit {
   }
 
   createExercise() {
-    if (!this.newExercise.name || !this.newExercise.difficulty || !this.newExercise.muscleGroup || !this.newExercise.type || this.newExercise.gif ||this.newExercise.description ) {
+    if (!this.newExercise.name || !this.newExercise.difficulty || !this.newExercise.muscleGroup || !this.newExercise.type || !this.newExercise.gif ||!this.newExercise.description ) {
       console.error('Please complete all fields.');
       return;
     }
