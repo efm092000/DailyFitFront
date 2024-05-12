@@ -14,6 +14,7 @@ import { RecommendationComponent } from "./recommendation/recommendation.compone
 import { last } from "rxjs";
 import { Goal } from "../../enums/goal.enum";
 import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
+import {User} from "../../interfaces/user";
 
 
 @Component({
@@ -44,6 +45,7 @@ export class ProgressComponent implements OnInit {
   protected exercises: string[] = [];
   isPremium: boolean = false;
   showPopup: boolean = false;
+  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
 
   years: number[] = Array.from({ length: 1 }, (v, k) => k + 2024);
   months: number[] = Array.from({ length: 12 }, (v, k) => k + 1);
@@ -59,7 +61,8 @@ export class ProgressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.progressService.getProgressExerciseName(this.userService.getLoggedInUser().email).then(
+    this.userService.user$.subscribe((user:User)=> {this.user = user;})
+    this.progressService.getProgressExerciseName(this.user.email).then(
       (exercises: string[]) => {
         this.exercises = exercises;
       }
@@ -67,21 +70,9 @@ export class ProgressComponent implements OnInit {
     this.isPremium = this.userService.user$.value.isPremium;
   }
 
-
-  selectExercise(exercise: string) {
-    this.userService.loggedInUser.subscribe(user => {
-      if (user) {
-        this.progress = this.progressService.getProgressMock(user.email, exercise);
-        this.loadChart();
-      } else {
-        // Manejar caso cuando el usuario no está autenticado
-        console.log("Usuario not authenticated");
-      }
-    });
-
   onGenerateChart() {
     this.progress.exercise = this.exercise.value;
-    this.progressService.getProgressByYearAndMonth(this.userService.getLoggedInUser().email, this.exercise.value, this.year.value, this.month.value).then(
+    this.progressService.getProgressByYearAndMonth(this.user.email, this.exercise.value, this.year.value, this.month.value).then(
       data => {
         this.progress.data = data;
         if (this.progress.data.length == 0) {

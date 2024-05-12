@@ -29,13 +29,14 @@ import {User} from "../../interfaces/user";
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
   showPopup: boolean = false;
-  user: User = this.userService.getLoggedInUser();
+  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe((user:User)=>{this.user=user;})
     this.serviceRoutines.getAllUserRoutines().subscribe(
       {
         next: (routines: UserRoutine[] | undefined) => {
@@ -64,9 +65,9 @@ export class RoutinesComponent implements OnInit{
   routineGenerator(): void {
     this.serviceRoutines.clearUserRoutine();
     this.serviceRoutines.isEditMode = true;
-    this.userService.loggedInUser.subscribe(user => {
-      if (user) {
-        this.serviceRoutines.createRoutine("NewRoutine", user.email).subscribe({
+
+      if (this.user) {
+        this.serviceRoutines.createRoutine("NewRoutine", this.user.email).subscribe({
           next: (response: UserRoutine) => {
             console.log('Rutina creada:', response);
             this.serviceRoutines.userRoutine.rid = response.rid;
@@ -81,7 +82,6 @@ export class RoutinesComponent implements OnInit{
         // Manejar caso cuando el usuario no está autenticado
         console.log("Usuario no autenticado");
       }
-    });
   }
 
   togglePopup() {

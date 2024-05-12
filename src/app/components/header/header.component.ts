@@ -19,7 +19,7 @@ export class HeaderComponent {
   }
 
   ngOnInit(){
-    this.userService.loggedInUser.subscribe(user => {
+    this.userService.user$.subscribe(user => {
       this.loggedIn = user !== null;
     });
   }

@@ -1,6 +1,6 @@
 import { Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, of, switchMap, map} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import { UserRoutine} from "../interfaces/user-routines.interface";
 import { Routine } from "../interfaces/routine.interface";
 import {UserService} from "./user.service";
@@ -15,7 +15,7 @@ export class RoutinesService {
   routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/123@gmail.com/routines';
   getRoutine(routineId: number): Observable <UserRoutine | undefined>{
-    return this.http.get<UserRoutine>(`http://localhost:8080/api/routine/${routineId}`).pipe(
+    return this.http.get<UserRoutine>(this.routineUrl+`${routineId}`).pipe(
       catchError( (error) => {
         console.log(error);
         return of(undefined);
@@ -42,24 +42,17 @@ export class RoutinesService {
       catchError ((error) => {
         console.log(error)
         return of(undefined)
-    })
+      })
     )
   }
-  getAllUserRoutines(): Observable<UserRoutine[] | undefined> {
-    return this.userService.loggedInUser.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.http.get<UserRoutine[]>(`http://localhost:8080/api/user/${user.email}/routines`).pipe(
-            catchError(error => {
-              console.log(error);
-              return of(undefined);
-            })
-          );
-        } else {
-          return of(undefined);
-        }
+
+  getAllUserRoutines(): Observable<UserRoutine[] | undefined>{
+    return this.http.get<UserRoutine[]>(`http://localhost:8080/api/user/${this.userService.getLoggedInUser().email}/routines`).pipe(
+      catchError((error) => {
+        console.log(error)
+        return of(undefined)
       })
-    );
+    )
   }
 
   getNumberOfRoutines(): Observable<number> {
