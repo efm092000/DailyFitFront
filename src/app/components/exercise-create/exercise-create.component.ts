@@ -3,10 +3,17 @@ import { ExerciseService } from "../../services/exercise.service";
 import { IntegerFilter } from "../../interfaces/integer-filter";
 import { BooleanFilter } from "../../interfaces/boolean-filter";
 import { Exercise } from "../../interfaces/exercise";
+import {FormsModule} from "@angular/forms";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-exercise-create',
   templateUrl: './exercise-create.component.html',
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgForOf
+  ],
   styleUrls: ['./exercise-create.component.css']
 })
 export class ExerciseCreateComponent implements OnInit {
@@ -17,8 +24,8 @@ export class ExerciseCreateComponent implements OnInit {
     muscleGroup: '',
     difficulty: 0,
     type: '',
-    gif: '',
-    description: ''
+    gif: 'a',
+    description: 'a'
   };
 
   materialFilters: BooleanFilter[] = [];

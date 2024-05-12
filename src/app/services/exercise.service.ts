@@ -40,7 +40,7 @@ export class ExerciseService {
   }
 
   createExercise(muscleGroup: string, type: string, name: string, difficulty: number, material: boolean, gif: string, description: string ):Observable<any>{
-    return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}`, {});
+    return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}&name=${name}`, {});
 
   }
 }
