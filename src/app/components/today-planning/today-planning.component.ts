@@ -66,7 +66,7 @@ export class TodayPlanningComponent implements OnInit{
     console.log(this.currentWeekly)
     this.weeklyService.getRoutinesOfWeeklyPlan(this.currentWeekly).subscribe(
       (r:UserRoutine[])=>{
-        this.routines = r.filter(routine => routine.day == new Date().getDay());
+        this.routines = r.filter(routine => routine.day == (new Date().getDay() == 0 ? 7 : new Date().getDay()));
         this.filterDoneRoutines();
       }
     );
