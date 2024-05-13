@@ -117,4 +117,8 @@ export class RoutinesService {
     const url = `http://localhost:8080/api/routine/${rid}/exercise?name=${name}&sets=${set}&reps=${rep}`
     return this.http.post(url, {});
   }
+  generateRoutine(routineName: string, selectedMuscle: String, maxExercises: number) {
+    const url = `http://localhost:8080/api/routine/generate/${routineName}?email=${this.userService.getLoggedInUser().email}&muscleGroup=${selectedMuscle}&maxExercises=${maxExercises}`
+    return this.http.post(url, {});
+  }
 }

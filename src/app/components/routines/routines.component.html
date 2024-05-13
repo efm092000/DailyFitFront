@@ -7,7 +7,10 @@
   <div  class="align-text-center pt-4">
     <button *ngIf="!routineLimitReached()" class="button" (click)="routineGenerator()" routerLink = "/routine">Create routine</button>
     <button *ngIf="routineLimitReached()" (click)="togglePopup()" class="button">Create routine</button>
+    <button *ngIf="!routineLimitReached()" class="button" (click)="toggleGeneratePopup()">Generate routine</button>
+    <button *ngIf="routineLimitReached()" (click)="toggleGeneratePopup()" class="button">Generate routine</button>
   </div>
 </div>
 
 <app-premium-popup *ngIf="showPopup" (closePopup)="togglePopup()"></app-premium-popup>
+<app-generate-routine *ngIf="showGeneratePopup" (closePopup)="toggleGeneratePopup()"></app-generate-routine>

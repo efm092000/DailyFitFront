@@ -1,0 +1,18 @@
+<div class="bg-black bg-opacity-25 background">
+  <div class="pop-up">
+    <form (ngSubmit)="generateRoutine()">
+      <label for="routine-name">Name of the Generated Routine:</label>
+      <input name="routine-name" class="filters" id="routine-name" [(ngModel)] ="routineName" value="{{routineName}}">
+      <label for="max-exercises">Maximum of exercises in the Routine:</label>
+      <input type="number" name="max-exercises" class="filters" id="max-exercises" [(ngModel)] ="maxExercises" value="{{routineName}}">
+      <label for="selectorOfMuscle">Select a Muscle Group:</label>
+      <select class="filters" [(ngModel)]="selectedMuscle" name="selectedMuscle" id="selectorOfMuscle">
+        <option selected value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
+      </select>
+      <div class="button-container">
+        <button type="submit" class="button">Generate Routine</button>
+        <button class="button" (click)="closeEvent()">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
