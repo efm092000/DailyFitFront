@@ -102,7 +102,7 @@ export class TodayPlanningComponent implements OnInit{
       this.progressService.getDoneExercisesByUserAndDay(new Date()).subscribe(
         (e:ExerciseDone[]) => {
           console.log(e.length)
-          let exercises = e.filter(() => e.some(ex => ex.rid === rid))
+          let exercises = e.filter(e => e.rid === rid);
           if (exercises){
             this.exercises[rid] = exercises;
           }
