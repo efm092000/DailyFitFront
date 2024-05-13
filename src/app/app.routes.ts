@@ -13,7 +13,7 @@ export const routes: Routes = [
       { path: 'routine', loadComponent: () => import('./components/routine/routine.component').then(m => m.RoutineComponent), canActivate: [loggedGuard]},
       { path: 'routines', loadComponent: () => import('./components/routines/routines.component').then(m => m.RoutinesComponent), canActivate: [loggedGuard]},
       { path: 'search', loadComponent: () => import('./components/exercise-search/exercise-search.component').then(m => m.ExerciseSearchComponent) },
-      { path: 'exercise', loadComponent: () => import('./components/exercise-create/exercise-create.component').then(m => m.ExerciseCreateComponent)},
+      { path: 'exercise', loadComponent: () => import('./components/exercise-create/exercise-create.component').then(m => m.ExerciseCreateComponent), canActivate: [loggedGuard]},
       { path: 'today', loadComponent: () => import('./components/today-planning/today-planning.component').then(m => m.TodayPlanningComponent), canActivate: [loggedGuard]},
       { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent), canActivate: [loggedGuard]},
       { path: 'weekly', loadComponent: () => import('./components/weekly/weekly.component').then(m => m.WeeklyComponent), canActivate: [loggedGuard]},
