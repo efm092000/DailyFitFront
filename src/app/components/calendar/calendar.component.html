@@ -15,7 +15,7 @@
       [ngModelOptions]="{standalone: true}"
     ></p-calendar>
     <label for="selectorOfWeekly">Select a Weekly Planning</label>
-    <select class="weekly-plans-selector" [(ngModel)]="selectedPlan" name="selectedPlan" id="selectorOfWeekly">
+    <select class="weekly-plans-selector filters" [(ngModel)]="selectedPlan" name="selectedPlan" id="selectorOfWeekly">
       <option selected value="{{weekly.wid}}" *ngFor="let weekly of userWeeklies">{{weekly.name}}</option>
     </select>
 
