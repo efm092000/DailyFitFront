@@ -41,6 +41,7 @@ export class ExerciseCreateComponent implements OnInit {
   difficultyFilters: IntegerFilter[] = [];
   typeFilters: string[] = [];
   muscleGroupFilters: string[] = [];
+
   edit : boolean = false;
   delete: boolean = false
 

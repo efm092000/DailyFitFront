@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Exercise} from "../../../interfaces/exercise";
 import {NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -18,6 +18,7 @@ import {RouterLink} from "@angular/router";
   styleUrl: './exercise-delete.component.css'
 })
 export class ExerciseDeleteComponent implements OnInit {
+  @Output() confirmClicked: EventEmitter<void> = new EventEmitter<void>();
   exercises: Exercise[] = [];
   searchFilters = {
     difficulty: "",

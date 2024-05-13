@@ -38,12 +38,13 @@
   <button class="button"  routerLink="/" (click)="createExercise()" >Save</button>
   <div class="d-flex align-items-center ">
     <button class="button m-3" (click)="editpopup()">Edit Exercise</button>
-      <app-exercise-edit *ngIf="this.edit" class="">
-
-      </app-exercise-edit>
-
     <button class="button m-3" (click)="deletepopup()">Delete Exercise</button>
-      <app-exercise-delete *ngIf="this.delete"></app-exercise-delete>
+    <div class="overlay" [hidden]="!edit && !delete">
+      <div class="popup">
+        <app-exercise-edit *ngIf="edit" (confirmClicked)="editpopup()"></app-exercise-edit>
+        <app-exercise-delete *ngIf="delete" (confirmClicked)="deletepopup()"></app-exercise-delete>
+      </div>
+    </div>
 
   </div>
 

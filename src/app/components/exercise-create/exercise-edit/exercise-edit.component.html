@@ -1,8 +1,45 @@
 <body>
   <div class="d-flex flex-column align-items-center">
     <h1 class="title">Edit Exercise</h1>
-    <select class="filters">
+    <select class="filters"  [(ngModel)]="oldExercise.name">
+      <option selected disabled hidden value ="">Choose an Exercise</option>
       <option *ngFor="let exercise of exercises" [value]="exercise.name">{{ exercise.name }}</option>
     </select>
+    <div id="info-group" class="container mb-8 align-items-right">
+      <div>
+        <label for="exerciseName" class="subheader">Name:</label>
+        <input type="text" id="exerciseName" class="container small-text" style="width: 10em;" [(ngModel)]="oldExercise.name">
+      </div>
+      <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
+        <select class="filters" [(ngModel)]="oldExercise.muscleGroup" name="muscleGroup">
+          <option selected disabled hidden value ="">Muscle Group</option>
+          <option *ngFor="let muscle of muscleGroupFilters" [value]="muscle">{{muscle}}</option>
+        </select>
+
+        <select class="filters" [(ngModel)]="oldExercise.material" name="material">
+          <option selected disabled hidden value ="false">Material</option>
+          <option *ngFor="let material of materialFilters" [value]="material.value">{{material.name}}</option>
+        </select>
+
+        <select class="filters" [(ngModel)]="oldExercise.type" name="type">
+          <option selected disabled hidden value ="">Type</option>
+          <option *ngFor="let type of typeFilters" [value]="type">{{type}}</option>
+        </select>
+
+        <select class="filters" [(ngModel)]="oldExercise.difficulty" name="difficulty">
+          <option selected disabled hidden value ="0">Difficulty</option>
+          <option *ngFor="let diff of difficultyFilters" [value]="diff.value">{{diff.name}}</option>
+        </select>
+      </div>
+      <div>
+        <label for="exerciseName" class="subheader">Gif:</label>
+        <input type="text" id="exerciseGif" class="container m-3 small-text" style="width: 10em;" [(ngModel)]="oldExercise.gif">
+      </div>
+      <div>
+        <label for="exerciseName" class="subheader">Description:</label>
+        <input type="text" id="exerciseDescription" class="container m-3 small-text" style="width: 20em;" [(ngModel)]="oldExercise.description">
+      </div>
+    </div>
+    <button class="button-small"  (click)="updateExercise(); confirmClicked.emit()" >Confirm</button>
   </div>
 </body>
