@@ -52,28 +52,27 @@ export class ExerciseService {
   }
   updateExercise(muscleGroup?: string, type?: string, name?: string, difficulty?: number, material?: boolean, gif?: string, description?: string ){
     let updateUrl: string = `${this.apiUrl}?`;
-    if (name !== undefined) {
+    if (name != '') {
       updateUrl += `name=${name}`;
     }
-    if (muscleGroup !== undefined) {
+    if (muscleGroup != '') {
       updateUrl += `&muscleGroup=${muscleGroup}`;
     }
-    if (type !== undefined) {
+    if (type != '') {
       updateUrl += `&type=${type}`;
     }
-    if (difficulty !== undefined) {
+    if (difficulty != 0) {
       updateUrl += `&difficulty=${difficulty}`;
     }
-    if (material !== undefined) {
+    if (material !== null) {
       updateUrl += `&material=${material}`;
     }
-    if (gif !== undefined) {
+    if (gif != '') {
       updateUrl += `&gif=${gif}`;
     }
-    if (description !== undefined) {
+    if (description != '') {
       updateUrl += `&description=${description}`;
     }
-    console.log(updateUrl);
     return this.http.put<any>(updateUrl, {}).subscribe( response => console.log(response));
   }
 }
