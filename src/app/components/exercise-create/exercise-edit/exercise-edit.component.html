@@ -28,7 +28,7 @@
       </div>
       <div>
         <label for="exerciseGif" class="subheader">Gif:</label>
-        <input type="text" id="exerciseGif" class="container m-3 small-text" style="width: 10em;" [(ngModel)]="oldExercise.gif">
+          <input type="file" class="container m-3 small-text" id="exerciseGif" [(ngModel)]="oldExercise.gif" (change)="onFileSelected($event)" style="width: 10em;" accept="image/gif">
       </div>
       <div>
         <label for="exerciseDescription" class="subheader">Description:</label>

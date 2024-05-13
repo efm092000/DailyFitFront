@@ -44,6 +44,7 @@ export class ExerciseEditComponent  implements OnInit {
   difficultyFilters: IntegerFilter[] = [];
   typeFilters: string[] = [];
   muscleGroupFilters: string[] = [];
+  selectedFile: File | null = null;
   constructor(protected exerciseService: ExerciseService){}
 
   ngOnInit(): void {
@@ -115,5 +116,9 @@ export class ExerciseEditComponent  implements OnInit {
 
   updateExercise(){
     this.exerciseService.updateExercise(this.oldExercise.muscleGroup,this.oldExercise.type, this.oldExercise.name,this.oldExercise.difficulty,this.oldExercise.material,this.oldExercise.gif,this.oldExercise.description)
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 }
