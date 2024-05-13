@@ -19,7 +19,7 @@
     <img class="sidebar-icons" src="assets/images/today.png" id="today" alt="">
     <span *ngIf="!hideElements">Today</span>
   </button></a>
-  <a routerLink="/exercise" *ngIf="isAdmin"><button class="sidebar_button">
+  <a routerLink="/exercise" *ngIf="checkAdmin()"><button class="sidebar_button">
     <img class="sidebar-icons" src="assets/images/today.png" alt="">
     <span *ngIf="!hideElements">Create Exercise</span>
   </button></a>
