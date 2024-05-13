@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { User } from "../interfaces/user";
 import { BehaviorSubject, firstValueFrom, Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,7 @@ export class UserService {
   private USER_KEY = 'loggedInUser';
   userIsLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   saveUserToLocalStorage(user: User) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
@@ -58,6 +58,7 @@ export class UserService {
       isPremium: false,
       profilePicture: ''
     });
+    this.router.navigate(['/']);
   }
 
   updateName(email: string, name?: string): Observable<User> {
