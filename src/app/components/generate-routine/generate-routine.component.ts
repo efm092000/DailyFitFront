@@ -39,7 +39,9 @@ export class GenerateRoutineComponent implements OnInit{
   }
 
   generateRoutine() {
-    this.closeEvent();
+    this.routineService
+      .generateRoutine(this.routineName,this.selectedMuscle,this.maxExercises)
+      .subscribe(()=>{this.closeEvent()})
   }
 
 }

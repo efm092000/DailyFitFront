@@ -92,6 +92,9 @@ export class RoutinesComponent implements OnInit{
   }
   toggleGeneratePopup() {
     this.showGeneratePopup = !this.showGeneratePopup;
+    if (!this.showGeneratePopup){
+      this.ngOnInit();
+    }
   }
 }
 
