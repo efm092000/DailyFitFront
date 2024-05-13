@@ -1,9 +1,9 @@
 <p>
-  Your One Rep Max(1RM) is {{ recommendation?.orm }} kg
+  Your One Rep Max(1RM) is {{ recommendation?.orm?.toFixed(2) }} kg
 </p>
 <p>
   Since your goal is {{ goal }} you should keep your repetitions in the range of {{ recommendation?.minReps }} to {{ recommendation?.maxReps }} reps
 </p>
 <p>
-  We recommend you do {{ recommendation?.sets }} sets of {{ recommendation?.minReps }}-{{ recommendation?.maxReps }} reps at {{ recommendation?.weight }} kg
+  We recommend you do {{ recommendation?.sets }} sets of {{ recommendation?.minReps }}-{{ recommendation?.maxReps }} reps at {{ recommendation?.weight?.toFixed(2) }} kg
 </p>
