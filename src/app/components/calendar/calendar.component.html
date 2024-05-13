@@ -1,8 +1,11 @@
 
-<div class="form-group d-flex justify-content-center">
-  <form (ngSubmit)="onSubmit()">
-    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
-    <h1>Link a Weekly Planning to a week</h1>
+<div class="form-group text-center">
+    <div style="width:80%; margin:0 auto;">
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  <button (click)="toggleEditMode()" class="button" style="margin-top:3em;">Link a Weekly Planning to a week</button>
+  <form (ngSubmit)="onSubmit()" *ngIf="editMode">
+    <h1 class="subheader">Link a Weekly Planning to a week</h1>
     <p-calendar
       class="max-w-full form-control"
       id="weekSelector"
