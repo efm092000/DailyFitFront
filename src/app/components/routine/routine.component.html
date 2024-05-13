@@ -1,5 +1,5 @@
 <div class="page d-flex flex-column align-items-center" *ngIf="!displaySearchExercises">
-  <input *ngIf="isEditMode" name="routine-name"
+  <input *ngIf="isEditMode" name="routine-name" id="routine-name"
          placeholder="Routine Name" [(ngModel)] = "userRoutine.name" value="{{userRoutine.name}}">
   <p *ngIf="!isEditMode" class="title">{{userRoutine.name}}</p>
   <table id="table" class="">
