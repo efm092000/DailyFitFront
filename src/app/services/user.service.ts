@@ -13,6 +13,7 @@ export class UserService {
     email: '',
     name: '',
     isPremium: false,
+    isAdmin: false,
     profilePicture: ''
   });
   private USER_KEY = 'loggedInUser';
@@ -87,7 +88,6 @@ export class UserService {
   }
 
   isUserPremium() {
-    console.log(this.user$.value);
     return this.user$.value.isPremium;
   }
 
@@ -95,4 +95,8 @@ export class UserService {
     return this.userIsLogged;
   }
 
+  isUserAdmin() {
+    console.log(this.user$.value);
+    return this.user$.value.isAdmin;
+  }
 }

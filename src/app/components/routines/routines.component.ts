@@ -29,7 +29,7 @@ import {User} from "../../interfaces/user";
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
   showPopup: boolean = false;
-  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
+  user: User = {email:'',name:'',isPremium:false,isAdmin:false,profilePicture:''};
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {

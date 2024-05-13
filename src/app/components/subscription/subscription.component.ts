@@ -16,7 +16,7 @@ import {UserService} from "../../services/user.service";
 })
 export class SubscriptionComponent implements OnInit{
   public countries: any = countries
-  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
+  user: User = {email:'',name:'',isPremium:false,isAdmin:false,profilePicture:''};
 
   constructor(private userService: UserService) {
   }
