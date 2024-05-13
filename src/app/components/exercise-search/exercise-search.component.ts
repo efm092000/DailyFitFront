@@ -7,6 +7,7 @@ import {ExerciseDetailsComponent} from "./exercise-details/exercise-details.comp
 import {NgxPaginationModule} from "ngx-pagination";
 import {IntegerFilter} from "../../interfaces/integer-filter";
 import {BooleanFilter} from "../../interfaces/boolean-filter";
+import {SearchResultComponent} from "./search-result/search-result.component";
 
 
 @Component({
@@ -16,7 +17,8 @@ import {BooleanFilter} from "../../interfaces/boolean-filter";
     NgForOf,
     FormsModule,
     ExerciseDetailsComponent,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SearchResultComponent
   ],
   templateUrl: './exercise-search.component.html',
   styleUrl: './exercise-search.component.css'
@@ -58,18 +60,6 @@ export class ExerciseSearchComponent implements OnInit{
         console.error('Error al obtener los ejercicios:', error);
       }
     );
-  }
-  getImage(gif:String): String {
-    let image:String= "";
-    this.exerciseService.getImage(gif).subscribe(
-      response => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          image = reader.result as string;
-        };
-        reader.readAsDataURL(response);
-      });
-    return image;
   }
 
   openDialog(entry: Exercise) {
