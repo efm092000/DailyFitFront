@@ -7,22 +7,22 @@
     </div>
     <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
       <select class="filters" [(ngModel)]="newExercise.muscleGroup" name="muscleGroup">
-        <option selected value="">Muscle Group</option>
+        <option selected disabled hidden value ="">Muscle Group</option>
         <option *ngFor="let muscle of muscleGroupFilters" [value]="muscle">{{muscle}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="newExercise.material" name="material">
-        <option selected value="">Material needed</option>
+        <option selected disabled hidden value ="false">Material</option>
         <option *ngFor="let material of materialFilters" [value]="material.value">{{material.name}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="newExercise.type" name="type">
-        <option selected value="">Type</option>
+        <option selected disabled hidden value ="">Type</option>
         <option *ngFor="let type of typeFilters" [value]="type">{{type}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="newExercise.difficulty" name="difficulty">
-        <option selected value="">Difficulty</option>
+        <option selected disabled hidden value ="0">Difficulty</option>
         <option *ngFor="let diff of difficultyFilters" [value]="diff.value">{{diff.name}}</option>
       </select>
     </div>
@@ -36,5 +36,16 @@
     </div>
   </div>
   <button class="button"  routerLink="/" (click)="createExercise()" >Save</button>
+  <div class="d-flex align-items-center ">
+    <button class="button m-3" (click)="editpopup()">Edit Exercise</button>
+      <app-exercise-edit *ngIf="this.edit" class="">
+
+      </app-exercise-edit>
+
+    <button class="button m-3" (click)="deletepopup()">Delete Exercise</button>
+      <app-exercise-delete *ngIf="this.delete"></app-exercise-delete>
+
+  </div>
+
 </div>
 

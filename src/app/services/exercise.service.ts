@@ -43,4 +43,10 @@ export class ExerciseService {
     return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}&name=${name}`, {});
 
   }
+  deleteExercise(name: string){
+    return this.http.delete<any>(this.apiUrl + `?name=${name}`).subscribe(
+      response => console.log(response),
+    );
+
+  }
 }

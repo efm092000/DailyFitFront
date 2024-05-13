@@ -1,0 +1,8 @@
+<body>
+  <div class="d-flex flex-column align-items-center">
+    <h1 class="title">Edit Exercise</h1>
+    <select class="filters">
+      <option *ngFor="let exercise of exercises" [value]="exercise.name">{{ exercise.name }}</option>
+    </select>
+  </div>
+</body>
