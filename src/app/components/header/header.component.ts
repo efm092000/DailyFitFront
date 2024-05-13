@@ -1,7 +1,8 @@
-import { Component, Renderer2} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import { User } from "../../interfaces/user";
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,29 +14,18 @@ import {UserService} from "../../services/user.service";
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-  loggedIn: boolean = false;
-  constructor(private userService: UserService, private renderer: Renderer2) {
+export class HeaderComponent implements OnInit{
+  loggedIn?: boolean;
+  user?: User;
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(){
-    this.userService.userIsLogged$.subscribe(
-      isLogged => {
-        this.loggedIn = isLogged;
-      }
-    );
-  }
-  logOut(){
-    this.userService.logout();
-    this.loggedIn = false;
+    this.userService.userIsLogged$.subscribe(isLogged => this.loggedIn = isLogged);
+    this.userService.user$.subscribe(user => this.user = user);
   }
 
-  loadMenuToggle() {
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-    if (dropdownMenu) {
-      const currentDisplay = window.getComputedStyle(dropdownMenu).display;
-      const newDisplay = currentDisplay === 'none' ? 'block' : 'none';
-      this.renderer.setStyle(dropdownMenu, 'display', newDisplay);
-    }
+  logOut(){
+    this.userService.logout();
   }
 }

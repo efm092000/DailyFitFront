@@ -4,29 +4,29 @@
       <img alt="logo" class="logo" id="logo" src="assets/images/logo.png" routerLink="/">
     </div>
     <div class="col-auto">
-      <div class="position-relative">
         <button class="search-button p-3 border-0" routerLink="/search">Search exercises</button>
-      </div>
     </div>
     <div *ngIf="loggedIn" class="col-auto">
       <div class="dropdown">
-        <button (click)="loadMenuToggle()" type="button" id="profile-image-button" class="btn dropdown-toggle bg-transparent border-nonep-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="mr-4" title="icon" src="assets/images/icon.png" style="width: 3em; height: 3em;" alt="">
+        <button type="button" id="profile-image-button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+          <img ngSrc="{{user?.profilePicture}}" class="circle" alt="assets/images/icon.png" height="50" width="50">
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="padding: 0;">
-          <li routerLink="/profile" class="btn" style="display: flex; align-items: center;">
-            <img src="assets/images/usersettings.png" style="width: 2em; height: 2em;" alt="profile" class="small-icon">
-            Profile
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-image-button">
+          <li routerLink="/profile" class="btn d-flex align-items-center gap-3">
+            <img src="assets/images/usersettings.png" style="width: 2em; height: 2em;" alt="" class="small-icon">
+            <span class="text text-black">Profile</span>
           </li>
-          <li (click)="logOut()" routerLink="" class="btn bg-transparent border-0" style="display: flex; align-items: center;  color: #195DA2;">
-            Log out
+          <li (click)="logOut()" class="btn d-flex align-items-center gap-3">
+            <img ngSrc="assets/images/logout.svg" alt="" height="30" width="30">
+            <span class="text text-danger">Log out</span>
           </li>
         </ul>
       </div>
     </div>
     <div *ngIf="!loggedIn" class="col-auto">
       <div class="to-login">
-        <button class="button" routerLink="/login"> Log in </button>
+        <button class="button" routerLink="/login"> Log in</button>
       </div>
     </div>
   </div>
