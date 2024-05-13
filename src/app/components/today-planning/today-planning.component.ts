@@ -25,6 +25,7 @@ export class TodayPlanningComponent implements OnInit{
   private currentWeekly: number = 0;
   protected routines: UserRoutine[] | undefined;
   protected exercises: {[clave: number]: Routine[]}= {};
+  protected routineIsNotDone:{[clave: number]: boolean} = {};
 
   constructor(private progressService: ProgressService,
               private weeklyService: WeeklyService,
@@ -51,7 +52,10 @@ export class TodayPlanningComponent implements OnInit{
       (e:ExerciseDone[]) => {
         if(this.routines){
           console.log(e.length)
-          this.routines = this.routines.filter(routine => !e.some(exercise => exercise.rid === routine.rid))
+          let notDoneRoutines = this.routines.filter(routine => !e.some(exercise => exercise.rid === routine.rid))
+          for (const notDoneRoutine of notDoneRoutines) {
+            this.routineIsNotDone[notDoneRoutine.rid] = true;
+          }
           this.exercises = Array(this.routines.length);
           this.getRoutineNames();
           for (let routine of this.routines) {
@@ -86,13 +90,25 @@ export class TodayPlanningComponent implements OnInit{
   }
 
   getExercisesOfRoutine(rid:number){
-    this.routineService.getRoutineExercises(rid).subscribe(
-      (exercises) => {
-        if (exercises){
-          this.exercises[rid] = exercises;
+    if (this.routineIsNotDone[rid]){
+      this.routineService.getRoutineExercises(rid).subscribe(
+        (exercises) => {
+          if (exercises){
+            this.exercises[rid] = exercises;
+          }
         }
-      }
-    )
+      )
+    } else{
+      this.progressService.getDoneExercisesByUserAndDay(new Date()).subscribe(
+        (e:ExerciseDone[]) => {
+          console.log(e.length)
+          let exercises = e.filter(() => e.some(ex => ex.rid === rid))
+          if (exercises){
+            this.exercises[rid] = exercises;
+          }
+        }
+      );
+    }
   }
   onRoutineDone(rid:number){
     for (let exercise of this.exercises[rid]) {
