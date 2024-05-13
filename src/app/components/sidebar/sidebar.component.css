@@ -75,6 +75,7 @@ a {
 }
 
 
+
 #today-button, #progress-button,#weekly-button,#routines-button, #hide-sidebar-button, .sidebar_button{
   display: flex;
   align-items: center;

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Exercise} from "../interfaces/exercise";
 import {IntegerFilter} from "../interfaces/integer-filter";
 import {BooleanFilter} from "../interfaces/boolean-filter";
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,37 @@ export class ExerciseService {
     return this.http.post<any>(this.apiUrl + `?muscleGroup=${muscleGroup}&type=${type}&difficulty=${difficulty}&material=${material}&gif=${gif}&description=${description}&name=${name}`, {});
 
   }
+  deleteExercise(name: string){
+    return this.http.delete<any>(this.apiUrl + `?name=${name}`).subscribe(
+      response => console.log(response),
+    );
+
+  }
+  updateExercise(muscleGroup?: string, type?: string, name?: string, difficulty?: number, material?: boolean, gif?: string, description?: string ){
+    let updateUrl: string = `${this.apiUrl}?`;
+    if (name !== undefined) {
+      updateUrl += `name=${name}`;
+    }
+    if (muscleGroup !== undefined) {
+      updateUrl += `&muscleGroup=${muscleGroup}`;
+    }
+    if (type !== undefined) {
+      updateUrl += `&type=${type}`;
+    }
+    if (difficulty !== undefined) {
+      updateUrl += `&difficulty=${difficulty}`;
+    }
+    if (material !== undefined) {
+      updateUrl += `&material=${material}`;
+    }
+    if (gif !== undefined) {
+      updateUrl += `&gif=${gif}`;
+    }
+    if (description !== undefined) {
+      updateUrl += `&description=${description}`;
+    }
+    console.log(updateUrl);
+    return this.http.put<any>(updateUrl, {}).subscribe( response => console.log(response));
+  }
 }
+

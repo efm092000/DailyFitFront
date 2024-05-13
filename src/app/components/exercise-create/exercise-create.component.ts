@@ -4,8 +4,11 @@ import { IntegerFilter } from "../../interfaces/integer-filter";
 import { BooleanFilter } from "../../interfaces/boolean-filter";
 import { Exercise } from "../../interfaces/exercise";
 import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {ExerciseDetailsComponent} from "../exercise-search/exercise-details/exercise-details.component";
+import {ExerciseEditComponent} from "./exercise-edit/exercise-edit.component";
+import {ExerciseDeleteComponent} from "./exercise-delete/exercise-delete.component";
 
 @Component({
   selector: 'app-exercise-create',
@@ -14,7 +17,11 @@ import {RouterLink} from "@angular/router";
   imports: [
     FormsModule,
     NgForOf,
-    RouterLink
+    RouterLink,
+    ExerciseDetailsComponent,
+    ExerciseEditComponent,
+    ExerciseDeleteComponent,
+    NgIf
   ],
   styleUrls: ['./exercise-create.component.css']
 })
@@ -24,7 +31,7 @@ export class ExerciseCreateComponent implements OnInit {
     name: '',
     material: false,
     muscleGroup: '',
-    difficulty: 0,
+    difficulty:0,
     type: '',
     gif: '',
     description: ''
@@ -34,6 +41,9 @@ export class ExerciseCreateComponent implements OnInit {
   difficultyFilters: IntegerFilter[] = [];
   typeFilters: string[] = [];
   muscleGroupFilters: string[] = [];
+
+  edit : boolean = false;
+  delete: boolean = false
 
   constructor(private exerciseService: ExerciseService) { }
 
@@ -101,6 +111,14 @@ export class ExerciseCreateComponent implements OnInit {
     this.exerciseService.createExercise(this.newExercise.muscleGroup, this.newExercise.type, this.newExercise.name, this.newExercise.difficulty, this.newExercise.material, this.newExercise.gif, this.newExercise.description).subscribe(response => {}, error => {
       console.error('Error creating the exercise:', error);
     });
+  }
+
+  editpopup(){
+    this.edit = !this.edit;
+  }
+
+  deletepopup(){
+    this.delete = !this.delete;
   }
 
 }

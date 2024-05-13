@@ -1,0 +1,10 @@
+<body>
+  <div class="d-flex flex-column align-items-center">
+    <h1 class="title">Delete Exercise</h1>
+    <select class="filters"  [(ngModel)]="selectedExercise">
+      <option selected disabled hidden value=""> Choose an Exercise </option>
+      <option *ngFor="let exercise of exercises" [value]="exercise.name">{{ exercise.name }}</option>
+    </select>
+    <button  routerLink="/exercise"  (click)="deleteExercise(); confirmClicked.emit()" class="button-small" style="color: darkred; background-color: transparent">Delete</button>
+  </div>
+</body>
