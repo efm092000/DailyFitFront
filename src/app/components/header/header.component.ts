@@ -19,9 +19,11 @@ export class HeaderComponent {
   }
 
   ngOnInit(){
-    this.userService.user$.subscribe(user => {
-      this.loggedIn = user !== null;
-    });
+    this.userService.userIsLogged$.subscribe(
+      isLogged => {
+        this.loggedIn = isLogged;
+      }
+    );
   }
   logOut(){
     this.userService.logout();

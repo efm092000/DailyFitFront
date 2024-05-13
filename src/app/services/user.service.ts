@@ -16,7 +16,7 @@ export class UserService {
     profilePicture: ''
   });
   private USER_KEY = 'loggedInUser';
-  userIsLogged: boolean = false;
+  userIsLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
   }
@@ -44,15 +44,20 @@ export class UserService {
     response.subscribe(
       user => {
         this.user$.next(user)
-        this.userIsLogged = true;
+        this.userIsLogged$.next(true)
       }
     );
     return response;
   }
 
   logout() {
-    this.userIsLogged = false;
-    localStorage.removeItem(this.USER_KEY);
+    this.userIsLogged$.next(false);
+    this.user$.next({
+      email: '',
+      name: '',
+      isPremium: false,
+      profilePicture: ''
+    });
   }
 
   updateName(email: string, name?: string): Observable<User> {
@@ -87,12 +92,6 @@ export class UserService {
   }
 
   isUserPremium() {
-    console.log(this.user$.value);
     return this.user$.value.isPremium;
   }
-
-  isLogged() {
-    return this.userIsLogged;
-  }
-
 }
