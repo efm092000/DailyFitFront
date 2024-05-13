@@ -44,6 +44,7 @@ export class ExerciseCreateComponent implements OnInit {
 
   edit : boolean = false;
   delete: boolean = false
+  selectedFile: File | null = null;
 
   constructor(private exerciseService: ExerciseService) { }
 
@@ -121,4 +122,7 @@ export class ExerciseCreateComponent implements OnInit {
     this.delete = !this.delete;
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
 }
