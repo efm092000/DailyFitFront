@@ -441,3 +441,6 @@ td {
   border-radius: 11px;
 }
 
+.circle {
+  border-radius: 50%;
+}

@@ -45,8 +45,9 @@ export class RoutineComponent implements OnInit{
   }
 
   toggleMode(): void {
-    this.serviceRoutine.isEditMode = !this.serviceRoutine.isEditMode;
-    this.isEditMode = this.serviceRoutine.isEditMode;
+    /*this.serviceRoutine.isEditMode = !this.serviceRoutine.isEditMode;
+    this.isEditMode = this.serviceRoutine.isEditMode;*/
+    this.isEditMode = !this.isEditMode;
   }
 
   saveRoutineAction() {

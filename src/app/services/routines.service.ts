@@ -15,7 +15,7 @@ export class RoutinesService {
   routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/123@gmail.com/routines';
   getRoutine(routineId: number): Observable <UserRoutine | undefined>{
-    return this.http.get<UserRoutine>(this.routineUrl+`${routineId}`).pipe(
+    return this.http.get<UserRoutine>('http://localhost:8080/api/routine/'+`${routineId}`).pipe(
       catchError( (error) => {
         console.log(error);
         return of(undefined);
