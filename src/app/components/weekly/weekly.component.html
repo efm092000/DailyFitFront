@@ -6,7 +6,7 @@
     <div id="weekly-{{day}}" class="d-flex flex-column row-cols-7 justify-content-between container-fluid align-items-center g-3" *ngFor="let i = index, let day of daysOfWeek">
       <h1 class="small-text">{{ day }}</h1>
       <div id="day-container" class="container d-flex flex-column align-items-center g-1 mt-4">
-        <div *ngFor=" let entry of filterRoutinesByDay(i+1)">
+        <div *ngFor=" let entry of filterRoutinesByDay(i+1)" class="mt-2">
           {{ getRoutineNameByRid(entry.rid)}}
         </div>
       </div>
@@ -31,13 +31,13 @@
   <div *ngIf="showPopup" class="d-flex flex-column align-items-center">
     <div class="mb-1">
       <label for="day-selector" class="mb-2 me-2">Day: </label>
-      <select id="day-selector" class="container"  [(ngModel)]="numberOfDay">
+      <select id="day-selector" class="filters" [(ngModel)]="numberOfDay">
         <option *ngFor="let day of daysOfWeek; let i = index"  [value]="i"> {{ day }}</option>
       </select>
     </div>
     <div class="mb-2">
       <label for="routine-selector" class="mb-2 me-2">Routine: </label>
-      <select id="routine-selector" class="container" [(ngModel)]="selectedRoutineIndex">
+      <select id="routine-selector" class="filters" [(ngModel)]="selectedRoutineIndex">
         <option  *ngFor="let i = index, let routine of routinesByUser;" [value]="i">{{ routine.name}}</option>
       </select>
     </div>

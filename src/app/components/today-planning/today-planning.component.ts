@@ -7,6 +7,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Routine} from "../../interfaces/routine.interface";
 import {FormsModule} from "@angular/forms";
 import {ExerciseDone} from "../../interfaces/exercise-done";
+import {ChronometerComponent} from "../chronometer/chronometer.component";
 
 
 
@@ -16,7 +17,8 @@ import {ExerciseDone} from "../../interfaces/exercise-done";
   imports: [
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    ChronometerComponent
   ],
   templateUrl: './today-planning.component.html',
   styleUrl: './today-planning.component.css'

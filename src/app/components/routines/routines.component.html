@@ -5,10 +5,10 @@
     </div>
   </div>
   <div  class="align-text-center pt-4">
-    <button *ngIf="!routineLimitReached()" class="button" (click)="routineGenerator()" routerLink = "/routine">Create routine</button>
-    <button *ngIf="routineLimitReached()" (click)="togglePopup()" class="button">Create routine</button>
-    <button *ngIf="!routineLimitReached()" class="button" (click)="toggleGeneratePopup()">Generate routine</button>
-    <button *ngIf="routineLimitReached()" (click)="toggleGeneratePopup()" class="button">Generate routine</button>
+    <button *ngIf="!routineLimitReached()" class="button m-1" (click)="routineGenerator()" routerLink = "/routine">Create routine</button>
+    <button *ngIf="routineLimitReached()" (click)="togglePopup()" class="button m-1">Create routine</button>
+    <button *ngIf="!routineLimitReached()" class="button m-1" (click)="toggleGeneratePopup()">Generate routine</button>
+    <button *ngIf="routineLimitReached()" (click)="togglePopup()" class="button m-1">Generate routine</button>
   </div>
 </div>
 

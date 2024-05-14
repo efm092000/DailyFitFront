@@ -6,23 +6,23 @@
 
     <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
       <select class="filters" [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
-        <option selected disabled hidden value ="">Muscle Group</option>
+        <option selected value ="">All Muscle Group</option>
         <option value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="searchFilters.material" name = "material">
-        <option selected disabled hidden value ="">Material</option>
+        <option selected value ="">All Material</option>
         <option value="{{material.value}}" *ngFor="let material of materialFilters">{{material.name}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="searchFilters.type" name="type">
-        <option value="" selected disabled hidden>Type</option>
+        <option value="" selected>All Types</option>
         <option value="{{type}}" *ngFor="let type of typeFilters">{{type}}</option>
       </select>
 
 
       <select class="filters" [(ngModel)]="searchFilters.difficulty" name="difficulty">
-        <option value="" selected disabled hidden >Difficulty</option>
+        <option value="" selected>All Difficulties</option>
         <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
       </select>
     </div>

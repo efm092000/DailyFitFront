@@ -7,7 +7,7 @@
       <h1>{{routine.name}}</h1>
       <ul class="list-group list-group-flush">
         <li *ngFor="let exercise of exercises[routine.rid]" class="list-group-item d-flex flex-column gap-3" style="width:30%">
-          <p>{{exercise.exercise}}</p>
+          <h2>{{exercise.exercise}}</h2>
           <div class="d-flex justify-content-between" >
             <label for="{{routine.rid}}-{{exercise}}-w">Weight:</label>
             <input id="{{routine.rid}}-{{exercise}}-w" [(ngModel)]="exercise.weight" [disabled]="!routineIsNotDone[routine.rid]">
@@ -29,3 +29,4 @@
     </div>
   </div>
 </div>
+<app-chronometer id="chronometer"></app-chronometer>
