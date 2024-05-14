@@ -9,17 +9,17 @@
         <li *ngFor="let exercise of exercises[routine.rid]" class="list-group-item">
           <p>{{exercise.exercise}}</p>
           <label for="{{routine.rid}}-{{exercise}}-w">Weight:</label>
-          <input id="{{routine.rid}}-{{exercise}}-w" [(ngModel)]="exercise.weight">
+          <input id="{{routine.rid}}-{{exercise}}-w" [(ngModel)]="exercise.weight" [disabled]="!routineIsNotDone[routine.rid]">
           <label for="{{routine.rid}}-{{exercise}}-s">Sets:</label>
-          <input id="{{routine.rid}}-{{exercise}}-s" [(ngModel)]="exercise.sets">
+          <input id="{{routine.rid}}-{{exercise}}-s" [(ngModel)]="exercise.sets" [disabled]="!routineIsNotDone[routine.rid]">
           <label for="{{routine.rid}}-{{exercise}}-r">Repetitions:</label>
-          <input id="{{routine.rid}}-{{exercise}}-r" [(ngModel)]="exercise.reps">
+          <input id="{{routine.rid}}-{{exercise}}-r" [(ngModel)]="exercise.reps" [disabled]="!routineIsNotDone[routine.rid]">
         </li>
       </ul>
       <div *ngIf="!exercises[routine.rid]">
         There are no exercises in this routine
       </div>
-      <button class="btn btn-primary mt-3" (click)="onRoutineDone(routine.rid)">Routine Done</button>
+      <button class="btn btn-primary mt-3" (click)="onRoutineDone(routine.rid)" *ngIf="routineIsNotDone[routine.rid]">Routine Done</button>
     </div>
   </div>
 </div>

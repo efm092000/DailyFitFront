@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {Weekly} from "../../interfaces/weekly";
 import {ProgressService} from "../../services/progress.service";
 import {WeeklyService} from "../../services/weekly.service";
-import {NgClass, NgForOf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {CalendarModule} from "primeng/calendar";
 import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import {CalendarOptions} from "@fullcalendar/core";
@@ -28,7 +28,8 @@ import {Router} from "@angular/router";
     NgSwitchCase,
     CalendarModule,
     NgStyle,
-    FullCalendarModule
+    FullCalendarModule,
+    NgIf
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css',
@@ -41,6 +42,7 @@ export class CalendarComponent implements OnInit{
   date: Date = new Date();
   routines:any[] = [];
   routinesByUser: UserRoutine[] | undefined = [];
+  editMode = false;
   @ViewChild('calendar') calendar: FullCalendarComponent | undefined;
 
 
@@ -50,6 +52,7 @@ export class CalendarComponent implements OnInit{
   ngOnInit(): void {
         this.getUserWeeklies();
         this.loadRoutines();
+        this.editMode=false;
   }
 
   onDateChanged(): void {
@@ -66,6 +69,7 @@ export class CalendarComponent implements OnInit{
     if (this.selectedDate && this.selectedPlan) {
       console.log(this.selectedDate)
       this.assignWeeklyToWeek(this.selectedDate, this.selectedPlan);
+      this.ngOnInit()
     } else {
       console.log('Please select a date and a weekly plan.');
     }
@@ -160,5 +164,9 @@ export class CalendarComponent implements OnInit{
       info.event.extendedProps.name,
       info.event.extendedProps.email);
     this.router.navigate(['/routine']);
+  }
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
   }
 }

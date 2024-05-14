@@ -8,6 +8,7 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
 import {UserService} from "../../services/user.service";
 import {PremiumPopupComponent} from "../premium-popup/premium-popup.component";
 import {User} from "../../interfaces/user";
+import {GenerateRoutineComponent} from "../generate-routine/generate-routine.component";
 
 
 
@@ -22,6 +23,7 @@ import {User} from "../../interfaces/user";
     NgIf,
     SidebarComponent,
     PremiumPopupComponent,
+    GenerateRoutineComponent,
   ],
   templateUrl: './routines.component.html',
   styleUrl: './routines.component.css'
@@ -30,6 +32,7 @@ export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
   showPopup: boolean = false;
   user: User = {email:'',name:'',isPremium:false,isAdmin:false,profilePicture:''};
+  showGeneratePopup: boolean = false;
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {
@@ -86,6 +89,12 @@ export class RoutinesComponent implements OnInit{
 
   togglePopup() {
     this.showPopup = !this.showPopup;
+  }
+  toggleGeneratePopup() {
+    this.showGeneratePopup = !this.showGeneratePopup;
+    if (!this.showGeneratePopup){
+      this.ngOnInit();
+    }
   }
 }
 

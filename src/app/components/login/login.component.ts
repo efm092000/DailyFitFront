@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FormControl } from '@angular/forms';
 import { Router, RouterLink } from "@angular/router";
 import { UserService } from "../../services/user.service";
+import { firstValueFrom } from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -39,13 +40,25 @@ export class LoginComponent{
   }
 
   login() {
-    this.userService.login(this.email.value, this.password.value)
-    .subscribe({
-        next: response => {
+    firstValueFrom(this.userService.login(this.email.value, this.password.value)).then(
+      (user) => {
+        if (user) {
           this.router.navigate(['/']);
-        },
-        error: response => alert(response.error)
+        }
       }
-    );
+    ).catch(
+      error => {
+        switch (error.status) {
+          case 0:
+            alert("Server is down");
+            break;
+          case 401:
+            alert("Invalid email or password");
+            break;
+          default:
+            alert(error.message);
+        }
+      }
+    )
   }
 }

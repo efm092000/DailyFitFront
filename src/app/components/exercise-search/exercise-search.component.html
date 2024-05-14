@@ -6,23 +6,23 @@
 
     <div class="d-flex align-items center justify-content-center justify-content-between" style="margin-top: 1em;">
       <select class="filters" [(ngModel)]="searchFilters.muscleGroup" name="muscleGroup">
-        <option selected value="">Muscle Group</option>
+        <option selected disabled hidden value ="">Muscle Group</option>
         <option value="{{muscle}}" *ngFor="let muscle of muscleGroupFilters">{{muscle}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="searchFilters.material" name = "material">
-        <option selected value ="">Material needed</option>
+        <option selected disabled hidden value ="">Material</option>
         <option value="{{material.value}}" *ngFor="let material of materialFilters">{{material.name}}</option>
       </select>
 
       <select class="filters" [(ngModel)]="searchFilters.type" name="type">
-        <option selected value="">Type</option>
+        <option value="" selected disabled hidden>Type</option>
         <option value="{{type}}" *ngFor="let type of typeFilters">{{type}}</option>
       </select>
 
 
       <select class="filters" [(ngModel)]="searchFilters.difficulty" name="difficulty">
-        <option selected value="">Difficulty</option>
+        <option value="" selected disabled hidden >Difficulty</option>
         <option value="{{diff.value}}" *ngFor="let diff of difficultyFilters">{{diff.name}}</option>
       </select>
     </div>
@@ -35,10 +35,9 @@
 
   <section id="search-results" class="container-fluid" style="margin-top: 5em">
     <div class="row row-cols-4 justify-content-around">
-      <article class="exercise-search-result" (click)="openDialog(entry)" *ngFor="let entry of exercises | paginate: { itemsPerPage: 5, currentPage: page } ">
-        <p class="exercise-search-result-name">Name: {{entry.name}}</p>
-        <p class="exercise-search-result-muscle">MuscleGroup: {{entry.muscleGroup}}</p>
-      </article>
+      <div class="exercise-search-result card h-100" (click)="openDialog(entry)" *ngFor="let entry of exercises | paginate: { itemsPerPage: 6, currentPage: page } ">
+        <app-search-result [entry]="entry"></app-search-result>
+      </div>
     </div>
   </section>
   <dialog id="{{entry.name.split(' ').join('_')}}" *ngFor="let entry of exercises">
@@ -46,8 +45,10 @@
     <button (click)="closeDialog(entry)" class="button-small">Close</button>
   </dialog>
 </div>
+<div class="d-flex justify-content-center">
+  <pagination-controls (pageChange)="page = $event"
+                       previousLabel= "Previous"
+                       nextLabel="Next" >
+  </pagination-controls>
+</div>
 
-<pagination-controls (pageChange)="page = $event"
-                     previousLabel= "Previous"
-                     nextLabel="Next" >
-</pagination-controls>

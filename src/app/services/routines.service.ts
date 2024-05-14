@@ -15,7 +15,7 @@ export class RoutinesService {
   routineUrl: string = 'http://localhost:8080/api/routine/';
   userRoutinesUrl: string = 'http://localhost:8080/api/user/123@gmail.com/routines';
   getRoutine(routineId: number): Observable <UserRoutine | undefined>{
-    return this.http.get<UserRoutine>(this.routineUrl+`${routineId}`).pipe(
+    return this.http.get<UserRoutine>('http://localhost:8080/api/routine/'+`${routineId}`).pipe(
       catchError( (error) => {
         console.log(error);
         return of(undefined);
@@ -115,6 +115,10 @@ export class RoutinesService {
   addExerciseToRoutine(rid:number, name:string, set:number, rep:number){
     console.log(rid);
     const url = `http://localhost:8080/api/routine/${rid}/exercise?name=${name}&sets=${set}&reps=${rep}`
+    return this.http.post(url, {});
+  }
+  generateRoutine(routineName: string, selectedMuscle: String, maxExercises: number) {
+    const url = `http://localhost:8080/api/routine/generate/${routineName}?email=${this.userService.getLoggedInUser().email}&muscleGroup=${selectedMuscle}&maxExercises=${maxExercises}`
     return this.http.post(url, {});
   }
 }
