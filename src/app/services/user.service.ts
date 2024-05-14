@@ -57,6 +57,7 @@ export class UserService {
       email: '',
       name: '',
       isPremium: false,
+      isAdmin: true,
       profilePicture: ''
     });
     this.router.navigate(['/']);
@@ -98,7 +99,7 @@ export class UserService {
   }
 
   isLogged() {
-    return this.userIsLogged;
+    return this.userIsLogged$;
   }
 
   isUserAdmin() {
