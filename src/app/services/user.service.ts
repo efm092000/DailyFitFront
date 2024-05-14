@@ -98,6 +98,11 @@ export class UserService {
     return this.user$.value.isPremium;
   }
 
+
+  isLogged() {
+    return this.userIsLogged$;
+  }
+
   isUserAdmin() {
     console.log(this.user$.value);
     return this.user$.value.isAdmin;

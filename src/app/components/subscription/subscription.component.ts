@@ -19,9 +19,12 @@ import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angula
 export class SubscriptionComponent implements OnInit{
   public countries: any = countries
   formPremium = this.fb.group({
-      cardNumber: ['', [Validators.required,
+      /*cardNumber: ['', [Validators.required,
         Validators.pattern("(?<!\\d)\\d{16}(?!\\d)")]
-      ],
+      ]*/
+      cardNumber: ['', [Validators.required,
+        Validators.pattern("(^4[0-9]{12}(?:[0-9]{3})?$)|(^5[1-5][0-9]{14}$)"),
+      ]],
       expireDate: ['', [Validators.required,
         Validators.pattern("^(0[1-9]|1[0-2])\\/?([0-9]{2})$")]
       ],
