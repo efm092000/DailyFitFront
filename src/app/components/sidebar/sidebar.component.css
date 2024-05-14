@@ -36,33 +36,14 @@
 }
 
 
-#routines-button:active {
-    transform: scale(0.9);
-}
-#routines-button img {
-    margin-right: 10px;
-}
 
-#weekly-button:active {
+
+.sidebar_button:active {
     transform: scale(0.9);
 }
 
 
-#weekly-button img {
-    margin-right: 10px;
-}
-
-#progress-button:active {
-  transform: scale(0.9);
-}
-#progress-button img {
-  margin-right: 10px;
-}
-
-#today-button:active {
-  transform: scale(0.9);
-}
-#today-button img {
+.sidebar-icons {
   margin-right: 10px;
 }
 

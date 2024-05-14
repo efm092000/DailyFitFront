@@ -6,14 +6,20 @@
     <div class="card-body">
       <h1>{{routine.name}}</h1>
       <ul class="list-group list-group-flush">
-        <li *ngFor="let exercise of exercises[routine.rid]" class="list-group-item">
+        <li *ngFor="let exercise of exercises[routine.rid]" class="list-group-item d-flex flex-column gap-3" style="width:30%">
           <p>{{exercise.exercise}}</p>
-          <label for="{{routine.rid}}-{{exercise}}-w">Weight:</label>
-          <input id="{{routine.rid}}-{{exercise}}-w" [(ngModel)]="exercise.weight" [disabled]="!routineIsNotDone[routine.rid]">
-          <label for="{{routine.rid}}-{{exercise}}-s">Sets:</label>
-          <input id="{{routine.rid}}-{{exercise}}-s" [(ngModel)]="exercise.sets" [disabled]="!routineIsNotDone[routine.rid]">
-          <label for="{{routine.rid}}-{{exercise}}-r">Repetitions:</label>
-          <input id="{{routine.rid}}-{{exercise}}-r" [(ngModel)]="exercise.reps" [disabled]="!routineIsNotDone[routine.rid]">
+          <div class="d-flex justify-content-between" >
+            <label for="{{routine.rid}}-{{exercise}}-w">Weight:</label>
+            <input id="{{routine.rid}}-{{exercise}}-w" [(ngModel)]="exercise.weight" [disabled]="!routineIsNotDone[routine.rid]">
+          </div>
+          <div class="d-flex justify-content-between">
+            <label for="{{routine.rid}}-{{exercise}}-s">Sets:</label>
+            <input id="{{routine.rid}}-{{exercise}}-s" [(ngModel)]="exercise.sets" [disabled]="!routineIsNotDone[routine.rid]">
+          </div>
+          <div class="d-flex justify-content-between">
+            <label for="{{routine.rid}}-{{exercise}}-r">Repetitions:</label>
+            <input id="{{routine.rid}}-{{exercise}}-r" [(ngModel)]="exercise.reps" [disabled]="!routineIsNotDone[routine.rid]">
+          </div>
         </li>
       </ul>
       <div *ngIf="!exercises[routine.rid]">
