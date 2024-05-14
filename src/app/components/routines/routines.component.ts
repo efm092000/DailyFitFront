@@ -31,8 +31,8 @@ import {GenerateRoutineComponent} from "../generate-routine/generate-routine.com
 export class RoutinesComponent implements OnInit{
   userRoutines?: UserRoutine[] = [];
   showPopup: boolean = false;
+  user: User = {email:'',name:'',isPremium:false,isAdmin:false,profilePicture:''};
   showGeneratePopup: boolean = false;
-  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
 
 
   constructor(private serviceRoutines: RoutinesService, private userService: UserService) {

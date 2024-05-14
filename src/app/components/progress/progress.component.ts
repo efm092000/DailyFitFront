@@ -45,7 +45,7 @@ export class ProgressComponent implements OnInit {
   protected exercises: string[] = [];
   isPremium: boolean = false;
   showPopup: boolean = false;
-  user: User = {email:'',name:'',isPremium:false,profilePicture:''};
+  user: User = {email:'',name:'',isPremium:false,isAdmin:false,profilePicture:''};
 
   years: number[] = Array.from({ length: 1 }, (v, k) => k + 2024);
   months: number[] = Array.from({ length: 12 }, (v, k) => k + 1);

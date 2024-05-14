@@ -5,19 +5,6 @@
   z-index: 100;
 }
 
-.pop-up {
-  position: absolute;
-  align-content: center;
-  background-color: #FFFFFF;
-  width: 400px;
-  height: 200px;
-  padding: 30px;
-  left: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 30px;
-}
-
 .button-container {
   text-align: center;
 }

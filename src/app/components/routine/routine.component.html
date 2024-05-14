@@ -33,9 +33,11 @@
 </div>
 
 <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
-  <p>Are you sure you want to delete this routine?</p>
-  <button class="button-small" (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
-  <button class="button-small" style=" filter: saturate(30%); background-color: white;   color:darkred" (click)="toggleDeleteConfirmation()">Cancel</button>
+  <div class="pop-up">
+    <p>Are you sure you want to delete this routine?</p>
+    <button class="button" (click)="deleteRoutineAction()" routerLink="/routines">Confirm</button>
+    <button class="button" style=" filter: saturate(30%); background-color: white;   color:darkred" (click)="toggleDeleteConfirmation()">Cancel</button>
+  </div>
 </div>
 
 <app-exercise-search *ngIf="displaySearchExercises" [rid] = userRoutine.rid></app-exercise-search>
